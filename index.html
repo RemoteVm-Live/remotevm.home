@@ -545,6 +545,8 @@
             const resetCallBtnRef = React.useRef(null);
             const muteBtnRef = React.useRef(null);
             const obsSectionRef = React.useRef(null);
+            const mediaStreamRef = React.useRef(null); // Reference to store the media stream
+            const hasRequestedPermissions = React.useRef(false); // Track if permissions have been requested
 
             const showMessage = (message, type = 'success') => {
                 const messageElement = type === 'success' ? copyMessageRef.current : errorMessageRef.current;
@@ -571,8 +573,36 @@
                 setState(prev => ({ ...prev, pushURL: newPushURL, obsLink: newObsLink }));
             };
 
+            const requestMediaPermissions = async () => {
+                if (hasRequestedPermissions.current) return true; // Skip if already requested
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+                    mediaStreamRef.current = stream; // Store the stream
+                    hasRequestedPermissions.current = true; // Mark as requested
+                    // Send confirmation back to iframe (if needed)
+                    if (vdoFrameRef.current && vdoFrameRef.current.contentWindow) {
+                        vdoFrameRef.current.contentWindow.postMessage({ type: 'mediaPermissionsGranted' }, 'https://live.remotevm.ir');
+                    }
+                    return true;
+                } catch (err) {
+                    if (err.name === 'NotAllowedError') {
+                        showMessage('دسترسی به دوربین یا میکروفون رد شد. لطفاً مجوزها را بررسی کنید.', 'error');
+                    } else if (err.name === 'NotFoundError') {
+                        showMessage('دوربین یا میکروفون یافت نشد. لطفاً دستگاه‌های خود را بررسی کنید.', 'error');
+                    } else {
+                        showMessage(`خطا در دسترسی به دوربین/میکروفون: ${err.message}`, 'error');
+                    }
+                    // Notify iframe of permission denial (if needed)
+                    if (vdoFrameRef.current && vdoFrameRef.current.contentWindow) {
+                        vdoFrameRef.current.contentWindow.postMessage({ type: 'mediaPermissionsDenied' }, 'https://live.remotevm.ir');
+                    }
+                    return false;
+                }
+            };
+
             const startCall = () => {
                 if (state.isCallActive || state.isLoading || !vdoFrameRef.current || !callContainerRef.current) return;
+
                 setState(prev => ({ ...prev, isLoading: true }));
                 const newRoomId = `room${Math.floor(Math.random() * 100000)}`;
                 setState(prev => ({ ...prev, roomId: newRoomId, isCallActive: true }));
@@ -584,12 +614,18 @@
                         if (ref.current) ref.current.classList.remove('hidden');
                     });
                     showMessage('اتاق تماس با موفقیت ایجاد شد', 'success');
-                    vdoFrameRef.current.onload = null;
+                    vdoFrameRef.current.onload = null; // Clear onload to prevent multiple triggers
                 };
             };
 
             const stopCall = () => {
                 if (!state.isCallActive || !vdoFrameRef.current || !callContainerRef.current) return;
+                // Stop the media stream if it exists
+                if (mediaStreamRef.current) {
+                    mediaStreamRef.current.getTracks().forEach(track => track.stop());
+                    mediaStreamRef.current = null;
+                }
+                hasRequestedPermissions.current = false; // Reset permission request flag
                 setState({
                     isCallActive: false,
                     isMuted: false,
@@ -611,6 +647,12 @@
                     return;
                 }
                 setState(prev => ({ ...prev, isLoading: true }));
+                // Stop existing media stream
+                if (mediaStreamRef.current) {
+                    mediaStreamRef.current.getTracks().forEach(track => track.stop());
+                    mediaStreamRef.current = null;
+                }
+                hasRequestedPermissions.current = false; // Allow new permission request
                 updateLinks();
                 vdoFrameRef.current.src = 'about:blank';
                 setTimeout(() => {
@@ -626,6 +668,11 @@
             };
 
             const toggleMute = () => {
+                if (mediaStreamRef.current) {
+                    mediaStreamRef.current.getAudioTracks().forEach(track => {
+                        track.enabled = !track.enabled;
+                    });
+                }
                 setState(prev => ({ ...prev, isMuted: !prev.isMuted }));
                 showMessage(state.isMuted ? 'میکروفون باصدا شد' : 'میکروفون بی‌صدا شد', 'success');
             };
@@ -669,6 +716,24 @@
             }, [state.isCallActive]);
 
             React.useEffect(() => {
+                const handleMessage = async (event) => {
+                    // Verify the message origin for security
+                    if (event.origin !== 'https://live.remotevm.ir') return;
+
+                    // Check for a specific message type from the iframe
+                    if (event.data && event.data.type === 'requestMedia') {
+                        const permissionGranted = await requestMediaPermissions();
+                        if (!permissionGranted) {
+                            stopCall(); // Stop call if permissions are denied
+                        }
+                    }
+                };
+
+                window.addEventListener('message', handleMessage);
+                return () => window.removeEventListener('message', handleMessage);
+            }, []);
+
+            React.useEffect(() => {
                 const handleKeyDown = (e) => {
                     if (e.key === 'Enter' && document.activeElement.tagName === 'BUTTON') {
                         document.activeElement.click();
@@ -680,6 +745,17 @@
                 document.addEventListener('keydown', handleKeyDown);
                 return () => document.removeEventListener('keydown', handleKeyDown);
             }, [state.isCallActive]);
+
+            // Cleanup media stream on component unmount
+            React.useEffect(() => {
+                return () => {
+                    if (mediaStreamRef.current) {
+                        mediaStreamRef.current.getTracks().forEach(track => track.stop());
+                        mediaStreamRef.current = null;
+                    }
+                    hasRequestedPermissions.current = false;
+                };
+            }, []);
 
             return (
                 <section id="call" className={`video-call-card mb-12 ${state.isCallActive ? 'active' : ''}`}>
@@ -759,8 +835,8 @@
             <main className="container mx-auto px-4 py-6">
                 <section className="text-center mb-12">
                     <h2 className="text-xl md:text-2xl mb-4">به RemoteVM خوش آمدید</h2>
-                    <p className="text-base md:text-lg mb-6">پلتفرم حرفه‌ای برای برگزاری کنفرانس‌های ویدیویی و جلسات آنلاین .</p>
-                   
+                    <p className="text-base md:text-lg mb-6">پلتفرم حرفه‌ای برای برگزاری کنفرانس‌های ویدیویی و جلسات آنلاین.</p>
+    
                 </section>
                 <VideoCall />
                 <section id="features" className="mb-12">
@@ -776,12 +852,11 @@
                     </div>
                 </section>
                 <section id="about" className="text-center">
-                    <h2 className="text-xl md:text-2xl mb-4"> RemoteVM</h2>
-                   
+                    <h2 className="text-xl md:text-2xl mb-4">درباره RemoteVM</h2>
+                    
                     <a href="https://about.remotevm.ir/docs" target="_blank" rel="noopener noreferrer" className="btn btn-primary">
                         <i className="fas fa-book-open mr-2"></i>مشاهده مستندات
                     </a>
-
                 </section>
             </main>
         );
@@ -791,8 +866,8 @@
                 <p className="text-sm">© 2025 RemoteVM. تمامی حقوق محفوظ است.</p>
                 <div className="flex justify-center gap-4 mt-4">
                     <a href="https://about.remotevm.ir" className="text-[var(--neon-blue)] hover:text-[var(--neon-pink)]">درباره ما</a>
-                    <a href="https://about.remotevm.ir/support" className="text-[var(--neon-blue)] hover:text-[var(--neon-pink)]">پشتیبانی</a>
-                    <a href="https://about.remotevm.ir/privacy" className="text-[var(--neon-blue)] hover:text-[var(--neon-pink)]">حریم خصوصی</a>
+                    <a href="https://room.remotevm.ir/" className="text-[var(--neon-blue)] hover:text-[var(--neon-pink)]">پنل حرفه ای</a>
+                    <a href="https://about.remotevm.site/" className="text-[var(--neon-blue)] hover:text-[var(--neon-pink)]">حریم خصوصی</a>
                 </div>
             </footer>
         );
