@@ -467,6 +467,14 @@
             transform: rotate(180deg);
         }
 
+        .border-light {
+            border-color: var(--border-light);
+        }
+
+        body.light-mode .border-light {
+            border-color: var(--border-dark);
+        }
+
         @media (max-width: 1024px) {
             .container {
                 max-width: 95vw;
@@ -780,16 +788,6 @@
         .border {
             border-width: 1px;
         }
-
-        .border-math
-varKATEX_INLINE_OPEN--border-lightKATEX_INLINE_CLOSE {
-            border-color: var(--border-light);
-        }
-
-        body.light-mode .border-math
-varKATEX_INLINE_OPEN--border-lightKATEX_INLINE_CLOSE {
-            border-color: var(--border-dark);
-        }
     </style>
 </head>
 <body>
@@ -912,22 +910,6 @@ varKATEX_INLINE_OPEN--border-lightKATEX_INLINE_CLOSE {
                             <span id="bitrateValue" class="min-w-70 text-sm text-center">2500 kbps</span>
                         </div>
                     </div>
-                    
-                    <!-- تنظیم نام اتاق -->
-                    <div class="mb-2">
-                        <label for="roomNameType" class="block font-medium mb-2 text-sm">نوع نام اتاق:</label>
-                        <select id="roomNameType" class="w-full">
-                            <option value="random">نام تصادفی عددی</option>
-                            <option value="readable">نام تصادفی قابل خواندن</option>
-                            <option value="custom">نام سفارشی</option>
-                        </select>
-                    </div>
-                    
-                    <!-- فیلد نام سفارشی (مخفی به صورت پیش‌فرض) -->
-                    <div id="customRoomNameContainer" class="mb-4 hidden">
-                        <label for="customRoomName" class="block font-medium mb-2 text-sm">نام سفارشی اتاق:</label>
-                        <input type="text" id="customRoomName" class="w-full" placeholder="نام دلخواه برای اتاق" />
-                    </div>
                 </div>
             </div>
 
@@ -942,7 +924,7 @@ varKATEX_INLINE_OPEN--border-lightKATEX_INLINE_CLOSE {
                 </div>
                 <iframe
                     id="vdoFrame"
-                    class="w-full h-full rounded-lg border-2 border-[var(--neon-blue)]"
+                    class="w-full h-full rounded-lg border-2 border-light"
                     allow="camera; microphone; fullscreen; display-capture"
                     title="پنجره تماس تصویری"
                     src=""
@@ -1052,10 +1034,7 @@ varKATEX_INLINE_OPEN--border-lightKATEX_INLINE_CLOSE {
             stereoCheckbox: document.getElementById('stereoCheckbox'),
             codecSelect: document.getElementById('codecSelect'),
             bitrateRange: document.getElementById('bitrateRange'),
-            bitrateValue: document.getElementById('bitrateValue'),
-            roomNameType: document.getElementById('roomNameType'),
-            customRoomName: document.getElementById('customRoomName'),
-            customRoomNameContainer: document.getElementById('customRoomNameContainer')
+            bitrateValue: document.getElementById('bitrateValue')
         };
 
         // Utility Functions
@@ -1068,29 +1047,30 @@ varKATEX_INLINE_OPEN--border-lightKATEX_INLINE_CLOSE {
             }
         }
 
-        // Function to generate room name based on selected type
+        // Function to generate room name with random alphanumeric characters
         function generateRoomName() {
-            const nameType = elements.roomNameType.value;
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            const length = 8; // طول مناسب برای نام اتاق
+            let result = '';
             
-            if (nameType === 'custom' && elements.customRoomName.value.trim()) {
-                return elements.customRoomName.value.trim();
+            // حداقل یک حرف و یک عدد داشته باشد
+            let hasLetter = false;
+            let hasNumber = false;
+            
+            for (let i = 0; i < length; i++) {
+                const char = characters.charAt(Math.floor(Math.random() * characters.length));
+                result += char;
+                
+                if (/[a-zA-Z]/.test(char)) hasLetter = true;
+                if (/[0-9]/.test(char)) hasNumber = true;
             }
             
-            if (nameType === 'readable') {
-                // لیست کلمات ساده فارسی برای ساخت نام قابل خواندن
-                const adjectives = ['آبی', 'سبز', 'قرمز', 'زرد', 'بزرگ', 'کوچک', 'سریع', 'آرام'];
-                const nouns = ['اتاق', 'خانه', 'پنجره', 'درخت', 'کتاب', 'قلم', 'دوربین', 'ستاره'];
-                const numbers = Array.from({length: 100}, (_, i) => i + 1);
-                
-                const randomAdj = adjectives[Math.floor(Math.random() * adjectives.length)];
-                const randomNoun = nouns[Math.floor(Math.random() * nouns.length)];
-                const randomNum = numbers[Math.floor(Math.random() * numbers.length)];
-                
-                return `${randomAdj}_${randomNoun}_${randomNum}`;
+            // اگر حداقل شرایط برآورده نشده باشد، دوباره سعی کنید
+            if (!hasLetter || !hasNumber) {
+                return generateRoomName();
             }
             
-            // نام تصادفی عددی (پیش‌فرض)
-            return `room${Math.floor(100000 + Math.random() * 900000)}`; // شش رقمی
+            return result;
         }
 
         function updateLinks(newRoomId = appState.roomId) {
@@ -1102,25 +1082,25 @@ varKATEX_INLINE_OPEN--border-lightKATEX_INLINE_CLOSE {
             
             let resolution;
             switch (quality) {
-                case "480": resolution = "&width=854&height=480"; break;
-                case "1080": resolution = "&width=1920&height=1080"; break;
-                default: resolution = "&width=1280&height=720";
+                case "480": resolution = "width=854&height=480"; break;
+                case "1080": resolution = "width=1920&height=1080"; break;
+                default: resolution = "width=1280&height=720";
             }
             
             // پارامترهای رابط کاربری
-            const uiParams = isClean ? '&noheader&nofooter&clean' : '&cleanish';
+            const uiParams = isClean ? 'noheader&nofooter&clean' : 'cleanish';
             
             // پارامترهای کیفیت
             let qualityParams = `${resolution}&scale=cover&bitrate=${bitrate}`;
             if (useStereo) qualityParams += '&stereo';
             if (codec) qualityParams += `&codec=${codec}`;
             
-            // پارامترهای تجربه کاربری
-            const experienceParams = '&broadcast';
+            // پارامترهای تجربه کاربری - اضافه کردن autostart و mute
+            const experienceParams = '';
             
-            // ساخت لینک‌های نهایی
-            appState.pushURL = `https://live.remotevm.ir/?push=${newRoomId}${qualityParams}${uiParams}${experienceParams}`;
-            appState.obsLink = `https://live.remotevm.ir/?view=${newRoomId}${qualityParams}${uiParams}`;
+            // ساخت لینک‌های نهایی - بدون تکرار & اضافی
+            appState.pushURL = `https://live.remotevm.ir/?push=${newRoomId}&${qualityParams}&${uiParams}&${experienceParams}`;
+            appState.obsLink = `https://live.remotevm.ir/?view=${newRoomId}&${qualityParams}&${uiParams}`;
             
             if (elements.obsLink) {
                 elements.obsLink.value = appState.obsLink;
@@ -1165,11 +1145,14 @@ varKATEX_INLINE_OPEN--border-lightKATEX_INLINE_CLOSE {
             elements.loadingOverlay.classList.remove('hidden');
             elements.callContainer.classList.remove('hidden');
             
+            // تولید نام اتاق تصادفی با ترکیب حروف و اعداد
             const newRoomId = generateRoomName();
             appState.roomId = newRoomId;
             appState.isCallActive = true;
             
+            // ارسال نام اتاق به updateLinks
             updateLinks(newRoomId);
+            
             elements.callCard.classList.add('active');
             elements.statusIndicator.classList.remove('status-inactive');
             elements.statusIndicator.classList.add('status-active');
@@ -1234,7 +1217,14 @@ varKATEX_INLINE_OPEN--border-lightKATEX_INLINE_CLOSE {
             }
             
             appState.hasRequestedPermissions = false;
-            updateLinks();
+            
+            // ایجاد نام اتاق جدید برای ریست کردن
+            const newRoomId = generateRoomName();
+            appState.roomId = newRoomId;
+            
+            // ارسال مجدد roomId جدید به updateLinks
+            updateLinks(newRoomId);
+            
             elements.vdoFrame.src = 'about:blank';
             
             setTimeout(() => {
@@ -1242,7 +1232,7 @@ varKATEX_INLINE_OPEN--border-lightKATEX_INLINE_CLOSE {
                 elements.vdoFrame.onload = () => {
                     appState.isLoading = false;
                     elements.loadingOverlay.classList.add('hidden');
-                    showMessage('تنظیمات با موفقیت اعمال شد', 'success');
+                    showMessage(`تنظیمات با موفقیت اعمال شد. اتاق جدید: ${newRoomId}`, 'success');
                     elements.vdoFrame.onload = null;
                 };
             }, 100);
@@ -1361,10 +1351,10 @@ varKATEX_INLINE_OPEN--border-lightKATEX_INLINE_CLOSE {
             
             // Basic settings events
             elements.qualitySelect.addEventListener('change', () => {
-                if (appState.isCallActive) updateLinks();
+                if (appState.isCallActive) updateLinks(appState.roomId);
             });
             elements.uiCheckbox.addEventListener('change', () => {
-                if (appState.isCallActive) updateLinks();
+                if (appState.isCallActive) updateLinks(appState.roomId);
             });
 
             // Advanced settings events
@@ -1374,11 +1364,11 @@ varKATEX_INLINE_OPEN--border-lightKATEX_INLINE_CLOSE {
             });
             
             elements.stereoCheckbox.addEventListener('change', () => {
-                if (appState.isCallActive) updateLinks();
+                if (appState.isCallActive) updateLinks(appState.roomId);
             });
             
             elements.codecSelect.addEventListener('change', () => {
-                if (appState.isCallActive) updateLinks();
+                if (appState.isCallActive) updateLinks(appState.roomId);
             });
             
             elements.bitrateRange.addEventListener('input', () => {
@@ -1386,12 +1376,7 @@ varKATEX_INLINE_OPEN--border-lightKATEX_INLINE_CLOSE {
             });
             
             elements.bitrateRange.addEventListener('change', () => {
-                if (appState.isCallActive) updateLinks();
-            });
-            
-            elements.roomNameType.addEventListener('change', () => {
-                elements.customRoomNameContainer.classList.toggle('hidden', 
-                    elements.roomNameType.value !== 'custom');
+                if (appState.isCallActive) updateLinks(appState.roomId);
             });
 
             // Handle message from iframe
