@@ -1,1411 +1,2469 @@
 <!DOCTYPE html>
+
 <html lang="fa" dir="rtl">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="تماس تصویری با کیفیت بالا با RemoteVM">
+
+    <meta name="description" content="استودیو انتقال تصویر با کیفیت بالا با RemoteVM">
+
     <meta name="keywords" content="تماس تصویری, RemoteVM, ویدیو کنفرانس, استریم">
+
     <meta name="author" content="RemoteVM">
+
     <title>RemoteVM - استودیو انتقال تصویر</title>
+
     <link rel="icon" type="image/png" href="favicon.png">
+
     <script src="https://cdn.tailwindcss.com"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
+
         @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;800&display=swap');
+
         :root {
+
             --dark-bg: linear-gradient(135deg, #07102e 0%, #13173a 100%);
+
             --light-bg: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+
             --dark-text: #ffffff;
+
             --light-text: #1e293b;
+
             --neon-blue: #00bfff;
+
             --neon-pink: #ff00c8;
+
             --primary: #6366f1;
+
             --primary-hover: #4f46e5;
+
             --success: #22c55e;
+
             --success-hover: #16a34a;
+
             --danger: #ef4444;
+
             --danger-hover: #dc2626;
+
             --warning: #f59e0b;
+
             --warning-hover: #d97706;
+
             --border-light: rgba(209,213,219,0.3);
+
             --border-dark: rgba(75,85,99,0.3);
+
             --card-bg: rgba(10, 14, 32, 0.85);
+
             --card-bg-light: rgba(245,245,250,0.95);
+
             --video-bg: #181f3f;
+
             --video-bg-light: #f0f4fa;
+
         }
+
+
 
         html { scroll-behavior: smooth; }
 
+
+
         body {
+
             font-family: 'Vazirmatn', sans-serif;
+
             background: var(--dark-bg);
+
             color: var(--dark-text);
+
             transition: background 0.5s, color 0.5s;
+
             min-height: 100vh;
+
             margin: 0;
+
         }
+
+
 
         body.light-mode {
+
             background: var(--light-bg);
+
             color: var(--light-text);
+
         }
+
+
 
         .container {
+
             background: var(--card-bg);
+
             border-radius: 1rem;
+
             border: 1px solid var(--border-light);
+
             box-shadow: 0 4px 24px rgba(0, 191, 255, 0.3);
+
             transition: background 0.3s, box-shadow 0.3s;
+
             padding: clamp(1rem, 4vw, 1.5rem);
+
             width: 100%;
+
             max-width: min(90vw, 1200px);
+
             margin: 0 auto;
+
         }
+
+
 
         body.light-mode .container {
+
             background: var(--card-bg-light);
+
             border: 1px solid var(--border-dark);
+
             box-shadow: 0 4px 24px rgba(0, 191, 255, 0.25);
+
         }
+
+
 
         h1, h2, h3, label {
+
             font-weight: 800;
+
             color: var(--dark-text);
+
             transition: color 0.5s;
+
         }
+
+
 
         body.light-mode h1, body.light-mode h2, body.light-mode h3, body.light-mode label {
+
             color: var(--light-text);
+
         }
+
+
 
         .btn {
+
             background: rgba(70,70,70,0.22);
+
             color: var(--dark-text);
+
             border: 1px solid rgba(0,191,255,0.2);
+
             border-radius: 0.6rem;
+
             padding: clamp(0.4rem, 1.5vw, 0.6rem) clamp(0.8rem, 2.5vw, 1.2rem);
+
             transition: background 0.3s, box-shadow 0.3s, transform 0.3s;
+
             display: inline-flex;
+
             align-items: center;
+
             gap: 0.5rem;
+
             font-size: clamp(0.8rem, 2vw, 0.9rem);
+
             cursor: pointer;
+
         }
+
+
 
         .btn i {
+
             font-size: clamp(0.8rem, 1.8vw, 0.9rem);
+
         }
+
+
 
         .btn:hover {
+
             background: linear-gradient(90deg, rgba(0, 191, 255, 0.3), rgba(255, 0, 200, 0.3));
+
             box-shadow: 0 0 12px rgba(0, 191, 255, 0.5);
+
             transform: translateY(-2px);
+
         }
+
+
 
         body.light-mode .btn {
+
             background: rgba(100,100,100,0.15);
+
             color: var(--light-text);
+
             border: 1px solid rgba(0,128,255,0.2);
+
         }
+
+
 
         .btn-primary { 
+
             background: linear-gradient(90deg, var(--primary), var(--neon-blue)); 
+
             color: #fff; 
+
         }
+
         .btn-primary:hover { 
+
             background: linear-gradient(90deg, var(--primary-hover), var(--neon-pink)); 
+
             box-shadow: 0 0 15px rgba(0, 191, 255, 0.6); 
+
         }
+
         .btn-success { background: var(--success); color: #fff; }
+
         .btn-success:hover { 
+
             background: var(--success-hover); 
+
             box-shadow: 0 0 12px rgba(0, 191, 255, 0.5); 
+
         }
+
         .btn-danger { background: var(--danger); color: #fff; }
+
         .btn-danger:hover { 
+
             background: var(--danger-hover); 
+
             box-shadow: 0 0 12px rgba(0, 191, 255, 0.5); 
+
         }
+
         .btn-warning { background: var(--warning); color: #fff; }
+
         .btn-warning:hover { 
+
             background: var(--warning-hover); 
+
             box-shadow: 0 0 12px rgba(0, 191, 255, 0.5); 
+
         }
+
         .btn-neutral { background: var(--border-light); color: var(--dark-text); }
+
         body.light-mode .btn-neutral { background: var(--border-dark); color: var(--light-text); }
+
         .btn:disabled {
+
             opacity: 0.5;
+
             cursor: not-allowed;
+
             box-shadow: none;
+
             transform: none;
+
         }
+
+
 
         input, select {
+
             background: rgba(1, 60, 99, 0.7);
+
             color: var(--dark-text);
+
             border: 1px solid var(--border-light);
+
             border-radius: 0.5rem;
+
             padding: clamp(0.5rem, 2vw, 0.75rem);
+
             width: 100%;
+
             font-size: clamp(0.8rem, 2vw, 0.9rem);
+
             transition: border-color 0.3s, box-shadow 0.3s;
+
         }
+
+
 
         body.light-mode input, body.light-mode select {
+
             background: rgba(55,65,81,0.15);
+
             color: var(--light-text);
+
             border: 1px solid var(--border-dark);
+
         }
+
+
 
         input:focus, select:focus {
+
             border-color: var(--neon-blue);
+
             box-shadow: 0 0 0 3px rgba(0, 191, 255, 0.4);
+
             outline: none;
+
         }
+
+
 
         input[type="range"] {
+
             -webkit-appearance: none;
+
             height: 8px;
+
             background: rgba(0, 191, 255, 0.3);
+
             border-radius: 5px;
+
             background-image: linear-gradient(var(--neon-blue), var(--neon-blue));
+
             background-repeat: no-repeat;
+
         }
+
+
 
         input[type="range"]::-webkit-slider-thumb {
+
             -webkit-appearance: none;
+
             height: 20px;
+
             width: 20px;
+
             border-radius: 50%;
-            background: var(--neon-blue);
+
+            background: #00778E;
+
             cursor: pointer;
-            box-shadow: 0 0 5px rgba(0, 191, 255, 0.5);
+
+            box-shadow: 0 0 15px rgba(237, 40, 255, 0.5);
+
         }
+
+
 
         input[type="range"]::-moz-range-thumb {
+
             height: 20px;
+
             width: 20px;
+
             border-radius: 50%;
+
             background: var(--neon-blue);
+
             cursor: pointer;
+
             border: none;
+
             box-shadow: 0 0 5px rgba(0, 191, 255, 0.5);
+
         }
+
+
 
         .feature-card {
+
             background: var(--card-bg);
+
             border-radius: 0.7rem;
+
             padding: clamp(1rem, 3vw, 1.5rem);
+
             border: 1px solid var(--border-light);
+
             box-shadow: 0 4px 20px rgba(0, 191, 255, 0.25);
+
             text-align: center;
+
             transition: transform 0.3s, box-shadow 0.3s;
+
         }
+
+
 
         body.light-mode .feature-card {
+
             background: var(--card-bg-light);
+
             border: 1px solid var(--border-dark);
+
             box-shadow: 0 4px 20px rgba(0, 191, 255, 0.2);
+
         }
+
+
 
         .feature-card:hover {
+
             transform: translateY(-4px);
+
             box-shadow: 0 8px 24px rgba(0, 191, 255, 0.5);
+
             animation: pulse-glow 2s infinite;
+
         }
+
+
 
         .status-indicator {
+
             width: 12px;
+
             height: 12px;
+
             border-radius: 50%;
+
             display: inline-block;
+
             margin-right: 7px;
+
         }
+
+
 
         .status-active {
+
             background: var(--success);
+
             box-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+
             animation: pulse-status 2s infinite;
+
         }
+
+
 
         .status-inactive {
+
             background: var(--danger);
+
         }
+
+
 
         @keyframes pulse-status {
+
             0% { box-shadow: 0 0 0 0 rgba(0, 191, 255, 0.5); }
+
             70% { box-shadow: 0 0 0 7px rgba(0, 191, 255, 0); }
+
             100% { box-shadow: 0 0 0 0 rgba(0, 191, 255, 0); }
+
         }
+
+
 
         @keyframes pulse-glow {
+
             0% { box-shadow: 0 4px 20px rgba(0, 191, 255, 0.25); }
+
             50% { box-shadow: 0 8px 30px rgba(0, 191, 255, 0.5); }
+
             100% { box-shadow: 0 4px 20px rgba(0, 191, 255, 0.25); }
+
         }
+
+
 
         .tooltip {
+
             position: relative;
+
         }
+
+
 
         .tooltip:hover::after {
+
             content: attr(data-tooltip);
+
             position: absolute;
+
             bottom: 110%;
+
             left: 50%;
+
             transform: translateX(-50%);
+
             background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink));
+
             color: var(--dark-text);
+
             padding: 4px 10px;
+
             border-radius: 4px;
+
             font-size: clamp(0.75rem, 2vw, 0.85rem);
+
             white-space: nowrap;
+
             z-index: 20;
+
             box-shadow: 0 2px 10px rgba(0, 191, 255, 0.3);
+
         }
+
+
 
         .zoom-text {
+
             font-size: clamp(2rem, 6vw, 3rem);
+
             font-weight: 800;
+
             background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink));
+
             background-clip: text;
+
             -webkit-background-clip: text;
+
             color: transparent;
+
             animation: pulse 2s infinite;
+
             margin-bottom: 0.5rem;
+
         }
+
+
 
         @keyframes pulse {
+
             0%, 100% { transform: scale(1); }
+
             50% { transform: scale(1.05); }
+
         }
+
+
 
         .overlay {
+
             position: fixed;
+
             inset: 0;
+
             z-index: 1000;
+
             background: linear-gradient(135deg, #07102e 0%, #0a1e4a 80%, #ff00c8 100%);
+
             display: flex;
+
             align-items: center;
+
             justify-content: center;
+
             transition: opacity 1s;
+
         }
+
+
 
         body.light-mode .overlay {
+
             background: linear-gradient(135deg, #e2e8f0 0%, #f8fafc 80%, #00bfff 100%);
+
         }
+
+
 
         .overlay.hidden {
+
             opacity: 0;
+
             pointer-events: none;
+
         }
+
+
 
         .video-call-card {
+
             background: var(--video-bg);
+
             color: var(--dark-text);
+
             border-radius: 1.2rem;
+
             border: 2px solid var(--neon-blue);
+
             box-shadow: 0 8px 28px rgba(0, 191, 255, 0.3);
+
             margin: 0 auto;
+
             padding: clamp(1rem, 3vw, 1.5rem);
+
             max-width: min(60vw, 500px);
+
             transition: background 0.4s, color 0.4s, max-width 0.5s, padding 0.5s, box-shadow 0.3s;
+
         }
+
+
 
         body.light-mode .video-call-card {
+
             background: var(--video-bg-light);
+
             color: var(--light-text);
+
             border: 2px solid var(--neon-blue);
+
             box-shadow: 0 8px 28px rgba(0, 191, 255, 0.25);
+
         }
+
+
 
         .video-call-card.active {
+
             max-width: 95vw;
+
             padding: clamp(1.5rem, 5vw, 2.5rem);
+
             box-shadow: 0 12px 32px rgba(0, 191, 255, 0.4);
+
             animation: pulse-glow 2s infinite;
+
         }
+
+
 
         .video-call-card.active .grid {
+
             gap: 0.75rem;
+
             display: flex;
+
             flex-wrap: wrap;
+
             justify-content: center;
+
         }
+
+
 
         .video-frame-box {
+
             width: 100%;
+
             max-width: min(55vw, 450px);
+
             aspect-ratio: 16/9;
+
             background: linear-gradient(135deg, #1a2a5a 0%, #0a1e4a 100%);
+
             border-radius: 1rem;
+
             margin: 0 auto 2rem auto;
+
             display: flex;
+
             align-items: center;
+
             justify-content: center;
+
             overflow: hidden;
+
             border: 2px solid var(--neon-blue);
+
             box-shadow: 0 4px 20px rgba(0, 191, 255, 0.25);
+
             transition: max-width 0.5s, box-shadow 0.3s, border 0.3s;
+
         }
+
+
 
         .video-call-card.active .video-frame-box {
+
             max-width: 90vw;
+
             box-shadow: 0 10px 30px rgba(0, 191, 255, 0.45);
+
             border: 2.5px solid var(--neon-blue);
+
         }
+
+
 
         .pulsing-loader {
+
             display: flex;
+
             gap: clamp(0.5rem, 2vw, 0.75rem);
+
             margin-bottom: 1rem;
+
         }
+
+
 
         .pulsing-loader .dot {
+
             width: clamp(0.75rem, 2vw, 1rem);
+
             height: clamp(0.75rem, 2vw, 1rem);
+
             border-radius: 50%;
+
             background-color: var(--neon-blue);
+
             animation: pulse-dot 1.4s infinite ease-in-out both;
+
         }
+
+
 
         .pulsing-loader .dot:nth-child(1) { animation-delay: -0.32s; }
+
         .pulsing-loader .dot:nth-child(2) { animation-delay: -0.16s; }
 
+
+
         @keyframes pulse-dot {
+
             0%, 80%, 100% { transform: scale(0.8); }
+
             40% { transform: scale(1.2); }
+
         }
+
+
 
         .toggle-switch {
+
             position: relative;
+
             display: inline-block;
+
             width: 50px;
+
             height: 28px;
+
         }
+
+
 
         .toggle-switch input {
+
             opacity: 0;
+
             width: 0;
+
             height: 0;
+
         }
+
+
 
         .toggle-slider {
+
             position: absolute;
+
             cursor: pointer;
+
             top: 0;
+
             left: 0;
+
             right: 0;
+
             bottom: 0;
+
             background-color: #ccc;
+
             transition: 0.4s;
+
             border-radius: 28px;
+
         }
+
+
 
         .toggle-slider:before {
+
             position: absolute;
+
             content: "";
+
             height: 20px;
+
             width: 20px;
+
             left: 4px;
+
             bottom: 4px;
+
             background-color: white;
+
             transition: 0.4s;
+
             border-radius: 50%;
+
         }
+
+
 
         input:checked + .toggle-slider {
+
             background-color: var(--neon-blue);
+
             box-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+
         }
+
+
 
         input:checked + .toggle-slider:before {
+
             transform: translateX(22px);
+
         }
+
+
 
         .hidden {
+
             display: none !important;
+
         }
+
+
 
         .grid {
+
             display: grid;
+
             grid-gap: 1rem;
+
         }
+
+
 
         .grid-cols-1 {
+
             grid-template-columns: 1fr;
+
         }
+
+
 
         .grid-cols-3 {
+
             grid-template-columns: repeat(3, 1fr);
+
         }
+
+
 
         .advanced-panel {
+
             background: rgba(10, 14, 32, 0.4);
+
             border-radius: 0.8rem;
+
             border: 1px solid var(--border-light);
+
             padding: 1rem;
+
             margin-top: 0.5rem;
+
             transition: all 0.3s ease;
+
         }
+
+
 
         body.light-mode .advanced-panel {
+
             background: rgba(245, 245, 250, 0.4);
+
             border: 1px solid var(--border-dark);
+
         }
+
+
 
         .transition-all {
+
             transition: all 0.3s ease;
+
         }
+
+
 
         .transition-transform {
+
             transition: transform 0.3s ease;
+
         }
+
+
 
         .rotate-180 {
+
             transform: rotate(180deg);
+
         }
+
+
 
         .border-light {
+
             border-color: var(--border-light);
+
         }
+
+
 
         body.light-mode .border-light {
+
             border-color: var(--border-dark);
+
         }
+
+
 
         @media (max-width: 1024px) {
+
             .container {
+
                 max-width: 95vw;
+
                 box-shadow: 0 4px 20px rgba(0, 191, 255, 0.25);
+
             }
+
             .video-call-card {
+
                 max-width: min(80vw, 450px);
+
                 box-shadow: 0 6px 24px rgba(0, 191, 255, 0.25);
+
             }
+
             .video-call-card.active {
+
                 max-width: 95vw;
+
                 box-shadow: 0 10px 28px rgba(0, 191, 255, 0.35);
+
             }
+
             .video-frame-box {
+
                 max-width: min(75vw, 400px);
+
                 box-shadow: 0 4px 18px rgba(0, 191, 255, 0.2);
+
             }
+
             .video-call-card.active .video-frame-box {
+
                 max-width: 90vw;
+
                 box-shadow: 0 8px 26px rgba(0, 191, 255, 0.4);
+
             }
+
             .btn {
+
                 padding: clamp(0.35rem, 1.2vw, 0.5rem) clamp(0.7rem, 2vw, 1rem);
+
                 font-size: clamp(0.75rem, 1.8vw, 0.85rem);
+
             }
+
             .btn i {
+
                 font-size: clamp(0.7rem, 1.6vw, 0.8rem);
+
             }
+
             h1 { font-size: clamp(1.8rem, 5vw, 2.5rem); }
+
             h2 { font-size: clamp(1.5rem, 4vw, 2rem); }
+
         }
+
+
 
         @media (min-width: 640px) {
+
             .sm\:grid-cols-2 {
+
                 grid-template-columns: repeat(2, 1fr);
+
             }
+
         }
+
+
 
         @media (min-width: 768px) {
+
             .md\:grid-cols-3 {
+
                 grid-template-columns: repeat(3, 1fr);
+
             }
+
             .md\:flex-row {
+
                 flex-direction: row;
+
             }
+
             .md\:justify-between {
+
                 justify-content: space-between;
+
             }
+
         }
+
+
 
         @media (max-width: 640px) {
+
             .container {
+
                 padding: clamp(0.35rem, 1vw, 1rem);
+
                 box-shadow: 0 4px 16px rgba(0, 191, 255, 0.2);
+
             }
+
             .video-call-card {
+
                 max-width: min(95vw, 420px);
+
                 padding: clamp(0.35rem, 1.5vw, 1rem);
+
                 box-shadow: 0 6px 20px rgba(0, 191, 255, 0.2);
+
             }
+
             .video-call-card.active {
+
                 max-width: 95vw;
+
                 box-shadow: 0 8px 24px rgba(0, 191, 255, 0.3);
+
             }
+
             .video-frame-box {
+
                 max-width: min(90vw, 360px);
+
                 height: calc(min(90vw, 350px) * 9 / 16 * 3);
+
                 box-shadow: 0 4px 16px rgba(0, 191, 255, 0.2);
+
             }
+
             .video-call-card.active .video-frame-box {
+
                 max-width: 95vw;
+
                 height: calc(95vw * 9 / 16 * 3);
+
                 box-shadow: 0 6px 22px rgba(0, 191, 255, 0.35);
+
             }
+
             .feature-card {
+
                 padding: clamp(0.25rem, 1.5vw, 1rem);
+
                 box-shadow: 0 4px 16px rgba(0, 191, 255, 0.2);
+
             }
+
             .grid {
+
                 grid-template-columns: 1fr;
+
             }
+
             .btn {
+
                 padding: clamp(0.3rem, 1vw, 0.45rem) clamp(0.6rem, 1.8vw, 0.9rem);
+
                 font-size: clamp(0.7rem, 1.5vw, 0.8rem);
+
             }
+
             .btn i {
+
                 font-size: clamp(0.65rem, 1.4vw, 0.75rem);
+
             }
+
             h1 { font-size: clamp(1.5rem, 4.5vw, 2rem); }
+
             h2 { font-size: clamp(1.25rem, 3.5vw, 1.75rem); }
+
             .zoom-text {
+
                 font-size: clamp(1.8rem, 5vw, 2.5rem);
+
             }
+
         }
+
+
 
         .flex {
+
             display: flex;
+
         }
+
+
 
         .flex-col {
+
             flex-direction: column;
+
         }
+
+
 
         .items-center {
+
             align-items: center;
+
         }
+
+
 
         .justify-center {
+
             justify-content: center;
+
         }
+
+
 
         .justify-between {
+
             justify-content: space-between;
+
         }
+
+
 
         .gap-2 {
+
             gap: 0.5rem;
+
         }
+
+
 
         .gap-3 {
+
             gap: 0.75rem;
+
         }
+
+
 
         .gap-4 {
+
             gap: 1rem;
+
         }
+
+
 
         .text-center {
+
             text-align: center;
+
         }
+
+
 
         .text-right {
+
             text-align: right;
+
         }
+
+
 
         .mx-auto {
+
             margin-left: auto;
+
             margin-right: auto;
+
         }
+
+
 
         .mt-2 {
+
             margin-top: 0.5rem;
+
         }
+
+
 
         .mt-4 {
+
             margin-top: 1rem;
+
         }
+
+
 
         .mt-6 {
+
             margin-top: 1.5rem;
+
         }
+
+
 
         .mb-2 {
+
             margin-bottom: 0.5rem;
+
         }
+
+
 
         .mb-4 {
+
             margin-bottom: 1rem;
+
         }
+
+
 
         .mb-5 {
+
             margin-bottom: 1.25rem;
+
         }
+
+
 
         .mb-6 {
+
             margin-bottom: 1.5rem;
+
         }
+
+
 
         .mb-8 {
+
             margin-bottom: 2rem;
+
         }
+
+
 
         .mb-12 {
+
             margin-bottom: 3rem;
+
         }
+
+
 
         .p-2 {
+
             padding: 0.5rem;
+
         }
+
+
 
         .p-4 {
+
             padding: 1rem;
+
         }
+
+
 
         .py-4 {
+
             padding-top: 1rem;
+
             padding-bottom: 1rem;
+
         }
+
+
 
         .py-6 {
+
             padding-top: 1.5rem;
+
             padding-bottom: 1.5rem;
+
         }
+
+
 
         .px-4 {
+
             padding-left: 1rem;
+
             padding-right: 1rem;
+
         }
+
+
 
         .rounded-lg {
+
             border-radius: 0.5rem;
+
         }
+
+
 
         .w-full {
+
             width: 100%;
+
         }
+
+
 
         .w-10 {
+
             width: 2.5rem;
+
         }
+
+
 
         .h-10 {
+
             height: 2.5rem;
+
         }
+
+
 
         .block {
+
             display: block;
+
         }
+
+
 
         .text-lg {
+
             font-size: 1.125rem;
+
         }
+
+
 
         .text-xl {
+
             font-size: 1.25rem;
+
         }
+
+
 
         .text-2xl {
+
             font-size: 1.5rem;
+
         }
+
+
 
         .text-3xl {
+
             font-size: 1.875rem;
+
         }
+
+
 
         .text-sm {
+
             font-size: 0.875rem;
+
         }
+
+
 
         .text-base {
+
             font-size: 1rem;
+
         }
+
+
 
         .font-medium {
+
             font-weight: 500;
+
         }
+
+
 
         .font-semibold {
+
             font-weight: 600;
+
         }
+
+
 
         .relative {
+
             position: relative;
+
         }
+
+
 
         .absolute {
+
             position: absolute;
+
         }
+
+
 
         .fixed {
+
             position: fixed;
+
         }
+
+
 
         .inset-0 {
+
             top: 0;
+
             right: 0;
+
             bottom: 0;
+
             left: 0;
+
         }
+
+
 
         .z-10 {
+
             z-index: 10;
+
         }
+
+
 
         .z-50 {
+
             z-index: 50;
+
         }
+
+
 
         .bottom-4 {
+
             bottom: 1rem;
+
         }
+
+
 
         .right-4 {
+
             right: 1rem;
+
         }
+
+
 
         .cursor-pointer {
+
             cursor: pointer;
+
         }
+
+
 
         .bg-black {
+
             background-color: #000;
+
         }
+
+
 
         .bg-opacity-30 {
+
             opacity: 0.3;
+
         }
+
+
 
         .animate-pulse {
+
             animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
         }
+
+
 
         .flex-wrap {
+
             flex-wrap: wrap;
+
         }
+
+
 
         .min-w-70 {
+
             min-width: 70px;
+
         }
+
+
 
         .border {
+
             border-width: 1px;
+
         }
+
     </style>
+
 </head>
+
 <body>
+
     <div id="overlay" class="overlay">
+
         <div class="flex flex-col items-center justify-center">
+
             <span class="zoom-text">RemoteVM</span>
+
             <div class="mt-4 text-center">
+
                 <p class="mb-2 text-lg">استودیو انتقال تصویر</p>
+
                 <div class="flex justify-center gap-4">
+
                     <div class="flex items-center justify-center w-10 h-10 rounded-full bg-[var(--neon-blue)]/30 animate-pulse">
+
                         <i class="fas fa-video"></i>
+
                     </div>
+
                     <div class="flex items-center justify-center w-10 h-10 rounded-full bg-[var(--neon-blue)]/30 animate-pulse" style="animation-delay: 0.2s">
+
                         <i class="fas fa-microphone"></i>
+
                     </div>
+
                     <div class="flex items-center justify-center w-10 h-10 rounded-full bg-[var(--neon-blue)]/30 animate-pulse" style="animation-delay: 0.4s">
+
                         <i class="fas fa-comments"></i>
+
                     </div>
+
                 </div>
+
             </div>
+
         </div>
+
     </div>
 
+
+
     <!-- Header -->
+
     <header id="header" class="container mx-auto py-4 px-4 mt-4 mb-8 flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+
         <div class="flex items-center gap-3">
+
             <img src="favicon.png" alt="RemoteVM Logo" class="w-10 h-10" />
-            <h1 class="text-2xl md:text-3xl">RemoteVM</h1>
+
+            <h1 class="text-2xl md:text-3xl">R.V.M</h1>
+
             <span id="statusIndicator" class="status-indicator status-inactive" aria-label="وضعیت تماس"></span>
+
         </div>
+
         <nav class="flex flex-wrap gap-3 justify-center md:justify-end">
-            <a href="https://room.remotevm.ir/" class="btn" data-tooltip="تماس تصویری"><i class="fas fa-video mr-2"></i>تماس تصویری</a>
+
+            <a href="https://room.remotevm.ir/" class="btn" data-tooltip="پنل حرفه ای تماس تصویری"><i class="fas fa-video mr-2"></i>پنل حرفه ای </a>
+
             <a href="https://about.remotevm.ir" class="btn" data-tooltip="درباره ما"><i class="fas fa-info-circle mr-2"></i>درباره ما</a>
+
             <a href="https://call.remotevm.ir" class="btn btn-primary" data-tooltip="شروع کنفرانس"><i class="fas fa-rocket mr-2"></i>شروع کنفرانس</a>
+
         </nav>
+
     </header>
 
+
+
     <!-- Main Content -->
+
     <main class="container mx-auto px-4 py-6">
+
         <section class="text-center mb-12">
-            <h2 class="text-xl md:text-2xl mb-4">به RemoteVM خوش آمدید</h2>
+
+            <h2 class="text-xl md:text-2xl mb-4"> RemoteVM  </h2>
+
             <p class="text-base md:text-lg mb-6">پلتفرم حرفه‌ای برای برگزاری کنفرانس‌های ویدیویی و جلسات آنلاین.</p>
+
         </section>
+
+
 
         <!-- Video Call Section -->
+
         <section id="call" class="video-call-card mb-12">
-            <h2 class="text-xl md:text-2xl text-center mb-6">تماس تصویری RemoteVM</h2>
+
+            <h2 class="text-xl md:text-2xl text-center mb-6"> استودیو انتقال تصویر </h2>
+
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+
                 <button id="startCallBtn" class="btn btn-primary" aria-label="شروع کنید" data-tooltip="شروع جلسه جدید">
+
                     <i class="fas fa-play mr-2 text-sm"></i>شروع کنید
+
                 </button>
+
                 <button id="fullscreenBtn" class="btn btn-success hidden" aria-label="تمام‌صفحه" data-tooltip="نمایش در حالت تمام‌صفحه">
+
                     <i class="fas fa-expand mr-2 text-sm"></i>تمام‌صفحه
+
                 </button>
+
                 <button id="stopCallBtn" class="btn btn-danger hidden" aria-label="توقف تماس" data-tooltip="پایان دادن به تماس">
+
                     <i class="fas fa-stop mr-2 text-sm"></i>توقف تماس
+
                 </button>
+
                 <button id="resetCallBtn" class="btn btn-neutral hidden" aria-label="ریست صفحه" data-tooltip="اعمال کیفیت جدید و ریست اتصال">
+
                     <i class="fas fa-sync mr-2 text-sm"></i>ریست اتصال
+
                 </button>
+
                 <button id="muteBtn" class="btn btn-warning hidden" aria-label="بی‌صدا کردن" data-tooltip="بی‌صدا/باصدا کردن میکروفون">
+
                     <i class="fas fa-microphone mr-2 text-sm"></i>بی‌صدا
+
                 </button>
+
             </div>
+
             <div class="mb-5">
+
                 <label for="qualitySelect" class="block font-medium mb-2">کیفیت ویدیو:</label>
+
                 <select id="qualitySelect" class="w-full" defaultValue="720">
+
                     <option value="480">480p</option>
+
                     <option value="720" selected>720p (پیش‌فرض)</option>
+
                     <option value="1080">1080p</option>
+
                 </select>
+
             </div>
+
             <div class="flex items-center justify-between mb-6 p-2 rounded-lg">
+
                 <label for="uiCheckbox" class="flex items-center gap-2 cursor-pointer text-sm font-medium">
+
                     <i class="fas fa-eye-slash text-sm"></i>
+
                     <span>حذف رابط کاربری (UI-less)</span>
+
                 </label>
+
                 <label class="toggle-switch">
+
                     <input type="checkbox" id="uiCheckbox" />
+
                     <span class="toggle-slider"></span>
+
                 </label>
+
             </div>
+
+            <div class="flex items-center justify-between mb-6 p-2 rounded-lg">
+
+                <label for="conferenceCheckbox" class="flex items-center gap-2 cursor-pointer text-sm font-medium">
+
+                    <i class="fas fa-users text-sm"></i>
+
+                    <span>حالت کنفرانس</span>
+
+                </label>
+
+                <label class="toggle-switch">
+
+                    <input type="checkbox" id="conferenceCheckbox" />
+
+                    <span class="toggle-slider"></span>
+
+                </label>
+
+            </div>
+
+
 
             <!-- Advanced Settings Panel -->
+
             <div class="mb-6">
+
                 <button id="advancedSettingsToggle" class="btn btn-neutral w-full text-right flex items-center justify-between mb-2">
-                    <span>تنظیمات پیشرفته</span>
+
+                    <span>تنظیمات بیشتر</span>
+
                     <i class="fas fa-chevron-down transition-transform duration-300"></i>
+
                 </button>
+
                 
+
                 <div id="advancedSettingsPanel" class="hidden advanced-panel transition-all duration-300">
+
                     <!-- گزینه صدای استریو -->
+
                     <div class="flex items-center justify-between mb-4">
+
                         <label for="stereoCheckbox" class="flex items-center gap-2 cursor-pointer text-sm font-medium">
+
                             <i class="fas fa-volume-high text-sm"></i>
-                            <span>صدای استریو (برای موسیقی)</span>
+
+                            <span> صدای استریو </span>
+
                         </label>
+
                         <label class="toggle-switch">
+
                             <input type="checkbox" id="stereoCheckbox" />
+
                             <span class="toggle-slider"></span>
+
                         </label>
+
                     </div>
+
                     
+
                     <!-- انتخاب کدک ویدیویی -->
+
                     <div class="mb-4">
+
                         <label for="codecSelect" class="block font-medium mb-2 text-sm">کدک ویدیویی:</label>
+
                         <select id="codecSelect" class="w-full">
+
                             <option value="">پیش‌فرض</option>
+
                             <option value="vp8">VP8 (سازگاری بالا)</option>
+
                             <option value="vp9">VP9 (کیفیت بالاتر)</option>
+
                             <option value="h264">H.264 (سازگاری با iOS)</option>
+
                         </select>
+
                     </div>
+
                     
+
                     <!-- تنظیم بیت‌ریت -->
+
                     <div class="mb-4">
+
                         <label for="bitrateRange" class="block font-medium mb-2 text-sm">بیت‌ریت (کیفیت ویدیو):</label>
+
                         <div class="flex items-center gap-3">
+
                             <input type="range" id="bitrateRange" min="500" max="8000" step="500" value="2500" class="w-full" />
+
                             <span id="bitrateValue" class="min-w-70 text-sm text-center">2500 kbps</span>
+
                         </div>
+
                     </div>
+
                 </div>
+
             </div>
+
+
 
             <div id="callContainer" class="video-frame-box relative w-full mb-6 hidden">
+
                 <div id="loadingOverlay" class="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-30 rounded-lg z-10 hidden">
+
                     <div class="pulsing-loader">
+
                         <div class="dot"></div>
+
                         <div class="dot"></div>
+
                         <div class="dot"></div>
+
                     </div>
+
                     <span class="text-base font-semibold">در حال اتصال ...</span>
+
                 </div>
+
                 <iframe
+
                     id="vdoFrame"
+
                     class="w-full h-full rounded-lg border-2 border-light"
+
                     allow="camera; microphone; fullscreen; display-capture"
-                    title="پنجره تماس تصویری"
+
+                    title="پنجره استودیو انتقال تصویر"
+
                     src=""
+
                 ></iframe>
+
             </div>
+
             <section id="obsSection" class="mt-6 hidden">
+
                 <label for="obsLink" class="block font-medium mb-2">لینک مخصوص OBS:</label>
+
                 <div class="flex gap-2">
+
                     <input type="text" id="obsLink" value="" class="w-full" readonly aria-label="لینک OBS" />
+
                     <button id="copyLinkBtn" class="btn btn-neutral" aria-label="کپی لینک OBS" data-tooltip="کپی لینک OBS">
+
                         <i class="fas fa-copy text-sm"></i>
+
                     </button>
+
                 </div>
+
                 <p id="copyMessage" class="mt-2 text-sm text-[var(--success)] hidden" role="alert"></p>
+
                 <p id="errorMessage" class="mt-2 text-sm text-[var(--danger)] hidden" role="alert"></p>
+
             </section>
+
+            <section id="inviteSection" class="mt-6 hidden">
+
+                <label for="inviteLink" class="block font-medium mb-2">لینک دعوت به اتاق:</label>
+
+                <div class="flex gap-2">
+
+                    <input type="text" id="inviteLink" value="" class="w-full" readonly aria-label="لینک دعوت" />
+
+                    <button id="copyInviteBtn" class="btn btn-neutral" aria-label="کپی لینک دعوت" data-tooltip="کپی لینک دعوت">
+
+                        <i class="fas fa-copy text-sm"></i>
+
+                    </button>
+
+                </div>
+
+                <p id="copyInviteMessage" class="mt-2 text-sm text-[var(--success)] hidden" role="alert"></p>
+
+                <p id="errorInviteMessage" class="mt-2 text-sm text-[var(--danger)] hidden" role="alert"></p>
+
+            </section>
+
         </section>
+
+
 
         <!-- Features Section -->
+
         <section id="features" class="mb-12">
+
             <h2 class="text-xl md:text-2xl text-center mb-8">ویژگی‌های RemoteVM</h2>
+
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" id="featuresContainer">
+
                 <!-- Features will be added by JavaScript -->
+
             </div>
+
         </section>
+
+
 
         <!-- About Section -->
+
         <section id="about" class="text-center">
+
             <h2 class="text-xl md:text-2xl mb-4">درباره RemoteVM</h2>
+
             <a href="https://about.remotevm.ir/docs" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+
                 <i class="fas fa-book-open mr-2"></i>مشاهده مستندات
+
             </a>
+
         </section>
+
     </main>
 
+
+
     <!-- Footer -->
-    <footer class="container mx-auto px-4 py-6 text-center mb-4">
-        <p class="text-sm">© 2025 RemoteVM. تمامی حقوق محفوظ است.</p>
-        <div class="flex justify-center gap-4 mt-4">
-            <a href="https://about.remotevm.ir" class="text-[var(--neon-blue)] hover:text-[var(--neon-pink)]">درباره ما</a>
-            <a href="https://room.remotevm.ir/" class="text-[var(--neon-blue)] hover:text-[var(--neon-pink)]">پنل حرفه ای</a>
-            <a href="https://about.remotevm.site/" class="text-[var(--neon-blue)] hover:text-[var(--neon-pink)]">حریم خصوصی</a>
-        </div>
+
+    <footer class="container mx-auto px-4 py-6 text-center">
+
+        <p>&copy; 2025 RemoteVM. All rights reserved.</p>
+
     </footer>
 
-    <!-- Theme Toggle Button -->
-    <button
-        id="themeToggleBtn"
-        class="fixed bottom-4 right-4 btn btn-primary z-50"
-        aria-label="تغییر تم"
-        data-tooltip="تغییر تم"
-    >
-        <i class="fas fa-sun mr-2 text-sm"></i>
-        حالت روشن
-    </button>
-
     <script>
-        // App state
-        const appState = {
-            isCallActive: false,
-            isMuted: false,
-            roomId: '',
-            pushURL: '',
-            obsLink: '',
-            isLoading: false,
-            isLightMode: false,
-            mediaStream: null,
-            hasRequestedPermissions: false
-        };
 
-        // Features data
+        window.addEventListener('load', () => {
+
+            setTimeout(() => {
+
+                document.getElementById('overlay').classList.add('hidden');
+
+            }, 2000);
+
+        });
+
+
+
         const features = [
-            { icon: 'fa-video', title: 'کیفیت ویدیویی بالا', desc: 'پشتیبانی از رزولوشن‌های HD، Full HD و 4K با نرخ فریم بالا برای تجربه‌ای روان.' },
-            { icon: 'fa-lock', title: 'امنیت پیشرفته', desc: 'رمزنگاری قوی و تنظیمات امنیتی مانند رمز عبور و تعویض خودکار رمز برای جلسات شما.' },
-            { icon: 'fa-desktop', title: 'اشتراک‌گذاری صفحه', desc: 'به راحتی صفحه نمایش خود را با دیگران به اشتراک بگذارید و ارائه‌های حرفه‌ای داشته باشید.' },
-            { icon: 'fa-users', title: 'مدیریت شرکت‌کنندگان', desc: 'کنترل کامل بر تعداد شرکت‌کنندگان، میکروفون و دوربین آن‌ها.' },
-            { icon: 'fa-cog', title: 'تنظیمات پیشرفته', desc: 'شخصی‌سازی صدا، تصویر، چیدمان و سایر تنظیمات برای تجربه‌ای بهینه.' },
-            { icon: 'fa-qrcode', title: 'دعوت آسان', desc: 'لینک دعوت و QR کد برای پیوستن سریع و آسان به جلسات.' }
+
+            {
+
+                icon: 'fa-video',
+
+                title: 'ویدیو با کیفیت بالا',
+
+                desc: 'انتقال ویدیو با رزولوشن بالا بدون تاخیر.'
+
+            },
+
+            {
+
+                icon: 'fa-microphone',
+
+                title: 'صدا استریو',
+
+                desc: 'صدای شفاف و با کیفیت استریو.'
+
+            },
+
+            {
+
+                icon: 'fa-users',
+
+                title: 'کنفرانس گروهی',
+
+                desc: 'جلسات گروهی با چندین شرکت‌کننده.'
+
+            },
+
+            {
+
+                icon: 'fa-lock',
+
+                title: 'امنیت بالا',
+
+                desc: 'رمزنگاری end-to-end برای حفظ حریم خصوصی.'
+
+            },
+
+            {
+
+                icon: 'fa-mobile-alt',
+
+                title: 'سازگار با موبایل',
+
+                desc: 'پشتیبانی کامل از دستگاه‌های موبایل.'
+
+            },
+
+            {
+
+                icon: 'fa-cloud',
+
+                title: 'بر پایه ابر',
+
+                desc: 'بدون نیاز به نصب نرم‌افزار.'
+
+            }
+
         ];
 
-        // DOM Elements
-        const elements = {
-            overlay: document.getElementById('overlay'),
-            callCard: document.getElementById('call'),
-            statusIndicator: document.getElementById('statusIndicator'),
-            startCallBtn: document.getElementById('startCallBtn'),
-            fullscreenBtn: document.getElementById('fullscreenBtn'),
-            stopCallBtn: document.getElementById('stopCallBtn'),
-            resetCallBtn: document.getElementById('resetCallBtn'),
-            muteBtn: document.getElementById('muteBtn'),
-            qualitySelect: document.getElementById('qualitySelect'),
-            uiCheckbox: document.getElementById('uiCheckbox'),
-            callContainer: document.getElementById('callContainer'),
-            loadingOverlay: document.getElementById('loadingOverlay'),
-            vdoFrame: document.getElementById('vdoFrame'),
-            obsSection: document.getElementById('obsSection'),
-            obsLink: document.getElementById('obsLink'),
-            copyLinkBtn: document.getElementById('copyLinkBtn'),
-            copyMessage: document.getElementById('copyMessage'),
-            errorMessage: document.getElementById('errorMessage'),
-            themeToggleBtn: document.getElementById('themeToggleBtn'),
-            featuresContainer: document.getElementById('featuresContainer'),
-            
-            // Advanced settings elements
-            advancedSettingsToggle: document.getElementById('advancedSettingsToggle'),
-            advancedSettingsPanel: document.getElementById('advancedSettingsPanel'),
-            stereoCheckbox: document.getElementById('stereoCheckbox'),
-            codecSelect: document.getElementById('codecSelect'),
-            bitrateRange: document.getElementById('bitrateRange'),
-            bitrateValue: document.getElementById('bitrateValue')
-        };
 
-        // Utility Functions
-        function showMessage(message, type = 'success') {
-            const messageElement = type === 'success' ? elements.copyMessage : elements.errorMessage;
-            if (messageElement) {
-                messageElement.textContent = message;
-                messageElement.classList.remove('hidden');
-                setTimeout(() => messageElement.classList.add('hidden'), 3000);
-            }
+
+        const featuresContainer = document.getElementById('featuresContainer');
+
+        features.forEach(feature => {
+
+            const card = document.createElement('div');
+
+            card.className = 'feature-card';
+
+            card.innerHTML = `
+
+                <i class="fas ${feature.icon} text-3xl mb-4" style="color: var(--neon-blue);"></i>
+
+                <h3 class="text-lg font-semibold mb-2">${feature.title}</h3>
+
+                <p class="text-sm">${feature.desc}</p>
+
+            `;
+
+            featuresContainer.appendChild(card);
+
+        });
+
+
+
+        const startCallBtn = document.getElementById('startCallBtn');
+
+        const stopCallBtn = document.getElementById('stopCallBtn');
+
+        const resetCallBtn = document.getElementById('resetCallBtn');
+
+        const fullscreenBtn = document.getElementById('fullscreenBtn');
+
+        const muteBtn = document.getElementById('muteBtn');
+
+        const qualitySelect = document.getElementById('qualitySelect');
+
+        const uiCheckbox = document.getElementById('uiCheckbox');
+
+        const stereoCheckbox = document.getElementById('stereoCheckbox');
+
+        const codecSelect = document.getElementById('codecSelect');
+
+        const bitrateRange = document.getElementById('bitrateRange');
+
+        const bitrateValue = document.getElementById('bitrateValue');
+
+        const conferenceCheckbox = document.getElementById('conferenceCheckbox');
+
+        const vdoFrame = document.getElementById('vdoFrame');
+
+        const callContainer = document.getElementById('callContainer');
+
+        const obsSection = document.getElementById('obsSection');
+
+        const obsLink = document.getElementById('obsLink');
+
+        const copyLinkBtn = document.getElementById('copyLinkBtn');
+
+        const copyMessage = document.getElementById('copyMessage');
+
+        const errorMessage = document.getElementById('errorMessage');
+
+        const inviteSection = document.getElementById('inviteSection');
+
+        const inviteLink = document.getElementById('inviteLink');
+
+        const copyInviteBtn = document.getElementById('copyInviteBtn');
+
+        const copyInviteMessage = document.getElementById('copyInviteMessage');
+
+        const errorInviteMessage = document.getElementById('errorInviteMessage');
+
+        const loadingOverlay = document.getElementById('loadingOverlay');
+
+        const statusIndicator = document.getElementById('statusIndicator');
+
+        const advancedSettingsToggle = document.getElementById('advancedSettingsToggle');
+
+        const advancedSettingsPanel = document.getElementById('advancedSettingsPanel');
+
+        const videoCallCard = document.getElementById('call');
+
+
+
+        advancedSettingsToggle.addEventListener('click', () => {
+
+            advancedSettingsPanel.classList.toggle('hidden');
+
+            const icon = advancedSettingsToggle.querySelector('i');
+
+            icon.classList.toggle('rotate-180');
+
+        });
+
+
+
+        bitrateRange.addEventListener('input', () => {
+
+            bitrateValue.textContent = `${bitrateRange.value} kbps`;
+
+        });
+
+
+
+        function generateRandomString(length = 8) {
+
+            return Math.random().toString(36).substring(2, length + 2);
+
         }
 
-        // Function to generate room name with random alphanumeric characters
-        function generateRoomName() {
-            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            const length = 8; // طول مناسب برای نام اتاق
-            let result = '';
-            
-            // حداقل یک حرف و یک عدد داشته باشد
-            let hasLetter = false;
-            let hasNumber = false;
-            
-            for (let i = 0; i < length; i++) {
-                const char = characters.charAt(Math.floor(Math.random() * characters.length));
-                result += char;
-                
-                if (/[a-zA-Z]/.test(char)) hasLetter = true;
-                if (/[0-9]/.test(char)) hasNumber = true;
+
+
+        function getParams(isViewer = false) {
+
+            let params = '';
+
+            const quality = qualitySelect.value;
+
+            if (quality && !isViewer) {
+
+                params += `&height=${quality}`;
+
             }
-            
-            // اگر حداقل شرایط برآورده نشده باشد، دوباره سعی کنید
-            if (!hasLetter || !hasNumber) {
-                return generateRoomName();
+
+            const codec = codecSelect.value;
+
+            if (codec) {
+
+                params += `&codec=${codec}`;
+
             }
-            
-            return result;
+
+            const bitrate = bitrateRange.value;
+
+            if (bitrate) {
+
+                params += `&vb=${bitrate}`;
+
+            }
+
+            if (stereoCheckbox.checked) {
+
+                params += '&stereo=1';
+
+            }
+
+            if (uiCheckbox.checked) {
+
+                params += '&cleanoutput=1';
+
+            }
+
+            return params;
+
         }
 
-        function updateLinks(newRoomId = appState.roomId) {
-            const quality = elements.qualitySelect.value || '720';
-            const isClean = elements.uiCheckbox.checked || false;
-            const useStereo = elements.stereoCheckbox.checked || false;
-            const codec = elements.codecSelect.value || '';
-            const bitrate = elements.bitrateRange.value || '2500';
-            
-            let resolution;
-            switch (quality) {
-                case "480": resolution = "width=854&height=480"; break;
-                case "1080": resolution = "width=1920&height=1080"; break;
-                default: resolution = "width=1280&height=720";
-            }
-            
-            // پارامترهای رابط کاربری
-            const uiParams = isClean ? 'noheader&nofooter&clean' : 'cleanish';
-            
-            // پارامترهای کیفیت
-            let qualityParams = `${resolution}&scale=cover&bitrate=${bitrate}`;
-            if (useStereo) qualityParams += '&stereo';
-            if (codec) qualityParams += `&codec=${codec}`;
-            
-            // پارامترهای تجربه کاربری - اضافه کردن autostart و mute
-            const experienceParams = '';
-            
-            // ساخت لینک‌های نهایی - بدون تکرار & اضافی
-            appState.pushURL = `https://live.remotevm.ir/?push=${newRoomId}&${qualityParams}&${uiParams}&${experienceParams}`;
-            appState.obsLink = `https://live.remotevm.ir/?view=${newRoomId}&${qualityParams}&${uiParams}`;
-            
-            if (elements.obsLink) {
-                elements.obsLink.value = appState.obsLink;
-            }
-        }
 
-        async function requestMediaPermissions() {
-            if (appState.hasRequestedPermissions) return true;
-            
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-                appState.mediaStream = stream;
-                appState.hasRequestedPermissions = true;
-                
-                // Send confirmation back to iframe (if needed)
-                if (elements.vdoFrame && elements.vdoFrame.contentWindow) {
-                    elements.vdoFrame.contentWindow.postMessage({ type: 'mediaPermissionsGranted' }, 'https://live.remotevm.ir');
-                }
-                return true;
-            } catch (err) {
-                if (err.name === 'NotAllowedError') {
-                    showMessage('دسترسی به دوربین یا میکروفون رد شد. لطفاً مجوزها را بررسی کنید.', 'error');
-                } else if (err.name === 'NotFoundError') {
-                    showMessage('دوربین یا میکروفون یافت نشد. لطفاً دستگاه‌های خود را بررسی کنید.', 'error');
-                } else {
-                    showMessage(`خطا در دسترسی به دوربین/میکروفون: ${err.message}`, 'error');
-                }
-                
-                // Notify iframe of permission denial (if needed)
-                if (elements.vdoFrame && elements.vdoFrame.contentWindow) {
-                    elements.vdoFrame.contentWindow.postMessage({ type: 'mediaPermissionsDenied' }, 'https://live.remotevm.ir');
-                }
-                return false;
-            }
-        }
 
-        // Main Functions
-        function startCall() {
-            if (appState.isCallActive || appState.isLoading) return;
+        let currentID = '';
 
-            appState.isLoading = true;
-            elements.loadingOverlay.classList.remove('hidden');
-            elements.callContainer.classList.remove('hidden');
-            
-            // تولید نام اتاق تصادفی با ترکیب حروف و اعداد
-            const newRoomId = generateRoomName();
-            appState.roomId = newRoomId;
-            appState.isCallActive = true;
-            
-            // ارسال نام اتاق به updateLinks
-            updateLinks(newRoomId);
-            
-            elements.callCard.classList.add('active');
-            elements.statusIndicator.classList.remove('status-inactive');
-            elements.statusIndicator.classList.add('status-active');
-            
-            elements.vdoFrame.src = appState.pushURL;
-            elements.vdoFrame.onload = () => {
-                appState.isLoading = false;
-                elements.loadingOverlay.classList.add('hidden');
-                
-                [elements.fullscreenBtn, elements.stopCallBtn, elements.resetCallBtn, elements.muteBtn, elements.obsSection].forEach(el => {
-                    if (el) el.classList.remove('hidden');
-                });
-                
-                showMessage(`اتاق "${newRoomId}" با موفقیت ایجاد شد`, 'success');
-                elements.vdoFrame.onload = null; // Clear onload to prevent multiple triggers
-            };
-        }
+        let isConference = false;
 
-        function stopCall() {
-            if (!appState.isCallActive) return;
-            
-            // Stop the media stream if it exists
-            if (appState.mediaStream) {
-                appState.mediaStream.getTracks().forEach(track => track.stop());
-                appState.mediaStream = null;
-            }
-            
-            appState.hasRequestedPermissions = false;
-            appState.isCallActive = false;
-            appState.isMuted = false;
-            appState.roomId = '';
-            appState.pushURL = '';
-            appState.obsLink = '';
-            appState.isLoading = false;
-            
-            elements.vdoFrame.src = 'about:blank';
-            elements.obsLink.value = '';
-            elements.callCard.classList.remove('active');
-            elements.statusIndicator.classList.remove('status-active');
-            elements.statusIndicator.classList.add('status-inactive');
-            
-            [elements.callContainer, elements.fullscreenBtn, elements.stopCallBtn, elements.resetCallBtn, elements.muteBtn, elements.obsSection].forEach(el => {
-                if (el) el.classList.add('hidden');
-            });
-            
-            showMessage('تماس با موفقیت متوقف شد', 'success');
-        }
 
-        function resetCall() {
-            if (!appState.isCallActive || !appState.roomId) {
-                showMessage('هیچ تماس فعالی برای ریست کردن وجود ندارد.', 'error');
-                return;
-            }
-            
-            appState.isLoading = true;
-            elements.loadingOverlay.classList.remove('hidden');
-            
-            // Stop existing media stream
-            if (appState.mediaStream) {
-                appState.mediaStream.getTracks().forEach(track => track.stop());
-                appState.mediaStream = null;
-            }
-            
-            appState.hasRequestedPermissions = false;
-            
-            // ایجاد نام اتاق جدید برای ریست کردن
-            const newRoomId = generateRoomName();
-            appState.roomId = newRoomId;
-            
-            // ارسال مجدد roomId جدید به updateLinks
-            updateLinks(newRoomId);
-            
-            elements.vdoFrame.src = 'about:blank';
-            
-            setTimeout(() => {
-                elements.vdoFrame.src = appState.pushURL;
-                elements.vdoFrame.onload = () => {
-                    appState.isLoading = false;
-                    elements.loadingOverlay.classList.add('hidden');
-                    showMessage(`تنظیمات با موفقیت اعمال شد. اتاق جدید: ${newRoomId}`, 'success');
-                    elements.vdoFrame.onload = null;
-                };
-            }, 100);
-        }
 
-        function toggleMute() {
-            if (appState.mediaStream) {
-                appState.mediaStream.getAudioTracks().forEach(track => {
-                    track.enabled = !track.enabled;
-                });
-            }
-            
-            appState.isMuted = !appState.isMuted;
-            
-            if (appState.isMuted) {
-                elements.muteBtn.innerHTML = '<i class="fas fa-microphone-slash mr-2 text-sm"></i>باصدا';
+        startCallBtn.addEventListener('click', () => {
+
+            isConference = conferenceCheckbox.checked;
+
+            currentID = generateRandomString(10);
+
+            const params = getParams();
+
+            const viewerParams = getParams(true);
+
+            let url = 'https://live.remotevm.ir/';
+
+            let obsViewUrl = 'https://live.remotevm.ir/';
+
+            let inviteUrl = '';
+
+            if (isConference) {
+
+                url += `?room=${currentID}${params}`;
+
+                obsViewUrl += `?room=${currentID}&scene=0${viewerParams}`;
+
+                inviteUrl = `?room=${currentID}`;
+
+                inviteLink.value = 'https://live.remotevm.ir/' + inviteUrl;
+
+                inviteSection.classList.remove('hidden');
+
             } else {
-                elements.muteBtn.innerHTML = '<i class="fas fa-microphone mr-2 text-sm"></i>بی‌صدا';
-            }
-            
-            showMessage(appState.isMuted ? 'میکروفون بی‌صدا شد' : 'میکروفون باصدا شد', 'success');
-        }
 
-        function goFullscreen() {
-            if (elements.vdoFrame && elements.vdoFrame.requestFullscreen) {
-                elements.vdoFrame.requestFullscreen().catch(err => 
-                    showMessage(`خطا در تمام‌صفحه: ${err.message}`, 'error')
-                );
+                url += `?push=${currentID}${params}`;
+
+                obsViewUrl += `?view=${currentID}`;
+
+                inviteSection.classList.add('hidden');
+
+            }
+
+            vdoFrame.src = url;
+
+            obsLink.value = obsViewUrl;
+
+            callContainer.classList.remove('hidden');
+
+            obsSection.classList.remove('hidden');
+
+            loadingOverlay.classList.remove('hidden');
+
+            startCallBtn.classList.add('hidden');
+
+            stopCallBtn.classList.remove('hidden');
+
+            resetCallBtn.classList.remove('hidden');
+
+            fullscreenBtn.classList.remove('hidden');
+
+            muteBtn.classList.remove('hidden');
+
+            statusIndicator.classList.remove('status-inactive');
+
+            statusIndicator.classList.add('status-active');
+
+            videoCallCard.classList.add('active');
+
+            vdoFrame.addEventListener('load', () => {
+
+                loadingOverlay.classList.add('hidden');
+
+            });
+
+        });
+
+
+
+        stopCallBtn.addEventListener('click', () => {
+
+            vdoFrame.src = '';
+
+            obsLink.value = '';
+
+            inviteLink.value = '';
+
+            callContainer.classList.add('hidden');
+
+            obsSection.classList.add('hidden');
+
+            inviteSection.classList.add('hidden');
+
+            startCallBtn.classList.remove('hidden');
+
+            stopCallBtn.classList.add('hidden');
+
+            resetCallBtn.classList.add('hidden');
+
+            fullscreenBtn.classList.add('hidden');
+
+            muteBtn.classList.add('hidden');
+
+            statusIndicator.classList.add('status-inactive');
+
+            statusIndicator.classList.remove('status-active');
+
+            videoCallCard.classList.remove('active');
+
+        });
+
+
+
+        resetCallBtn.addEventListener('click', () => {
+
+            const params = getParams();
+
+            let url = 'https://live.remotevm.ir/';
+
+            if (isConference) {
+
+                url += `?room=${currentID}${params}`;
+
             } else {
-                showMessage('مرورگر شما از حالت تمام‌صفحه پشتیبانی نمی‌کند', 'error');
-            }
-        }
 
-        async function copyToClipboard() {
-            if (!appState.obsLink) {
-                showMessage('لینکی برای کپی وجود ندارد!', 'error');
-                return;
+                url += `?push=${currentID}${params}`;
+
             }
-            
+
+            vdoFrame.src = url;
+
+        });
+
+
+
+        fullscreenBtn.addEventListener('click', () => {
+
+            if (vdoFrame.requestFullscreen) {
+
+                vdoFrame.requestFullscreen();
+
+            } else if (vdoFrame.mozRequestFullScreen) {
+
+                vdoFrame.mozRequestFullScreen();
+
+            } else if (vdoFrame.webkitRequestFullscreen) {
+
+                vdoFrame.webkitRequestFullscreen();
+
+            } else if (vdoFrame.msRequestFullscreen) {
+
+                vdoFrame.msRequestFullscreen();
+
+            }
+
+        });
+
+
+
+        let isMuted = false;
+
+        muteBtn.addEventListener('click', () => {
+
+            isMuted = !isMuted;
+
+            if (isMuted) {
+
+                muteBtn.innerHTML = '<i class="fas fa-microphone-slash mr-2 text-sm"></i>باصدا';
+
+            } else {
+
+                muteBtn.innerHTML = '<i class="fas fa-microphone mr-2 text-sm"></i>بی‌صدا';
+
+            }
+
+            vdoFrame.contentWindow.postMessage({ mute: isMuted }, '*');
+
+        });
+
+
+
+        copyLinkBtn.addEventListener('click', () => {
+
+            obsLink.select();
+
             try {
-                await navigator.clipboard.writeText(appState.obsLink);
-                showMessage('لینک OBS با موفقیت کپی شد!', 'success');
+
+                document.execCommand('copy');
+
+                copyMessage.textContent = 'لینک کپی شد!';
+
+                copyMessage.classList.remove('hidden');
+
+                setTimeout(() => {
+
+                    copyMessage.classList.add('hidden');
+
+                }, 2000);
+
             } catch (err) {
-                const textArea = document.createElement('textarea');
-                textArea.value = appState.obsLink;
-                document.body.appendChild(textArea);
-                textArea.select();
-                
-                try {
-                    document.execCommand('copy');
-                    showMessage('لینک OBS با موفقیت کپی شد!', 'success');
-                } catch (execErr) {
-                    showMessage('خطا در کپی لینک OBS!', 'error');
-                }
-                
-                document.body.removeChild(textArea);
+
+                errorMessage.textContent = 'خطا در کپی لینک.';
+
+                errorMessage.classList.remove('hidden');
+
+                setTimeout(() => {
+
+                    errorMessage.classList.add('hidden');
+
+                }, 2000);
+
             }
-        }
 
-        function toggleTheme() {
-            appState.isLightMode = !appState.isLightMode;
-            document.body.classList.toggle('light-mode', appState.isLightMode);
-            localStorage.setItem('theme', appState.isLightMode ? 'light' : 'dark');
-            
-            const themeIcon = appState.isLightMode ? 'fa-moon' : 'fa-sun';
-            const themeText = appState.isLightMode ? 'حالت تاریک' : 'حالت روشن';
-            elements.themeToggleBtn.innerHTML = `<i class="fas ${themeIcon} mr-2 text-sm"></i>${themeText}`;
-        }
+        });
 
-        // Initialize Features
-        function renderFeatures() {
-            features.forEach(feature => {
-                const featureCard = document.createElement('div');
-                featureCard.className = 'feature-card';
-                featureCard.innerHTML = `
-                    <i class="fas ${feature.icon} text-2xl md:text-3xl mb-4 text-[var(--neon-blue)]"></i>
-                    <h3 class="text-lg md:text-xl mb-2">${feature.title}</h3>
-                    <p class="text-sm md:text-base">${feature.desc}</p>
-                `;
-                elements.featuresContainer.appendChild(featureCard);
-            });
-        }
 
-        // Initialize Application
-        function initApp() {
-            // Hide overlay after a short delay
-            setTimeout(() => {
-                elements.overlay.classList.add('hidden');
-            }, 1200);
-            
-            // Check saved theme
-            const savedTheme = localStorage.getItem('theme');
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            appState.isLightMode = savedTheme ? savedTheme === 'light' : !prefersDark;
-            document.body.classList.toggle('light-mode', appState.isLightMode);
-            
-            // Update theme button
-            const themeIcon = appState.isLightMode ? 'fa-moon' : 'fa-sun';
-            const themeText = appState.isLightMode ? 'حالت تاریک' : 'حالت روشن';
-            elements.themeToggleBtn.innerHTML = `<i class="fas ${themeIcon} mr-2 text-sm"></i>${themeText}`;
-            
-            // Update bitrate value display
-            elements.bitrateValue.textContent = `${elements.bitrateRange.value} kbps`;
-            
-            // Render features
-            renderFeatures();
 
-            // Add event listeners
-            elements.startCallBtn.addEventListener('click', startCall);
-            elements.stopCallBtn.addEventListener('click', stopCall);
-            elements.resetCallBtn.addEventListener('click', resetCall);
-            elements.muteBtn.addEventListener('click', toggleMute);
-            elements.fullscreenBtn.addEventListener('click', goFullscreen);
-            elements.copyLinkBtn.addEventListener('click', copyToClipboard);
-            elements.themeToggleBtn.addEventListener('click', toggleTheme);
-            
-            // Basic settings events
-            elements.qualitySelect.addEventListener('change', () => {
-                if (appState.isCallActive) updateLinks(appState.roomId);
-            });
-            elements.uiCheckbox.addEventListener('change', () => {
-                if (appState.isCallActive) updateLinks(appState.roomId);
-            });
+        copyInviteBtn.addEventListener('click', () => {
 
-            // Advanced settings events
-            elements.advancedSettingsToggle.addEventListener('click', () => {
-                elements.advancedSettingsPanel.classList.toggle('hidden');
-                elements.advancedSettingsToggle.querySelector('i').classList.toggle('rotate-180');
-            });
-            
-            elements.stereoCheckbox.addEventListener('change', () => {
-                if (appState.isCallActive) updateLinks(appState.roomId);
-            });
-            
-            elements.codecSelect.addEventListener('change', () => {
-                if (appState.isCallActive) updateLinks(appState.roomId);
-            });
-            
-            elements.bitrateRange.addEventListener('input', () => {
-                elements.bitrateValue.textContent = `${elements.bitrateRange.value} kbps`;
-            });
-            
-            elements.bitrateRange.addEventListener('change', () => {
-                if (appState.isCallActive) updateLinks(appState.roomId);
-            });
+            inviteLink.select();
 
-            // Handle message from iframe
-            window.addEventListener('message', async (event) => {
-                // Verify the message origin for security
-                if (event.origin !== 'https://live.remotevm.ir') return;
+            try {
 
-                // Check for a specific message type from the iframe
-                if (event.data && event.data.type === 'requestMedia') {
-                    const permissionGranted = await requestMediaPermissions();
-                    if (!permissionGranted) {
-                        stopCall(); // Stop call if permissions are denied
-                    }
-                }
-            });
+                document.execCommand('copy');
 
-            // Handle keyboard shortcuts
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' && document.activeElement.tagName === 'BUTTON') {
-                    document.activeElement.click();
-                }
-                if (e.key.toLowerCase() === 'm' && appState.isCallActive) {
-                    toggleMute();
-                }
-            });
-        }
+                copyInviteMessage.textContent = 'لینک دعوت کپی شد!';
 
-        // Start the application when DOM is fully loaded
-        document.addEventListener('DOMContentLoaded', initApp);
+                copyInviteMessage.classList.remove('hidden');
+
+                setTimeout(() => {
+
+                    copyInviteMessage.classList.add('hidden');
+
+                }, 2000);
+
+            } catch (err) {
+
+                errorInviteMessage.textContent = 'خطا در کپی لینک دعوت.';
+
+                errorInviteMessage.classList.remove('hidden');
+
+                setTimeout(() => {
+
+                    errorInviteMessage.classList.add('hidden');
+
+                }, 2000);
+
+            }
+
+        });
+
     </script>
+
 </body>
+
 </html>
