@@ -461,35 +461,34 @@
             justify-content: space-between;
         }
     }
-    @media (max-width: 640px) {
-        .container {
-            padding: clamp(0.35rem, 1vw, 1rem);
-            box-shadow: 0 4px 16px rgba(0, 191, 255, 0.2);
-        }
-        .video-call-card {
-            max-width: min(95vw, 420px);
-            height: 80vh !important;
-            padding: clamp(0.35rem, 1.5vw, 1rem);
-            box-shadow: 0 6px 20px rgba(0, 191, 255, 0.2);
-        }
-        .video-call-card.active {
-            max-width: 95vw;
-            box-shadow: 0 8px 24px rgba(0, 191, 255, 0.3);
-        }
-        .video-frame-box {
-            max-width: min(90vw, 360px);
-            
-            height: 70vh !important;
-            box-shadow: 0 4px 16px rgba(0, 191, 255, 0.2);
-        }
-        .video-call-card.active .video-frame-box {
-            max-width: 95vw;
-            box-shadow: 0 6px 22px rgba(0, 191, 255, 0.35);
-        }
-        .feature-card {
-            padding: clamp(0.25rem, 1.5vw, 1rem);
-            box-shadow: 0 4px 16px rgba(0, 191, 255, 0.2);
-        }
+@media (max-width: 640px) {
+            .container {
+                padding: clamp(0.35rem, 1vw, 1rem);
+                box-shadow: 0 4px 16px rgba(0, 191, 255, 0.2);
+            }
+            .video-call-card {
+                max-width: min(95vw, 420px);
+                padding: clamp(0.35rem, 1.5vw, 1rem);
+                box-shadow: 0 6px 20px rgba(0, 191, 255, 0.2);
+            }
+            .video-call-card.active {
+                max-width: 95vw;
+                box-shadow: 0 8px 24px rgba(0, 191, 255, 0.3);
+            }
+            .video-frame-box {
+                max-width: min(90vw, 360px);
+                height: calc(min(90vw, 350px) * 9 / 16 * 3);
+                box-shadow: 0 4px 16px rgba(0, 191, 255, 0.2);
+            }
+            .video-call-card.active .video-frame-box {
+                max-width: 95vw;
+                height: calc(95vw * 9 / 16 * 3);
+                box-shadow: 0 6px 22px rgba(0, 191, 255, 0.35);
+            }
+            .feature-card {
+                padding: clamp(0.25rem, 1.5vw, 1rem);
+                box-shadow: 0 4px 16px rgba(0, 191, 255, 0.2);
+            }
         .grid {
             grid-template-columns: 1fr;
         }
