@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="آموزش استفاده از RemoteVM برای کنفرانس‌های ویدیویی و انتقال تصویر یک‌طرفه">
+    <meta name="keywords" content="RemoteVM, کنفرانس ویدیویی, انتقال تصویر, آموزش">
+    <meta name="author" content="RemoteVM">
+    <title>آموزش استفاده از RemoteVM</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;800&display=swap');
+        :root {
+            --dark-bg: linear-gradient(135deg, #0a0f2a 0%, #1a2152 100%);
+            --dark-text: #e0e7ff;
+            --neon-blue: #00d4ff;
+            --neon-purple: #7b2cbf;
+            --primary: #3b82f6;
+            --primary-hover: #2563eb;
+            --accent-glow: #00d4ff80;
+            --border-dark: rgba(59, 130, 246, 0.3);
+            --card-bg: rgba(10, 15, 42, 0.9);
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: var(--dark-bg);
+            color: var(--dark-text);
+            min-height: 100vh;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        .container {
+            background: var(--card-bg);
+            border-radius: 1rem;
+            border: 1px solid var(--border-dark);
+            box-shadow: 0 4px 24px var(--accent-glow);
+            padding: clamp(1rem, 4vw, 1.5rem);
+            max-width: min(90vw, 1200px);
+            margin: 2rem auto;
+            position: relative;
+            z-index: 1;
+        }
+        h1, h2, h3 {
+            font-weight: 900;
+            color: var(--neon-blue);
+            text-shadow: 0 0 8px var(--neon-blue);
+        }
+        .btn {
+            background: linear-gradient(90deg, var(--primary), var(--neon-purple));
+            color: #fff;
+            border-radius: 0.6rem;
+            padding: clamp(0.5rem, 1.5vw, 0.7rem) clamp(1rem, 2.5vw, 1.5rem);
+            transition: background 0.3s, box-shadow 0.3s, transform 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            cursor: pointer;
+            box-shadow: 0 0 12px var(--accent-glow);
+        }
+        .btn:hover {
+            background: linear-gradient(90deg, var(--primary-hover), var(--neon-blue));
+            box-shadow: 0 0 20px var(--accent-glow);
+            transform: translateY(-2px);
+        }
+        .feature-card {
+            background: var(--card-bg);
+            border-radius: 0.7rem;
+            padding: clamp(1rem, 3vw, 1.5rem);
+            border: 1px solid var(--border-dark);
+            box-shadow: 0 4px 20px var(--accent-glow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.2), transparent 70%);
+            opacity: 0.5;
+            z-index: -1;
+        }
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px var(--accent-glow);
+            animation: neon-pulse 1.5s infinite;
+        }
+        @keyframes neon-pulse {
+            0% { box-shadow: 0 4px 20px var(--accent-glow); }
+            50% { box-shadow: 0 8px 30px rgba(0, 212, 255, 0.7); }
+            100% { box-shadow: 0 4px 20px var(--accent-glow); }
+        }
+        .step-list {
+            counter-reset: step;
+            padding-right: 1.5rem;
+        }
+        .step-list li {
+            position: relative;
+            margin-bottom: 1rem;
+            padding-right: 2.5rem;
+        }
+        .step-list li::before {
+            content: counter(step);
+            counter-increment: step;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 1.8rem;
+            height: 1.8rem;
+            background: var(--neon-blue);
+            color: #0a0f2a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+        .faq-item {
+            margin-bottom: 1rem;
+            background: rgba(59, 130, 246, 0.15);
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-dark);
+        }
+        .faq-item summary {
+            cursor: pointer;
+            font-weight: 700;
+            padding: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--neon-blue);
+        }
+        .faq-item p {
+            padding: 1rem;
+            background: rgba(59, 130, 246, 0.05);
+            border-radius: 0.5rem;
+        }
+        .image-placeholder {
+            background: linear-gradient(135deg, #1a2a5a 0%, #0a1e4a 100%);
+            border-radius: 0.75rem;
+            border: 2px solid var(--neon-blue);
+            box-shadow: 0 4px 20px var(--accent-glow);
+            width: 70%;
+            aspect-ratio: 16/9;
+            display: block;
+            position: relative;
+            overflow: hidden;
+            margin-left: auto;
+            margin-right: auto;
+            color: var(--dark-text);
+        }
+        .image-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 0.75rem;
+            display: block;
+            transition: transform 0.3s;
+        }
+        .image-placeholder:hover img {
+            transform: scale(1.05);
+        }
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: var(--card-bg);
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-dark);
+            box-shadow: 0 2px 12px var(--accent-glow);
+        }
+        .menu-toggle {
+            background: none;
+            border: none;
+            color: var(--neon-blue);
+            font-size: 1.5rem;
+            cursor: pointer;
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 60;
+            transition: color 0.3s;
+        }
+        .menu-toggle:hover {
+            color: var(--neon-purple);
+        }
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 40;
+            transition: opacity 0.3s ease;
+        }
+        .menu-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .menu-panel {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 250px;
+            height: 100%;
+            background: var(--card-bg);
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            z-index: 50;
+            border-left: 1px solid var(--border-dark);
+            box-shadow: -4px 0 12px var(--accent-glow);
+        }
+        .menu-panel.open {
+            transform: translateX(0);
+        }
+        .menu-content {
+            padding: 2rem;
+            color: var(--dark-text);
+        }
+        .menu-content h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--neon-blue);
+            text-shadow: 0 0 8px var(--neon-blue);
+        }
+        .menu-content ul {
+            list-style: none;
+            goal-oriented: 0;
+        }
+        .menu-content li {
+            margin-bottom: 1rem;
+        }
+        .menu-content a {
+            color: var(--neon-blue);
+            text-decoration: none;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s, transform 0.3s;
+        }
+        .menu-content a:hover {
+            color: var(--neon-purple);
+            transform: translateX(5px);
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+                max-width: 95vw;
+            }
+            h1 { font-size: 1.75rem; }
+            h2 { font-size: 1.25rem; }
+            .image-placeholder {
+                width: 90%;
+                font-size: 1rem;
+            }
+            .menu-panel {
+                width: 200px;
+            }
+        }
+        /* Hi-tech background effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(59, 130, 246, 0.1), transparent 70%);
+            z-index: -1;
+            animation: background-glow 10s infinite alternate;
+        }
+        @keyframes background-glow {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <button id="menu-toggle" class="menu-toggle" aria-label="باز کردن منو">
+            <i id="menu-icon" class="fas fa-bars" aria-hidden="true"></i>
+        </button>
+        <div id="menu-overlay" class="menu-overlay hidden opacity-0"></div>
+        <nav id="menu-panel" class="menu-panel">
+            <div class="menu-content">
+                <h2>منو</h2>
+                <ul>
+                    <li><a href="https://remotevm.ir" target="_blank"><i class="fas fa-home"></i>خانه</a></li>
+                    <li><a href="https://call.remotevm.ir" target="_blank"><i class="fas fa-video"></i>تماس تصویری</a></li>
+                    <li><a href="https://about.remotevm.ir" target="_blank"><i class="fas fa-info-circle"></i>درباره ما</a></li>
+                    <li><a href="https://room.remotevm.ir" target="_blank"><i class="fas fa-users-cog"></i>پنل حرفه ای</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <section class="text-center mb-12">
+            <h1 class="text-3xl md:text-4xl mb-4 flex items-center justify-center gap-3">
+                <i class="fas fa-video text-[var(--neon-blue)] text-3xl"></i> آموزش استفاده از RemoteVM
+            </h1>
+            <p class="text-lg mb-6">راهنمای جامع برای برگزاری کنفرانس‌های ویدیویی و استریم با کیفیت بالا</p>
+            <div class="image-placeholder">
+                <img src="./remotevm-tut/RemoteVm01.jpg" alt="پیش‌نمایش RemoteVM">
+            </div>
+        </section>
+
+        <section class="feature-card mb-12">
+            <h2 class="text-xl md:text-2xl mb-4 flex items-center gap-2">
+                <i class="fas fa-info-circle text-[var(--neon-blue)]"></i> معرفی حالت‌های RemoteVM
+            </h2>
+            <p class="mb-4">RemoteVM دو حالت اصلی برای استفاده ارائه می‌دهد:</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="feature-card">
+                    <h3 class="text-lg font-semibold mb-2 flex items-center gap-2">
+                        <i class="fas fa-users text-[var(--neon-blue)]"></i> حالت کنفرانس گروهی
+                    </h3>
+                    <p class="text-sm">مناسب برای جلسات تیمی، وبینارها یا کلاس‌های آنلاین که در آن چندین شرکت‌کننده می‌توانند ویدیو و صدا را به اشتراک بگذارند.</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="text-lg font-semibold mb-2 flex items-center gap-2">
+                        <i class="fas fa-stream text-[var(--neon-blue)]"></i> حالت انتقال تصویر یک‌طرفه
+                    </h3>
+                    <p class="text-sm">ایده‌آل برای استریم یا پخش زنده، مانند ارائه‌های یک‌نفره یا پخش در پلتفرم‌هایی مثل YouTube و Twitch.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="feature-card mb-12">
+            <h2 class="text-xl md:text-2xl mb-4 flex items-center gap-2">
+                <i class="fas fa-rocket text-[var(--neon-blue)]"></i> پیش‌نیازها
+            </h2>
+            <ul class="step-list">
+                <li><strong>مرورگر مدرن</strong>: از مرورگرهای Chrome، Firefox یا Edge استفاده کنید.</li>
+                <li><strong>اتصال اینترنت پایدار</strong>: حداقل سرعت 5 مگابیت بر ثانیه برای کیفیت بهتر.</li>
+                <li><strong>دوربین و میکروفون</strong>: برای تماس ویدیویی یا کنفرانس ضروری است.</li>
+            </ul>
+        </section>
+        <section class="feature-card mb-12">
+            <h2 class="text-xl md:text-2xl mb-4 flex items-center gap-2">
+                <i class="fas fa-cog text-[var(--neon-blue)]"></i> تنظیمات و سفارشی‌سازی
+            </h2>
+            <div class="image-placeholder mb-4">
+                <img src="./remotevm-tut/RemoteVm-setting.jpg" alt="تصویر کنفرانس گروهی">
+            </div>             
+            <ul class="step-list">
+                <li><strong>کیفیت ویدیو</strong>: از منوی «کیفیت ویدیو» رزولوشن 480p، 720p یا 1080p را انتخاب کنید.</li>
+                <li><strong>تنظیمات پیشرفته</strong>: روی «تنظیمات بیشتر» کلیک کنید:
+                    <ul class="pr-4 list-disc">
+                        <li><strong>صدای استریو</strong>: برای کیفیت صدای بهتر.</li>
+                        <li><strong>کدک ویدیویی</strong>: VP8، VP9 یا H.264.</li>
+                        <li><strong>بیت‌ریت</strong>: بین 500 تا 8000 kbps تنظیم کنید.</li>
+                        <li><strong>دستگاه صوتی/تصویری</strong>: میکروفون و دوربین را انتخاب کنید.</li>
+                    </ul>
+                </li>
+                <li><strong>حذف رابط کاربری</strong>: کلید «حذف رابط کاربری» را برای تجربه ساده‌تر فعال کنید.</li>
+                <li><strong>اعمال تغییرات</strong>: با دکمه «ریست اتصال» تنظیمات را اعمال کنید.</li>
+            </ul>
+        </section>
+        <section class="feature-card mb-12">
+            <h2 class="text-2xl md:text-3xl mb-4 flex items-center gap-4">
+                <i class="fas fa-users text-[var(--neon-blue)]"></i> آموزش حالت کنفرانس گروهی
+            </h2>
+            <p class="mb-4">این حالت برای جلسات با چندین شرکت‌کننده طراحی شده است.</p>
+            <div class="image-placeholder mb-4">
+                <img src="./remotevm-tut/group-conference.jpg" alt="تصویر کنفرانس گروهی">
+            </div>
+            
+            <h3 class="text-lg font-semibold mb-2">مراحل استفاده:</h3>
+            <ul class="step-list">
+                <li><strong>فعال‌سازی حالت کنفرانس</strong>: در بخش «استودیو انتقال تصویر»، کلید «حالت کنفرانس» را فعال کنید.</li>
+                <li><strong>شروع تماس</strong>: روی دکمه «شروع کنید» کلیک کنید. یک ID تصادفی تولید شده و پنجره ویدیویی ظاهر می‌شود.</li>
+                <li><strong>دعوت شرکت‌کنندگان</strong>: لینک دعوت را از بخش «لینک دعوت به اتاق» کپی کرده و برای دیگران ارسال کنید.</li>
+                <div class="image-placeholder mb-4">
+                    <img src="./remotevm-tut/group-conference2.jpg" alt="تصویر کنفرانس گروهی">
+                </div>                
+                <li><strong>مدیریت تماس</strong>:
+                    <ul class="pr-4 list-disc">
+                        <li><strong>بی‌صدا کردن</strong>: میکروفون را خاموش/روشن کنید.</li>
+                        <li><strong>تمام‌صفحه</strong>: پنجره ویدیویی را تمام‌صفحه کنید.</li>
+                        <li><strong>توقف تماس</strong>: برای پایان کنفرانس.</li>
+                        <li><strong>ریست اتصال</strong>: برای اعمال تنظیمات جدید.</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <section class="feature-card mb-12">
+            <h2 class="text-3xl md:text-3xl mb-4 flex items-center gap-4 ">
+                <i class="fas fa-stream text-[var(--neon-blue)]"></i> آموزش حالت انتقال تصویر یک‌طرفه
+            </h2>
+            <p class="mb-4">این حالت برای استریم یا پخش زنده به مخاطبان مناسب است.</p>
+            <div class="image-placeholder mb-4">
+                <img src="./remotevm-tut/stream.jpg" alt="تصویر استریم یک‌طرفه">
+            </div>
+            <h3 class="text-lg font-semibold mb-2">مراحل استفاده:</h3>
+            <ul class="step-list">
+                <li><strong>غیرفعال کردن حالت کنفرانس</strong>: مطمئن شوید کلید «حالت کنفرانس» خاموش است.</li>
+                <li><strong>شروع تماس</strong>: روی دکمه «شروع کنید» کلیک کنید تا پنجره ویدیویی ظاهر شود.</li>
+                <li><strong>استفاده از لینک OBS</strong>: لینک OBS را از بخش «لینک مخصوص OBS» کپی کرده و در نرم‌افزار OBS وارد کنید.</li>
+                <li><strong>مدیریت تماس</strong>: مشابه حالت کنفرانس (بی‌صدا، تمام‌صفحه، توقف، ریست).</li>
+            </ul>
+        </section>
+
+        <section class="feature-card mb-12">
+            <h2 class="text-xl md:text-2xl mb-4 flex items-center gap-2">
+                <i class="fas fa-lightbulb text-[var(--neon-blue)]"></i> نکات و ترفندها
+            </h2>
+            <ul class="step-list">
+                <li><strong>بررسی دستگاه‌ها</strong>: مطمئن شوید دوربین و میکروفون فعال هستند.</li>
+                <li><strong>مدیریت پهنای باند</strong>: برای اینترنت ضعیف، بیت‌ریت را کاهش دهید.</li>
+                <li><strong>کپی لینک‌ها</strong>: لینک‌های OBS و دعوت را قبل از اشتراک بررسی کنید.</li>
+                <li><strong>رفع مشکلات</strong>: در صورت قطع ارتباط، تماس را ریست کنید.</li>
+                <li><strong>مستندات</strong>: به <a href="https://about.remotevm.ir/docs" class="text-[var(--neon-blue)] hover:underline">مستندات</a> مراجعه کنید.</li>
+            </ul>
+        </section>
+
+        <section class="feature-card mb-12">
+            <h2 class="text-xl md:text-2xl mb-4 flex items-center gap-2">
+                <i class="fas fa-question-circle text-[var(--neon-blue)]"></i> سوالات متداول
+            </h2>
+            <details class="faq-item">
+                <summary><i class="fas fa-question text-[var(--neon-blue)]"></i> چگونه دیگران را به کنفرانس دعوت کنم؟</summary>
+                <p>در حالت کنفرانس، لینک دعوت را کپی کرده و برای شرکت‌کنندگان ارسال کنید.</p>
+            </details>
+            <details class="faq-item">
+                <summary><i class="fas fa-question text-[var(--neon-blue)]"></i> آیا نیاز به نصب نرم‌افزار دارم؟</summary>
+                <p>خیر، RemoteVM کاملاً مبتنی بر وب است.</p>
+            </details>
+            <details class="faq-item">
+                <summary><i class="fas fa-question text-[var(--neon-blue)]"></i> چگونه کیفیت تماس را بهبود دهم؟</summary>
+                <p>بیت‌ریت را افزایش دهید، کدک VP9 را انتخاب کنید و از اینترنت پایدار استفاده کنید.</p>
+            </details>
+        </section>
+
+        <section class="feature-card text-center">
+            <h2 class="text-xl md:text-2xl mb-4 flex items-center justify-center gap-2">
+                <i class="fas fa-headset text-[var(--neon-blue)]"></i> پشتیبانی
+            </h2>
+            <p class="mb-4">برای پشتیبانی، به <a href="https://about.remotevm.ir/docs" class="text-[var(--neon-blue)] hover:underline">مستندات رسمی</a> مراجعه کنید.</p>
+            <a href="https://remotevm.ir" class="btn">
+                <i class="fas fa-rocket"></i> شروع با RemoteVM
+            </a>
+        </section>
+    </div>
+
+    <footer class="container mx-auto px-4 py-6 text-center">
+        <p>&copy; 2025 RemoteVM. All rights reserved</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuToggle = document.getElementById('menu-toggle');
+            const menuOverlay = document.getElementById('menu-overlay');
+            const menuPanel = document.getElementById('menu-panel');
+            const menuIcon = document.getElementById('menu-icon');
+
+            menuToggle.addEventListener('click', () => {
+                menuPanel.classList.toggle('open');
+                menuOverlay.classList.toggle('hidden');
+                menuOverlay.classList.toggle('opacity-0');
+                menuIcon.classList.toggle('fa-bars');
+                menuIcon.classList.toggle('fa-times');
+            });
+
+            menuOverlay.addEventListener('click', () => {
+                menuPanel.classList.remove('open');
+                menuOverlay.classList.add('hidden');
+                menuOverlay.classList.add('opacity-0');
+                menuIcon.classList.add('fa-bars');
+                menuIcon.classList.remove('fa-times');
+            });
+        });
+    </script>
+</body>
+</html>

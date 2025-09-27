@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>کاتالوگ محصولات | Remote VM</title>
+    <meta name="description" content="کاتالوگ محصولات حرفه‌ای Remote VM شامل کارت کپچر با EDID، مینی سرور انتقال تصویر، و کارت کپچر با ورودی و خروجی صدا برای استریمینگ، ویدیوکنفرانس، و آزمون‌های آنلاین.">
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "ItemList",
+      "itemListElement": [
+        {
+          "@type": "Product",
+          "name": "کارت کپچر با EDID",
+          "image": "https://remotevm.site/product/capture-card-edid-01.jpg",
+          "description": "کارت کپچر HDMI به USB با شبیه‌ساز EDID، مناسب برای آزمون‌های آنلاین و استریمینگ با کیفیت بالا.",
+          "brand": {
+            "@type": "Brand",
+            "name": "Remote VM"
+          },
+          "sku": "RVM-CAP-001",
+          "offers": {
+            "@type": "Offer",
+            "url": "https://remotevm.site/product/capture-card-edid",
+            "priceCurrency": "IRR",
+            "price": "4900000",
+            "itemCondition": "https://schema.org/NewCondition",
+            "availability": "https://schema.org/InStock",
+            "seller": {
+              "@type": "Organization",
+              "name": "Remote VM"
+            }
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "reviewCount": "85"
+          }
+        },
+        {
+          "@type": "Product",
+          "name": "مینی سرور انتقال تصویر",
+          "image": "https://remotevm.site/product/mini-server-01.jpg",
+          "description": "مینی سرور حرفه‌ای برای انتقال تصویر و استریمینگ بدون نیاز به سخت‌افزار پیچیده، ایده‌آل برای ویدیوکنفرانس.",
+          "brand": {
+            "@type": "Brand",
+            "name": "Remote VM"
+          },
+          "sku": "RVM-SRV-001",
+          "offers": {
+            "@type": "Offer",
+            "url": "https://remotevm.site/product/mini-server",
+            "priceCurrency": "IRR",
+            "price": "8900000",
+            "itemCondition": "https://schema.org/NewCondition",
+            "availability": "https://schema.org/InStock",
+            "seller": {
+              "@type": "Organization",
+              "name": "Remote VM"
+            }
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.7",
+            "reviewCount": "62"
+          }
+        },
+        {
+          "@type": "Product",
+          "name": "کارت کپچر با EDID و خروجی و ورودی صدا RemoteVM",
+          "image": "https://remotevm.site/product/capture-card-audio-01.jpg",
+          "description": "کارت کپچر HDMI به USB با ورودی میکروفون، خروجی هدفون، شبیه‌ساز EDID و وبکم، مناسب برای استریمینگ و ویدیوکنفرانس با کیفیت 4K.",
+          "brand": {
+            "@type": "Brand",
+            "name": "Remote VM"
+          },
+          "sku": "RVM-CAP-002",
+          "offers": {
+            "@type": "Offer",
+            "url": "https://remotevm.site/product/capture-card-audio-edid",
+            "priceCurrency": "IRR",
+            "price": "6500000",
+            "itemCondition": "https://schema.org/NewCondition",
+            "availability": "https://schema.org/InStock",
+            "seller": {
+              "@type": "Organization",
+              "name": "Remote VM"
+            }
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "reviewCount": "97"
+          }
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: #0f172a; /* slate-900 */
+            color: #cbd5e1; /* slate-300 */
+        }
+        .header-scrolled {
+            background-color: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+        .gradient-text {
+            background: linear-gradient(to left, #22d3ee, #67e8f9);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .faq-question::after {
+            content: '\f078'; /* Chevron down icon */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            transition: transform 0.3s ease;
+        }
+        .faq-question.active::after {
+            transform: rotate(180deg);
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .swiper-button-next:after, .swiper-button-prev:after {
+            color: #22d3ee;
+            font-size: 1.5rem;
+        }
+        .swiper-pagination-bullet-active {
+            background: #22d3ee !important;
+        }
+        .whatsapp-float-btn {
+            position: fixed;
+            bottom: 24px;
+            left: 24px;
+            z-index: 1000;
+            background-color: #25D366;
+            color: #ffffff;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease-in-out;
+        }
+        .whatsapp-float-btn:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+    <header id="header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="https://remotevm.site/" class="flex items-center gap-3 text-2xl font-bold text-white">
+                    <i class="fas fa-server text-cyan-400 text-3xl"></i>
+                    <span>Remote VM</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-reverse space-x-6 text-lg">
+                    <a href="https://remotevm.ir/" class="text-slate-300 hover:text-cyan-400 transition-colors">خانه</a>
+                    <a href="https://remotevm.site/store/" class="text-slate-300 hover:text-cyan-400 transition-colors">محصولات</a>
+                    <a href="#faq" class="text-slate-300 hover:text-cyan-400 transition-colors">سوالات متداول</a>
+                    <a href="https://remotevm.site/contact/" class="text-slate-300 hover:text-cyan-400 transition-colors">تماس</a>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="https://remotevm.ir/" target="_blank" class="hidden sm:inline-block px-6 py-2 text-white bg-blue-600 hover:bg-blue-700 rounded-full transition-transform duration-300 hover:scale-105">
+                        R.V.M Server
+                    </a>
+                    <button id="menu-btn" class="md:hidden text-white text-2xl">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full right-0 w-full bg-slate-800/95 backdrop-blur-sm">
+            <div class="flex flex-col items-center space-y-4 py-6">
+                <a href="https://remotevm.ir/" class="mobile-menu-link text-slate-300 hover:text-cyan-400 transition-colors">خانه</a>
+                <a href="https://remotevm.site/store/" class="mobile-menu-link text-slate-300 hover:text-cyan-400 transition-colors">محصولات</a>
+                <a href="#faq" class="mobile-menu-link text-slate-300 hover:text-cyan-400 transition-colors">سوالات متداول</a>
+                <a href="https://remotevm.site/contact/" class="mobile-menu-link text-slate-300 hover:text-cyan-400 transition-colors">تماس</a>
+                <a href="https://about.remotevm.ir/" class="px-6 py-2 text-white bg-blue-600 hover:bg-blue-700 rounded-full transition-transform duration-300 hover:scale-105 mt-4"> درباره ما </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-20">
+        <section id="products" class="py-16 md:py-24 bg-gradient-to-b from-slate-900 to-slate-800">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12" data-aos="fade-up">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 gradient-text">کاتالوگ محصولات Remote VM</h2>
+                    <p class="text-slate-400 max-w-3xl mx-auto">محصولات حرفه‌ای طراحی‌شده برای استریمینگ، ویدیوکنفرانس، و آزمون‌های آنلاین با کیفیت و عملکرد بی‌نظیر.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Product 1: کارت کپچر با EDID -->
+                    <div class="bg-slate-800 rounded-xl p-6 shadow-md hover:shadow-cyan-500/20 transition-all duration-300 border border-slate-700" data-aos="fade-up" data-aos-delay="100">
+                        <div class="swiper mySwiper">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide aspect-square flex items-center justify-center">
+                                    <img src="https://remotey.ir/product/RemoteVm-capture-card-V1-03.jpg" alt="کارت کپچر با EDID - نمای اصلی" class="w-full h-full object-contain rounded-xl">
+                                </div>
+                            </div>
+                            <div class="swiper-pagination"></div>
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next"></div>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mt-4 mb-2">کارت کپچر با EDID</h3>
+                        <p class="text-slate-400 mb-4">کارت کپچر HDMI به USB با شبیه‌ساز EDID، مناسب برای آزمون‌های آنلاین و استریمینگ با کیفیت بالا.</p>
+                        <div class="flex items-center gap-4 mb-4">
+                            <span class="text-2xl font-bold text-white">۴,۹۰۰,۰۰۰ تومان</span>
+                            <span class="bg-green-500 text-white text-sm font-semibold px-3 py-1 rounded-full">موجود در انبار</span>
+                        </div>
+                        <div class="flex items-center gap-2 mb-4 text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span class="text-slate-400 ml-2">(۴.۸ از ۵ ستاره)</span>
+                        </div>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <a href="https://wa.me/+989195600767?text=سلام، برای خرید کارت کپچر با EDID مزاحم میشم." target="_blank" class="w-full sm:w-auto flex items-center justify-center gap-3 px-6 py-3 bg-cyan-500 hover:bg-cyan-600 text-white font-bold rounded-lg transition-all duration-300 hover:scale-105">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span>سفارش از واتساپ</span>
+                            </a>
+                            <a href="https://remotey.ir/product/%DA%A9%D8%A7%D8%B1%D8%AA-%DA%A9%D9%BE%DA%86%D8%B1-hdmi-edid-and-webcam-emulator2" class="w-full sm:w-auto flex items-center justify-center gap-3 px-6 py-3 bg-slate-700/80 hover:bg-slate-700 text-white font-bold rounded-lg transition-all duration-300 hover:scale-105">
+                                <i class="fas fa-info-circle"></i>
+                                <span>مشاهده جزئیات</span>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Product 2: مینی سرور انتقال تصویر -->
+                    <div class="bg-slate-800 rounded-xl p-6 shadow-md hover:shadow-cyan-500/20 transition-all duration-300 border border-slate-700" data-aos="fade-up" data-aos-delay="200">
+                        <div class="swiper mySwiper">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide aspect-square flex items-center justify-center">
+                                    <img src="./RemoteVm-mini-stream-server.jpg" alt="مینی سرور انتقال تصویر - نمای اصلی" class="w-full h-full object-contain rounded-xl">
+                                </div>
+                            </div>
+                            <div class="swiper-pagination"></div>
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next"></div>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mt-4 mb-2">مینی سرور انتقال تصویر</h3>
+                        <p class="text-slate-400 mb-4">مینی سرور حرفه‌ای برای انتقال تصویر و استریمینگ بدون نیاز به سخت‌افزار پیچیده، ایده‌آل برای ویدیوکنفرانس.</p>
+                        <div class="flex items-center gap-4 mb-4">
+                            <span class="text-2xl font-bold text-white">۸,۹۰۰,۰۰۰ تومان</span>
+                            <span class="bg-green-500 text-white text-sm font-semibold px-3 py-1 rounded-full">موجود در انبار</span>
+                        </div>
+                        <div class="flex items-centerдор: gap-2 mb-4 text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span class="text-slate-400 ml-2">(۴.۷ از ۵ ستاره)</span>
+                        </div>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <a href="https://wa.me/+989195600767?text=سلام، برای خرید مینی سرور انتقال تصویر مزاحم میشم." target="_blank" class="w-full sm:w-auto flex items-center justify-center gap-3 px-6 py-3 bg-cyan-500 hover:bg-cyan-600 text-white font-bold rounded-lg transition-all duration-300 hover:scale-105">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span>سفارش از واتساپ</span>
+                            </a>
+                            <a href="https://remotevm.site/product/remote-machine/" class="w-full sm:w-auto flex items-center justify-center gap-3 px-6 py-3 bg-slate-700/80 hover:bg-slate-700 text-white font-bold rounded-lg transition-all duration-300 hover:scale-105">
+                                <i class="fas fa-info-circle"></i>
+                                <span>مشاهده جزئیات</span>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Product 3: کارت کپچر با EDID و خروجی و ورودی صدا -->
+                    <div class="bg-slate-800 rounded-xl p-6 shadow-md hover:shadow-cyan-500/20 transition-all duration-300 border border-slate-700" data-aos="fade-up" data-aos-delay="300">
+                        <div class="swiper mySwiper">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide aspect-square flex items-center justify-center">
+                                    <img src="./RemoteVm-HDMI-capture-card-with-EDID-2.jpg" alt="کارت کپچر با EDID و ورودی/خروجی صدا - نمای اصلی" class="w-full h-full object-contain rounded-xl">
+                                </div>
+                            </div>
+                            <div class="swiper-pagination"></div>
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next"></div>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mt-4 mb-2">کارت کپچر با EDID و ورودی/خروجی صدا</h3>
+                        <p class="text-slate-400 mb-4">کارت کپچر HDMI به USB با ورودی میکروفون، خروجی هدفون، شبیه‌ساز EDID و وبکم، مناسب برای استریمینگ و ویدیوکنفرانس 4K.</p>
+                        <div class="flex items-center gap-4 mb-4">
+                            <span class="text-2xl font-bold text-white">۶,۵۰۰,۰۰۰ تومان</span>
+                            <span class="bg-green-500 text-white text-sm font-semibold px-3 py-1 rounded-full">موجود در انبار</span>
+                        </div>
+                        <div class="flex items-center gap-2 mb-4 text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span class="text-slate-400 ml-2">(۴.۹ از ۵ ستاره)</span>
+                        </div>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <a href="https://wa.me/+989195600767?text=سلام، برای خرید کارت کپچر با EDID و ورودی/خروجی صدا مزاحم میشم." target="_blank" class="w-full sm:w-auto flex items-center justify-center gap-3 px-6 py-3 bg-cyan-500 hover:bg-cyan-600 text-white font-bold rounded-lg transition-all duration-300 hover:scale-105">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span>سفارش از واتساپ</span>
+                            </a>
+                            <a href="https://remotey.ir/product/%DA%A9%D8%A7%D8%B1%D8%AA-%DA%A9%D9%BE%DA%86%D8%B1-hdmi-edid-and-webcam-emulator2" class="w-full sm:w-auto flex items-center justify-center gap-3 px-6 py-3 bg-slate-700/80 hover:bg-slate-700 text-white font-bold rounded-lg transition-all duration-300 hover:scale-105">
+                                <i class="fas fa-info-circle"></i>
+                                <span>مشاهده جزئیات</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="py-16 md:py-24 bg-slate-900">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12" data-aos="fade-up">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">سوالات متداول</h2>
+                    <p class="text-slate-400 max-w-3xl mx-auto">پاسخ به پرتکرارترین سوالات شما درباره محصولات Remote VM.</p>
+                </div>
+                <div class="max-w-3xl mx-auto space-y-4" data-aos="fade-up">
+                    <div class="bg-slate-800/50 rounded-lg border border-slate-700 shadow-md">
+                        <button class="faq-question w-full flex justify-between items-center text-right p-5 font-semibold text-white text-lg">
+                            <span>تفاوت کارت کپچر با EDID و کارت کپچر با ورودی/خروجی صدا چیست؟</span>
+                        </button>
+                        <div class="faq-answer px-5 pb-5 text-slate-400">
+                            <p>کارت کپچر با EDID قابلیت شبیه‌سازی مانیتور را دارد، اما فاقد ورودی/خروجی صدا است. کارت کپچر با ورودی/خروجی صدا علاوه بر شبیه‌سازی EDID، امکان اتصال میکروفون و هدفون را فراهم می‌کند، که برای استریمینگ و ویدیوکنفرانس حرفه‌ای مناسب‌تر است.</p>
+                        </div>
+                    </div>
+                    <div class="bg-slate-800/50 rounded-lg border border-slate-700 shadow-md">
+                        <button class="faq-question w-full flex justify-between items-center text-right p-5 font-semibold text-white text-lg">
+                            <span>مینی سرور انتقال تصویر چه کاربردی دارد؟</span>
+                        </button>
+                        <div class="faq-answer px-5 pb-5 text-slate-400">
+                            <p>مینی سرور انتقال تصویر برای استریمینگ و ویدیوکنفرانس بدون نیاز به سخت‌افزار پیچیده طراحی شده است. این دستگاه به شما امکان می‌دهد تصاویر و ویدیوها را با کیفیت بالا و به صورت پایدار منتقل کنید، ایده‌آل برای جلسات آنلاین و پخش زنده.</p>
+                        </div>
+                    </div>
+                    <div class="bg-slate-800/50 rounded-lg border border-slate-700 shadow-md">
+                        <button class="faq-question w-full flex justify-between items-center text-right p-5 font-semibold text-white text-lg">
+                            <span>آیا این محصولات نیاز به نصب درایور دارند؟</span>
+                        </button>
+                        <div class="faq-answer px-5 pb-5 text-slate-400">
+                            <p>خیر، تمامی محصولات Remote VM به صورت Plug & Play طراحی شده‌اند و بدون نیاز به نصب درایور در سیستم‌عامل‌های ویندوز، مک، و لینوکس کار می‌کنند.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cta" class="py-16 md:py-24 bg-gradient-to-r from-blue-700 to-cyan-600 text-white text-center">
+            <div class="container mx-auto px-6" data-aos="zoom-in">
+                <h2 class="text-3xl md:text-5xl font-extrabold mb-6 leading-tight">محصولات حرفه‌ای Remote VM برای نیازهای شما</h2>
+                <p class="text-xl max-w-3xl mx-auto mb-10 opacity-90">
+                    با محصولات Remote VM، تجربه‌ای بی‌نظیر از کیفیت و عملکرد در استریمینگ، ویدیوکنفرانس، و آزمون‌های آنلاین داشته باشید.
+                </p>
+                <a href="https://wa.me/+989195600767?text=سلام، برای دریافت اطلاعات بیشتر درباره محصولات Remote VM مزاحم میشم." target="_blank" class="inline-flex items-center gap-3 px-10 py-5 bg-white text-cyan-700 font-bold text-xl rounded-full shadow-2xl shadow-blue-900/40 hover:scale-105 transition-transform duration-300">
+                    <i class="fab fa-whatsapp text-2xl"></i>
+                    <span>تماس با ما در واتساپ</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-900 border-t border-slate-800">
+        <div class="container mx-auto px-6 py-8 text-center text-slate-400">
+            <p class="text-sm">&copy; 2025 Remote VM - تمامی حقوق محفوظ است.</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/+989195600767?text=سلام، برای دریافت اطلاعات بیشتر درباره محصولات Remote VM مزاحم میشم." class="whatsapp-float-btn" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <a href="#" id="back-to-top" class="fixed bottom-6 right-6 w-12 h-12 bg-cyan-500/80 hover:bg-cyan-500 text-white rounded-full flex items-center justify-center shadow-lg transition-all duration-300 opacity-0 invisible z-40">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 50,
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.getElementById('header');
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const backToTopBtn = document.getElementById('back-to-top');
+
+            window.addEventListener('scroll', () => {
+                header.classList.toggle('header-scrolled', window.scrollY > 50);
+                if (window.scrollY > 300) {
+                    backToTopBtn.classList.remove('opacity-0', 'invisible');
+                } else {
+                    backToTopBtn.classList.add('opacity-0', 'invisible');
+                }
+            });
+
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                menuBtn.querySelector('i').classList.toggle('fa-bars');
+                menuBtn.querySelector('i').classList.toggle('fa-times');
+            });
+
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const answer = question.nextElementSibling;
+                    const isActive = question.classList.contains('active');
+                    faqQuestions.forEach(q => {
+                        if (q !== question) {
+                            q.classList.remove('active');
+                            q.nextElementSibling.style.maxHeight = null;
+                        }
+                    });
+                    if (!isActive) {
+                        question.classList.add('active');
+                        answer.style.maxHeight = answer.scrollHeight + "px";
+                    } else {
+                        question.classList.remove('active');
+                        answer.style.maxHeight = null;
+                    }
+                });
+            });
+
+            const swipers = document.querySelectorAll('.mySwiper');
+            swipers.forEach(swiper => {
+                new Swiper(swiper, {
+                    loop: true,
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true,
+                    },
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                    autoplay: {
+                        delay: 5000,
+                        disableOnInteraction: false,
+                    },
+                });
+            });
+        });
+    </script>
+</body>
+</html>
