@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="سیاست حریم خصوصی RemoteVM - پلتفرمی امن و رایگان با فناوری WebRTC و P2P بدون نیاز به ثبت‌نام یا ذخیره اطلاعات">
+    <meta name="keywords" content="حریم خصوصی, RemoteVM, WebRTC, P2P, تماس تصویری, امنیت">
+    <meta name="author" content="RemoteVM">
+    <title>سیاست حریم خصوصی - RemoteVM</title>
+    <link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;800&display=swap');
+        :root {
+            --primary-blue: #1e40af;
+            --secondary-blue: #3b82f6;
+            --accent-purple: #7c3aed;
+            --dark-bg: #0f172a;
+            --light-bg: #f8fafc;
+            --card-dark: #1e293b;
+            --card-light: #ffffff;
+            --text-dark: #f1f5f9;
+            --text-light: #1e293b;
+            --border-dark: rgba(255, 255, 255, 0.1);
+            --border-light: rgba(0, 0, 0, 0.1);
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Vazirmatn', 'IRANSans', Arial, sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            transition: background 0.3s, color 0.3s;
+        }
+        body.light-mode {
+            background: var(--light-bg);
+            color: var(--text-light);
+        }
+        .container {
+            max-width: min(90vw, 1280px);
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+        header {
+            background: var(--card-dark);
+            border-bottom: 1px solid var(--border-dark);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 1.5rem;
+            border-radius: 0 0 1rem 1rem;
+        }
+        body.light-mode header {
+            background: var(--card-light);
+            border-bottom: 1px solid var(--border-light);
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .logo img {
+            width: 2.5rem;
+            height: 2.5rem;
+            transition: transform 0.3s;
+        }
+        .logo img:hover {
+            transform: scale(1.1);
+        }
+        h1, h2 {
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+        h1 {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+        }
+        h2 {
+            font-size: clamp(1.25rem, 3vw, 1.5rem);
+            color: var(--secondary-blue);
+        }
+        body.light-mode h2 {
+            color: var(--primary-blue);
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .btn-neutral {
+            background: transparent;
+            color: var(--text-dark);
+            border: 1px solid var(--border-dark);
+        }
+        body.light-mode .btn-neutral {
+            color: var(--text-light);
+            border: 1px solid var(--border-light);
+        }
+        .btn-neutral:hover {
+            background: var(--secondary-blue);
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        .btn-primary {
+            background: var(--secondary-blue);
+            color: #fff;
+            border: none;
+        }
+        .btn-primary:hover {
+            background: var(--accent-purple);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+            transform: translateY(-2px);
+        }
+        .section-card {
+            background: var(--card-dark);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-dark);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        body.light-mode .section-card {
+            background: var(--card-light);
+            border: 1px solid var(--border-light);
+        }
+        .section-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+        .section-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--secondary-blue), var(--accent-purple));
+            transition: width 0.3s;
+        }
+        .section-card:hover::before {
+            width: 8px;
+        }
+        .section-icon {
+            font-size: 1.5rem;
+            color: var(--secondary-blue);
+            margin-left: 0.5rem;
+        }
+        body.light-mode .section-icon {
+            color: var(--primary-blue);
+        }
+        .hero-section {
+            text-align: center;
+            padding: 2rem 1rem;
+            background: linear-gradient(135deg, var(--secondary-blue), var(--accent-purple));
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            z-index: 0;
+        }
+        .hero-section h2 {
+            font-size: clamp(2rem, 5vw, 2.5rem);
+            color: #fff;
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .hero-section p {
+            position: relative;
+            z-index: 1;
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .menu-toggle {
+            background: transparent;
+            border: none;
+            color: var(--text-dark);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 2000;
+        }
+        body.light-mode .menu-toggle {
+            color: var(--text-light);
+        }
+        .menu-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1500;
+            transition: opacity 0.3s ease;
+        }
+        .menu-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .menu-panel {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: min(80vw, 320px);
+            height: 100vh;
+            background: var(--card-dark);
+            border-left: 1px solid var(--border-dark);
+            box-shadow: -4px 0 12px rgba(0, 0, 0, 0.2);
+            transition: right 0.3s ease;
+            z-index: 1600;
+        }
+        body.light-mode .menu-panel {
+            background: var(--card-light);
+            border-left: 1px solid var(--border-light);
+        }
+        .menu-panel.active {
+            right: 0;
+        }
+        .menu-content {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .menu-content ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .menu-content ul li a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-dark);
+            font-size: 1rem;
+            text-decoration: none;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        body.light-mode .menu-content ul li a {
+            color: var(--text-light);
+        }
+        .menu-content ul li a:hover {
+            background: var(--secondary-blue);
+            color: #fff;
+        }
+        footer {
+            background: var(--card-dark);
+            border-top: 1px solid var(--border-dark);
+            padding: 1.5rem;
+            text-align: center;
+            border-radius: 1rem 1rem 0 0;
+        }
+        body.light-mode footer {
+            background: var(--card-light);
+            border-top: 1px solid var(--border-light);
+        }
+        footer a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+        body.light-mode footer a {
+            color: var(--text-light);
+        }
+        footer a:hover {
+            color: var(--secondary-blue);
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            background: var(--secondary-blue);
+            color: #fff;
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .back-to-top:hover {
+            background: var(--accent-purple);
+            transform: translateY(-2px);
+        }
+        .list-disc {
+            list-style: disc;
+            padding-right: 1.5rem;
+            margin-top: 0.5rem;
+        }
+        .list-disc li {
+            margin-bottom: 0.5rem;
+        }
+        @media (min-width: 768px) {
+            .menu-toggle { display: none; }
+            .menu-panel {
+                position: static;
+                width: auto;
+                height: auto;
+                background: transparent;
+                border: none;
+                box-shadow: none;
+                display: flex;
+            }
+            .menu-content ul {
+                flex-direction: row;
+                gap: 1.5rem;
+            }
+            .menu-content ul li a {
+                padding: 0.5rem 1rem;
+            }
+            .menu-content h2 { display: none; }
+            .container { padding: 2rem; }
+            .section-card { padding: 2rem; }
+        }
+        @media (max-width: 768px) {
+            h1 { font-size: clamp(1.25rem, 3.5vw, 1.75rem); }
+            h2 { font-size: clamp(1rem, 3vw, 1.25rem); }
+            .hero-section h2 { font-size: clamp(1.8rem, 4.5vw, 2.25rem); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <img src="favicon.png" alt="RemoteVM Logo" loading="lazy" sizes="(max-width: 768px) 32px, 48px">
+                <h1>سیاست حریم خصوصی</h1>
+            </div>
+            <div class="flex items-center gap-4">
+                <button id="menu-toggle" class="menu-toggle" aria-label="باز کردن منو" aria-expanded="false">
+                    <i id="menu-icon" class="fas fa-bars" aria-hidden="true"></i>
+                </button>
+                <nav id="menu-panel" class="menu-panel">
+                    <div class="menu-content">
+                        <h2>منو</h2>
+                        <ul>
+                            <li><a href="https://remotevm.ir" target="_blank" rel="noopener noreferrer"><i class="fas fa-home"></i> خانه</a></li>
+                            <li><a href="https://remotevm.ir/remotevm-tut.html" target="_blank" rel="noopener noreferrer"><i class="fas fa-book"></i> راهنما</a></li>
+                            <li><a href="https://call.remotevm.ir" target="_blank" rel="noopener noreferrer"><i class="fas fa-video"></i> تماس تصویری</a></li>
+                            <li><a href="https://about.remotevm.ir" target="_blank" rel="noopener noreferrer"><i class="fas fa-info-circle"></i> درباره ما</a></li>
+                            <li><a href="https://room.remotevm.ir" target="_blank" rel="noopener noreferrer"><i class="fas fa-users-cog"></i> پنل حرفه‌ای</a></li>
+                            <li><a href="https://remotevm.ir/product" target="_blank" rel="noopener noreferrer"><i class="fas fa-box-open"></i> محصولات</a></li>
+                            <li><a href="https://seccam.remotevm.ir" target="_blank" rel="noopener noreferrer"><i class="fas fa-eye"></i> Security Cam</a></li>
+                            <li><a href="https://classroom.remotevm.ir" target="_blank" rel="noopener noreferrer"><i class="fas fa-chalkboard-teacher"></i> RVM ClassRoom</a></li>
+                        </ul>
+                    </div>
+                </nav>
+                <button id="themeToggle" class="btn btn-neutral" aria-label="تغییر تم">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+    <main class="container">
+        <section class="hero-section">
+            <h2>سیاست حریم خصوصی RemoteVM</h2>
+            <p>حریم خصوصی شما اولویت ماست. بدون ثبت‌نام، بدون ذخیره اطلاعات.</p>
+        </section>
+        <section class="section-card">
+            <h2><i class="fas fa-info-circle section-icon"></i> مقدمه</h2>
+            <p>RemoteVM یک پلتفرم تماس ویدیویی مبتنی بر فناوری WebRTC و P2P است که به‌صورت رایگان ارائه می‌شود. ما هیچ اطلاعات شخصی از شما جمع‌آوری یا ذخیره نمی‌کنیم و نیازی به ثبت‌نام ندارید. این سیاست توضیح می‌دهد که چگونه خدمات ما حریم خصوصی شما را حفظ می‌کند.</p>
+        </section>
+        <section class="section-card">
+            <h2><i class="fas fa-user-shield section-icon"></i> عدم جمع‌آوری اطلاعات شخصی</h2>
+            <p>ما هیچ اطلاعاتی مانند نام، ایمیل، یا شماره موبایل از شما درخواست نمی‌کنیم. ویژگی‌های کلیدی خدمات ما:</p>
+            <ul class="list-disc">
+                <li>بدون نیاز به پر کردن فرم یا ثبت‌نام.</li>
+                <li>عدم ایجاد حساب کاربری یا پروفایل.</li>
+                <li>عدم ذخیره داده‌ها در سرورهای ما.</li>
+            </ul>
+        </section>
+        <section class="section-card">
+            <h2><i class="fas fa-network-wired section-icon"></i> فناوری WebRTC و P2P</h2>
+            <p>RemoteVM از WebRTC و ارتباطات همتا به همتا استفاده می‌کند تا تماس‌های شما امن و مستقیم باشد:</p>
+            <ul class="list-disc">
+                <li>داده‌های صوتی و تصویری مستقیماً بین کاربران منتقل می‌شوند.</li>
+                <li>ما به محتوای تماس‌های شما دسترسی نداریم.</li>
+                <li>تماس‌ها با رمزنگاری end-to-end محافظت می‌شوند.</li>
+            </ul>
+        </section>
+        <section class="section-card">
+            <h2><i class="fas fa-cookie-bite section-icon"></i> کوکی‌ها و داده‌های موقت</h2>
+            <p>ما فقط از کوکی‌های موقت برای تنظیمات ضروری استفاده می‌کنیم:</p>
+            <ul class="list-disc">
+                <li>بدون ذخیره اطلاعات شخصی.</li>
+                <li>حذف خودکار پس از بستن مرورگر.</li>
+                <li>استفاده برای بهبود تجربه کاربری (مانند تم روشن/تاریک).</li>
+            </ul>
+        </section>
+        <section class="section-card">
+            <h2><i class="fas fa-lock section-icon"></i> امنیت</h2>
+            <p>ما از رمزنگاری پیشرفته WebRTC برای امنیت تماس‌ها استفاده می‌کنیم. توصیه‌های ما:</p>
+            <ul class="list-disc">
+                <li>استفاده از مرورگرهای به‌روز (Chrome، Firefox، Edge).</li>
+                <li>اشتراک لینک تماس فقط با افراد مورد اعتماد.</li>
+                <li>استفاده از شبکه‌های امن (مانند Wi-Fi خصوصی).</li>
+            </ul>
+        </section>
+        <section class="section-card">
+            <h2><i class="fas fa-gift section-icon"></i> خدمات رایگان</h2>
+            <p>RemoteVM کاملاً رایگان است و نیازی به پرداخت یا ارائه اطلاعات مالی ندارد.</p>
+        </section>
+        <section class="section-card">
+            <h2><i class="fas fa-sync-alt section-icon"></i> تغییرات در سیاست حریم خصوصی</h2>
+            <p>هرگونه به‌روزرسانی در این سیاست از طریق همین صفحه اعلام خواهد شد. لطفاً به‌صورت دوره‌ای بررسی کنید.</p>
+        </section>
+        <section class="section-card">
+            <h2><i class="fas fa-envelope section-icon"></i> تماس با ما</h2>
+            <p>برای هرگونه سؤال درباره سیاست حریم خصوصی یا خدمات ما:</p>
+            <a href="https://remotevm.ir/contact" class="btn btn-primary mt-4" target="_blank" rel="noopener noreferrer">
+                <i class="fas fa-envelope"></i> تماس با ما
+            </a>
+        </section>
+    </main>
+    <footer class="container">
+        <p>&copy; 2025 RemoteVM. تمامی حقوق محفوظ است.</p>
+        <div class="flex justify-center gap-4 mt-4">
+            <a href="https://remotevm.ir/privacy-policy" target="_blank" rel="noopener noreferrer">سیاست حریم خصوصی</a>
+            <a href="https://remotevm.ir/remotevm-tut.html" target="_blank" rel="noopener noreferrer">شرایط استفاده</a>
+            <a href="https://remotevm.ir/contact" target="_blank" rel="noopener noreferrer">تماس با ما</a>
+        </div>
+    </footer>
+    <button id="backToTop" class="back-to-top" aria-label="بازگشت به بالا">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    <script defer>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Helper function to log errors if elements are missing
+            const getElement = (id) => {
+                const element = document.getElementById(id);
+                if (!element) {
+                    console.error(`Element with ID "${id}" not found in the DOM.`);
+                }
+                return element;
+            };
+    
+            // Theme toggle
+            const themeToggle = getElement('themeToggle');
+            if (themeToggle) {
+                const savedTheme = localStorage.getItem('theme') || 'dark';
+                if (savedTheme === 'light') {
+                    document.body.classList.add('light-mode');
+                    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                }
+                themeToggle.addEventListener('click', () => {
+                    document.body.classList.toggle('light-mode');
+                    const isLight = document.body.classList.contains('light-mode');
+                    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+                    themeToggle.innerHTML = isLight ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+                });
+            }
+    
+            // Menu toggle
+            const menuToggle = getElement('menu-toggle');
+            const menuPanel = getElement('menu-panel');
+            const menuOverlay = getElement('menu-overlay');
+            const menuIcon = getElement('menu-icon');
+    
+            if (menuToggle && menuPanel && menuOverlay && menuIcon) {
+                menuToggle.addEventListener('click', () => {
+                    const isActive = menuPanel.classList.contains('active');
+                    menuPanel.classList.toggle('active');
+                    menuOverlay.classList.toggle('hidden');
+                    menuIcon.className = isActive ? 'fas fa-bars' : 'fas fa-times';
+                    menuToggle.setAttribute('aria-expanded', !isActive);
+                    document.body.style.overflow = isActive ? 'auto' : 'hidden';
+                });
+    
+                menuOverlay.addEventListener('click', () => {
+                    menuPanel.classList.remove('active');
+                    menuOverlay.classList.add('hidden');
+                    menuIcon.className = 'fas fa-bars';
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = 'auto';
+                });
+    
+                const menuLinks = document.querySelectorAll('.menu-content a');
+                if (menuLinks.length === 0) {
+                    console.warn('No menu links found in .menu-content.');
+                }
+                menuLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        menuPanel.classList.remove('active');
+                        menuOverlay.classList.add('hidden');
+                        menuIcon.className = 'fas fa-bars';
+                        menuToggle.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = 'auto';
+                    });
+                });
+            }
+    
+            // Back to top button
+            const backToTop = getElement('backToTop');
+            if (backToTop) {
+                window.addEventListener('scroll', () => {
+                    backToTop.classList.toggle('visible', window.scrollY > 200);
+                });
+                backToTop.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
