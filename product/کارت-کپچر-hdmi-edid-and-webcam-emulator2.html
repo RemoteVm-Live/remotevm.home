@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>کارت کپچر 4K با ورودی/خروجی صدا | شبیه‌ساز EDID و وبکم | Remote VM</title>
+    <meta name="description" content="کارت کپچر حرفه‌ای HDMI به USB با ورودی میکروفون، خروجی هدفون، شبیه‌ساز EDID و وبکم. بهترین راه‌حل برای آزمون‌های آنلاین، استریمینگ و ویدیوکنفرانس با کیفیت 4K.">
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "name": "کارت کپچر HDMI به USB با ورودی/خروجی صدا، EDID Emulator و شبیه‌ساز وبکم",
+      "image": [
+        "https://remotey.ir/product/capture-card-audio-01.jpg",
+        "https://remotey.ir/product/capture-card-audio-02.jpg",
+        "https://remotey.ir/product/capture-card-audio-03.jpg"
+      ],
+      "description": "کارت کپچر HDMI به USB حرفه‌ای با ورودی میکروفون، خروجی هدفون، قابلیت EDID Emulator و شبیه‌ساز وبکم، مناسب برای آزمون‌های آنلاین، استریمینگ، ویدیوکنفرانس‌ها و ضبط ویدیوهای 4K با کیفیت بالا.",
+      "brand": {
+        "@type": "Brand",
+        "name": "Remote VM"
+      },
+      "sku": "RVM-CAP-002",
+      "mpn": "RVM-CAP-AUDIO-EDID-V3",
+      "offers": {
+        "@type": "Offer",
+        "url": "https://remotevm.site/product/capture-card-audio-edid",
+        "priceCurrency": "IRR",
+        "price": "5900000",
+        "itemCondition": "https://schema.org/NewCondition",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Remote VM"
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "97"
+      }
+    }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: #0f172a; /* slate-900 */
+            color: #cbd5e1; /* slate-300 */
+        }
+        .header-scrolled {
+            background-color: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+        .gradient-text {
+            background: linear-gradient(to left, #22d3ee, #67e8f9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .faq-question::after {
+            content: '\f078'; /* Chevron down icon */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            transition: transform 0.3s ease;
+        }
+        .faq-question.active::after {
+            transform: rotate(180deg);
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .swiper-button-next:after, .swiper-button-prev:after {
+            color: #22d3ee;
+            font-size: 1.5rem;
+        }
+        .swiper-pagination-bullet-active {
+            background: #22d3ee !important;
+        }
+
+        /* استایل برای دکمه شناور واتساپ */
+        .whatsapp-float-btn {
+            position: fixed;
+            bottom: 24px;
+            left: 24px;
+            z-index: 1000;
+            background-color: #25D366; /* رنگ واتساپ */
+            color: #ffffff;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease-in-out;
+        }
+        .whatsapp-float-btn:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <header id="header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="https://remotevm.site/" class="flex items-center gap-3 text-2xl font-bold text-white">
+                    <i class="fas fa-server text-cyan-400 text-3xl"></i>
+                    <span>Remote VM</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-reverse space-x-6 text-lg">
+                    <a href="https://remotevm.site/" class="text-slate-300 hover:text-cyan-400 transition-colors">خانه</a>
+                    <a href="https://remotevm.site/store/" class="text-slate-300 hover:text-cyan-400 transition-colors">محصولات</a>
+                    <a href="#faq" class="text-slate-300 hover:text-cyan-400 transition-colors">سوالات متداول</a>
+                    <a href="https://remotevm.site/contact/" class="text-slate-300 hover:text-cyan-400 transition-colors">تماس</a>
+                </div>
+                <div class="flex items-center gap-4">
+                     <a href="https://remotevm.ir/" target="_blank" class="hidden sm:inline-block px-6 py-2 text-white bg-blue-600 hover:bg-blue-700 rounded-full transition-transform duration-300 hover:scale-105 ">
+                          R.V.M Server 
+                     </a>                 
+                    <button id="menu-btn" class="md:hidden text-white text-2xl">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full right-0 w-full bg-slate-800/95 backdrop-blur-sm">
+            <div class="flex flex-col items-center space-y-4 py-6">
+                <a href="https://remotevm.site/" class="mobile-menu-link text-slate-300 hover:text-cyan-400 transition-colors">خانه</a>
+                <a href="https://remotevm.site/store/" class="mobile-menu-link text-slate-300 hover:text-cyan-400 transition-colors">محصولات</a>
+                <a href="#faq" class="mobile-menu-link text-slate-300 hover:text-cyan-400 transition-colors">سوالات متداول</a>
+                <a href="https://remotevm.site/contact/" class="mobile-menu-link text-slate-300 hover:text-cyan-400 transition-colors">تماس</a>
+                <a href="#" class="px-6 py-2 text-white bg-blue-600 hover:bg-blue-700 rounded-full transition-transform duration-300 hover:scale-105 mt-4">ورود / ثبت‌نام</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-20">
+        <section id="product-details" class="py-12 md:py-20 bg-gradient-to-b from-slate-900 to-slate-800">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div data-aos="fade-left">
+                        <div class="bg-slate-800 rounded-2xl p-4 md:p-8 shadow-2xl shadow-slate-900/50 relative">
+                            <div class="swiper mySwiper">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide aspect-square flex items-center justify-center">
+                                        <img src="./capture-card-audio-01.jpg" alt="کارت کپچر با ورودی صدا و EDID - نمای اصلی" class="w-full h-full object-contain rounded-xl">
+                                    </div>
+                                    <div class="swiper-slide aspect-square flex items-center justify-center">
+                                        <img src="./RemoteVm-HDMI-capture-card-with-EDID-2.jpg" alt=" معرفی قابلیت شبیه ساز وبکم و مانیتور کارت کپچر " class="w-full h-full object-contain rounded-xl">
+                                    </div>
+                                    <div class="swiper-slide aspect-square flex items-center justify-center">
+                                        <img src="./capture-card-EDID-0001.jpg" alt="کاربر در حال نشان دادن کارت کپچر RemoteVm" class="w-full h-full object-contain rounded-xl">
+                                    </div>
+                                    <div class="swiper-slide aspect-square flex items-center justify-center">
+                                        <img src="./RemoteVm-capture-card-V1-03.jpg" alt="قابلیت EDID و شبیه ساز وبکم برای آزمون های آنلاین. کارت کپچر" class="w-full h-full object-contain rounded-xl">
+                                    </div>
+                                    <div class="swiper-slide aspect-square flex items-center justify-center">
+                                        <img src="./capture-card-audio-02.jpg" alt="پورت های کارت کپچر شامل ورودی و خروجی صدا" class="w-full h-full object-contain rounded-xl">
+                                    </div>
+                                    <div class="swiper-slide aspect-square flex items-center justify-center">
+                                        <img src="./RemoteVm-HDMI-capture-card-with-EDID-3.jpg" alt="محتویات جعبه کارت کپچر" class="w-full h-full object-contain rounded-xl">
+                                    </div>                                 
+                                </div>
+                                <div class="swiper-pagination"></div>
+                                <div class="swiper-button-prev"></div>
+                                <div class="swiper-button-next"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div data-aos="fade-right">
+                        <span class="text-cyan-400 font-semibold tracking-wider">REMOTE VM PROFESSIONAL</span>
+                        <h1 class="text-3xl md:text-4xl font-extrabold text-white my-4">کارت کپچر 4K با ورودی/خروجی صدا، EDID و شبیه‌ساز وبکم</h1>
+                        <p class="text-slate-400 leading-relaxed mb-6">
+                            راه‌حل نهایی برای حرفه‌ای‌ها! این کارت کپچر تمام قابلیت‌های مورد نیاز شما از جمله شبیه‌سازی پیشرفته، ورودی میکروفون و خروجی هدفون را در یک دستگاه جمع کرده است تا بالاترین سطح از سازگاری و عملکرد را تجربه کنید.
+                        </p>
+                        
+                        <div class="flex items-center gap-4 mb-6">
+                            <span class="text-3xl font-bold text-white">۶,۵۰۰,۰۰۰ تومان</span>
+                            <span class="bg-green-500 text-white text-sm font-semibold px-3 py-1 rounded-full">موجود در انبار</span>
+                        </div>
+
+                        <div class="flex items-center gap-2 mb-6 text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span class="text-slate-400 ml-2">(۴.۹ از ۵ ستاره بر اساس ۹۷ بررسی)</span>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <a href="https://wa.me/+989195600767?text=سلام، برای خرید کارت کپچر حرفه‌ای با ورودی صدا و EDID مزاحم میشم." target="_blank" class="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 bg-cyan-500 hover:bg-cyan-600 text-white font-bold rounded-lg transition-all duration-300 hover:scale-105 shadow-lg shadow-cyan-500/30">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span>ثبت سفارش از واتساپ</span>
+                            </a>
+                            <a href="https://remotevm.site/product/hdmi-capture-card-usb-edid-emulator-fake-webcam/" class="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 bg-slate-700/80 hover:bg-slate-700 text-white font-bold rounded-lg transition-all duration-300 hover:scale-105">
+                                <i class="fas fa-info-circle"></i>
+                                <span>مشاهده ویژگی‌ها</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="py-16 md:py-24 bg-slate-800/50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12" data-aos="fade-up">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">طراحی شده برای حرفه‌ای‌ها</h2>
+                    <p class="text-slate-400 max-w-3xl mx-auto">این محصول فراتر از یک کارت کپچر معمولی است. قابلیت‌های انحصاری آن، شما را در حساس‌ترین شرایط آنلاین مجهز می‌کند.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-md hover:shadow-cyan-500/20 hover:border-cyan-600 transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
+                        <div class="text-3xl text-cyan-400 mb-4"><i class="fas fa-microchip"></i></div>
+                        <h3 class="text-xl font-bold text-white mb-3">EDID Emulator (شبیه‌ساز مانیتور)</h3>
+                        <p class="text-slate-400">سیستم شما این کارت را به عنوان یک مانیتور واقعی (مانند Dell) شناسایی می‌کند و هرگونه شک به استفاده از کپچر کارت را از بین می‌برد. حیاتی برای عبور از نرم‌افزارهای نظارتی آزمون‌های آنلاین.</p>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-md hover:shadow-cyan-500/20 hover:border-cyan-600 transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
+                        <div class="text-3xl text-cyan-400 mb-4"><i class="fas fa-video"></i></div>
+                        <h3 class="text-xl font-bold text-white mb-3">Webcam Emulator (شبیه‌ساز وبکم)</h3>
+                        <p class="text-slate-400">دستگاه به عنوان یک وبکم معتبر (مانند Logitech) با سریال نامبر واقعی شناسایی می‌شود، تا نرم‌افزارهای امنیتی نتوانند استفاده از کارت کپچر را تشخیص دهند.</p>
+                    </div>
+                     <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-md hover:shadow-cyan-500/20 hover:border-cyan-600 transition-all duration-300" data-aos="fade-up" data-aos-delay="300">
+                        <div class="text-3xl text-cyan-400 mb-4"><i class="fas fa-headphones-alt"></i></div>
+                        <h3 class="text-xl font-bold text-white mb-3">ورودی و خروجی صدای پیشرفته</h3>
+                        <p class="text-slate-400">با ورودی مجزا برای میکروفون و خروجی هدفون، کنترل کاملی بر روی صدای ورودی و مانیتورینگ زنده داشته باشید. ایده‌آل برای استریم و کنفرانس.</p>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-md hover:shadow-cyan-500/20 hover:border-cyan-600 transition-all duration-300" data-aos="fade-up" data-aos-delay="400">
+                        <div class="text-3xl text-cyan-400 mb-4"><i class="fas fa-sync-alt"></i></div>
+                        <h3 class="text-xl font-bold text-white mb-3">HDMI Loop-out بدون تاخیر</h3>
+                        <p class="text-slate-400">تصویر ورودی 4K را همزمان و بدون هیچگونه تاخیر روی یک نمایشگر دیگر مشاهده کنید. ایده‌آل برای مانیتورینگ زنده و استریمینگ حرفه‌ای.</p>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-md hover:shadow-cyan-500/20 hover:border-cyan-600 transition-all duration-300" data-aos="fade-up" data-aos-delay="500">
+                        <div class="text-3xl text-cyan-400 mb-4"><i class="fas fa-bolt"></i></div>
+                        <h3 class="text-xl font-bold text-white mb-3">پشتیبانی از 4K Ultra HD</h3>
+                        <p class="text-slate-400">قابلیت ورودی و لوپ‌اوت تصویر تا رزولوشن 4K@60Hz را فراهم می‌کند. خروجی USB با کیفیت 1080p@60Hz برای ضبط و استریم روان.</p>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-md hover:shadow-cyan-500/20 hover:border-cyan-600 transition-all duration-300" data-aos="fade-up" data-aos-delay="600">
+                        <div class="text-3xl text-cyan-400 mb-4"><i class="fas fa-power-off"></i></div>
+                        <h3 class="text-xl font-bold text-white mb-3">عملکرد Plug & Play</h3>
+                        <p class="text-slate-400">بدون نیاز به نصب درایور. به سادگی متصل کنید و در ویندوز، مک (شامل Apple Silicon) و لینوکس شروع به کار کنید.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="use-cases" class="py-16 md:py-24 bg-slate-900">
+              <div class="container mx-auto px-6">
+                  <div class="text-center mb-12" data-aos="fade-up">
+                      <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 gradient-text">کاربردهای کلیدی</h2>
+                      <p class="text-slate-400 max-w-3xl mx-auto">این محصول، راه‌حل ایده‌آل برای طیف وسیعی از نیازهای حساس و حرفه‌ای است.</p>
+                  </div>
+                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                      <div class="bg-slate-800 p-6 rounded-xl border border-cyan-700 shadow-lg hover:border-cyan-500 transition-all duration-300" data-aos="zoom-in" data-aos-delay="100">
+                          <div class="text-4xl text-cyan-400 mb-4"><i class="fas fa-user-graduate"></i></div>
+                          <h3 class="text-xl font-bold text-white mb-3">آزمون‌های آنلاین (Home Edition)</h3>
+                          <p class="text-slate-400 text-sm">با EDID و Webcam Emulator، به راحتی از سد سیستم‌های نظارتی عبور کرده و در آزمون‌های بین‌المللی شرکت کنید.</p>
+                      </div>
+                      <div class="bg-slate-800 p-6 rounded-xl border border-cyan-700 shadow-lg hover:border-cyan-500 transition-all duration-300" data-aos="zoom-in" data-aos-delay="200">
+                          <div class="text-4xl text-cyan-400 mb-4"><i class="fas fa-gamepad"></i></div>
+                          <h3 class="text-xl font-bold text-white mb-3">استریمینگ و تولید محتوا</h3>
+                          <p class="text-slate-400 text-sm">تصویر کنسول و صدای میکروفون خود را با بالاترین کیفیت و کمترین تاخیر برای استریم یا ضبط محتوا منتقل کنید.</p>
+                      </div>
+                      <div class="bg-slate-800 p-6 rounded-xl border border-cyan-700 shadow-lg hover:border-cyan-500 transition-all duration-300" data-aos="zoom-in" data-aos-delay="300">
+                          <div class="text-4xl text-cyan-400 mb-4"><i class="fas fa-users-rectangle"></i></div>
+                          <h3 class="text-xl font-bold text-white mb-3">ویدیوکنفرانس‌های حساس</h3>
+                          <p class="text-slate-400 text-sm">کیفیت جلسات آنلاین خود را با استفاده از دوربین‌های حرفه‌ای به عنوان وبکم و میکروفون‌های استودیویی ارتقا دهید.</p>
+                      </div>
+                  </div>
+              </div>
+        </section>
+
+        <section id="specs" class="py-16 md:py-24">
+              <div class="container mx-auto px-6">
+                  <div class="text-center mb-12" data-aos="fade-up">
+                      <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">مشخصات فنی کامل</h2>
+                  </div>
+                   <div class="max-w-4xl mx-auto bg-slate-800/50 rounded-lg overflow-hidden border border-slate-700" data-aos="fade-up">
+                       <table class="w-full text-right">
+                           <tbody class="divide-y divide-slate-700">
+                               <tr class="divide-x-reverse divide-x divide-slate-700">
+                                   <td class="p-4 font-semibold text-white w-1/3">ورودی HDMI</td>
+                                   <td class="p-4 text-slate-300">HDMI 2.0 تا رزولوشن 4K@60Hz</td>
+                               </tr>
+                                <tr class="divide-x-reverse divide-x divide-slate-700 bg-slate-800/40">
+                                   <td class="p-4 font-semibold text-white w-1/3">خروجی HDMI Loop-out</td>
+                                   <td class="p-4 text-slate-300">HDMI 2.0 تا رزولوشن 4K@60Hz (بدون تأخیر)</td>
+                               </tr>
+                               <tr class="divide-x-reverse divide-x divide-slate-700">
+                                   <td class="p-4 font-semibold text-white w-1/3">رابط اتصال به کامپیوتر</td>
+                                   <td class="p-4 text-slate-300">USB 3.0 Type-C (سازگار با USB 2.0)</td>
+                               </tr>
+                                <tr class="divide-x-reverse divide-x divide-slate-700 bg-slate-800/40">
+                                   <td class="p-4 font-semibold text-white w-1/3">رزولوشن ضبط (USB)</td>
+                                   <td class="p-4 text-slate-300">حداکثر 1080p@60Hz</td>
+                               </tr>
+                               <tr class="divide-x-reverse divide-x divide-slate-700">
+                                   <td class="p-4 font-semibold text-white w-1/3">ورودی صدا</td>
+                                   <td class="p-4 text-slate-300">جک 3.5mm میکروفون (Mic-in)</td>
+                               </tr>
+                                <tr class="divide-x-reverse divide-x divide-slate-700 bg-slate-800/40">
+                                   <td class="p-4 font-semibold text-white w-1/3">خروجی صدا</td>
+                                   <td class="p-4 text-slate-300">جک 3.5mm هدفون / اسپیکر (Line-out)</td>
+                               </tr>
+                               <tr class="divide-x-reverse divide-x divide-slate-700">
+                                   <td class="p-4 font-semibold text-white w-1/3">شبیه‌سازی وبکم</td>
+                                   <td class="p-4 text-slate-300">Logitech با شماره سریال معتبر</td>
+                               </tr>
+                                <tr class="divide-x-reverse divide-x divide-slate-700 bg-slate-800/40">
+                                   <td class="p-4 font-semibold text-white w-1/3">شبیه‌سازی EDID</td>
+                                   <td class="p-4 text-slate-300">مانیتور DELL (پروفایل‌های قابل تنظیم)</td>
+                               </tr>
+                               <tr class="divide-x-reverse divide-x divide-slate-700">
+                                   <td class="p-4 font-semibold text-white w-1/3">سازگاری با سیستم‌عامل</td>
+                                   <td class="p-4 text-slate-300">Windows (7/8/10/11), macOS (10.13+), Linux</td>
+                               </tr>
+                                <tr class="divide-x-reverse divide-x divide-slate-700 bg-slate-800/40">
+                                   <td class="p-4 font-semibold text-white w-1/3">نیاز به درایور</td>
+                                   <td class="p-4 text-slate-300">کاملا Plug & Play</td>
+                               </tr>
+                           </tbody>
+                       </table>
+                   </div>
+              </div>
+        </section>
+
+        <section id="faq" class="py-16 md:py-24 bg-slate-900">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12" data-aos="fade-up">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">سوالات متداول</h2>
+                    <p class="text-slate-400 max-w-3xl mx-auto">پاسخ به پرتکرارترین سوالات شما درباره این محصول.</p>
+                </div>
+                <div class="max-w-3xl mx-auto space-y-4" data-aos="fade-up">
+                    <div class="bg-slate-800/50 rounded-lg border border-slate-700 shadow-md">
+                        <button class="faq-question w-full flex justify-between items-center text-right p-5 font-semibold text-white text-lg">
+                            <span>چرا EDID Emulator برای آزمون آنلاین مهم است؟</span>
+                        </button>
+                        <div class="faq-answer px-5 pb-5 text-slate-400">
+                            <p>نرم‌افزارهای آزمون‌گیر می‌توانند دستگاه‌های متصل به خروجی تصویر را شناسایی کنند. EDID Emulator این کارت، دستگاه را به عنوان یک مانیتور معمولی (مثلا مانیتور Dell) به سیستم معرفی می‌کند و هرگونه شک به استفاده از ابزارهای جانبی را از بین می‌برد.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-800/50 rounded-lg border border-slate-700 shadow-md">
+                        <button class="faq-question w-full flex justify-between items-center text-right p-5 font-semibold text-white text-lg">
+                            <span>آیا می‌توانم صدای میکروفون را به تصویر HDMI اضافه کنم؟</span>
+                        </button>
+                        <div class="faq-answer px-5 pb-5 text-slate-400">
+                            <p>بله، یکی از قابلیت‌های کلیدی این کارت همین است. شما می‌توانید میکروفون خود را به ورودی 3.5mm متصل کرده و صدای آن را با تصویر ورودی HDMI ترکیب (mix) کنید. خروجی نهایی (تصویر به همراه صدای HDMI و صدای میکروفون) از طریق USB به کامپیوتر شما ارسال می‌شود.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-slate-800/50 rounded-lg border border-slate-700 shadow-md">
+                        <button class="faq-question w-full flex justify-between items-center text-right p-5 font-semibold text-white text-lg">
+                            <span>حداکثر رزولوشن پشتیبانی شده برای ضبط چقدر است؟</span>
+                        </button>
+                        <div class="faq-answer px-5 pb-5 text-slate-400">
+                            <p>این کارت کپچر از ورودی و خروجی HDMI Loop-out تا رزولوشن 4K (3840×2160) با نرخ 60 فریم بر ثانیه پشتیبانی می‌کند. اما برای ضبط و استریم از طریق USB، حداکثر رزولوشن 1080p (Full HD) با نرخ 60 فریم بر ثانیه است که برای اکثر کاربردها کیفیتی عالی و روان را ارائه می‌دهد.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cta" class="py-16 md:py-24 bg-gradient-to-r from-blue-700 to-cyan-600 text-white text-center">
+            <div class="container mx-auto px-6" data-aos="zoom-in">
+                <h2 class="text-3xl md:text-5xl font-extrabold mb-6 leading-tight">حرفه‌ای‌ترین کارت کپچر برای نیازهای خاص شما</h2>
+                <p class="text-xl max-w-3xl mx-auto mb-10 opacity-90">
+                    محصولی انحصاری و بازطراحی‌شده توسط تیم Remote VM، طراحی شده برای متخصصانی که به بالاترین سطح پنهان‌سازی و عملکرد نیاز دارند.
+                </p>
+                <a href="https://wa.me/+989195600767?text=سلام، برای خرید کارت کپچر حرفه‌ای با ورودی صدا و EDID مزاحم میشم." target="_blank" class="inline-flex items-center gap-3 px-10 py-5 bg-white text-cyan-700 font-bold text-xl rounded-full shadow-2xl shadow-blue-900/40 hover:scale-105 transition-transform duration-300">
+                    <i class="fab fa-whatsapp text-2xl"></i>
+                    <span>همین حالا در واتساپ سفارش بده</span>
+                </a>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="bg-slate-900 border-t border-slate-800">
+        <div class="container mx-auto px-6 py-8 text-center text-slate-400">
+            <p class="text-sm">&copy; 2025 Remote VM - تمامی حقوق محفوظ است.</p>
+        </div>
+    </footer>
+
+    <!-- دکمه شناور واتساپ -->
+    <a href="https://wa.me/+989195600767?text=سلام، برای خرید کارت کپچر حرفه‌ای با ورودی صدا و EDID مزاحم میشم." class="whatsapp-float-btn" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    
+    <a href="https://remotey.ir/" id="back-to-top" class="fixed bottom-6 right-6 w-12 h-12 bg-cyan-500/80 hover:bg-cyan-500 text-white rounded-full flex items-center justify-center shadow-lg transition-all duration-300 opacity-0 invisible z-40">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+    
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 50,
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.getElementById('header');
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const backToTopBtn = document.getElementById('back-to-top');
+            
+            window.addEventListener('scroll', () => {
+                header.classList.toggle('header-scrolled', window.scrollY > 50);
+            });
+
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                menuBtn.querySelector('i').classList.toggle('fa-bars');
+                menuBtn.querySelector('i').classList.toggle('fa-times');
+            });
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    backToTopBtn.classList.remove('opacity-0', 'invisible');
+                } else {
+                    backToTopBtn.classList.add('opacity-0', 'invisible');
+                }
+            });
+
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const answer = question.nextElementSibling;
+                    const isActive = question.classList.contains('active');
+
+                    faqQuestions.forEach(q => {
+                        if (q !== question) {
+                            q.classList.remove('active');
+                            q.nextElementSibling.style.maxHeight = null;
+                        }
+                    });
+                    
+                    if (!isActive) {
+                        question.classList.add('active');
+                        answer.style.maxHeight = answer.scrollHeight + "px";
+                    } else {
+                        question.classList.remove('active');
+                        answer.style.maxHeight = null;
+                    }
+                });
+            });
+
+            const swiper = new Swiper('.mySwiper', {
+                loop: true,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                },
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>چیت سخت‌افزاری: کابوس Anti-cheat ها | Remote VM</title>
+    <meta name="description" content="مقاله‌ای درباره چیت‌های سخت‌افزاری مانند ایم‌بات و نقش کارت کپچر Remote VM با شبیه‌ساز EDID در گیمینگ رقابتی و پنهان‌سازی از نرم‌افزارهای ضدتقلب.">
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <style>
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: #0f172a; /* slate-900 */
+            color: #f4f9ff; /* slate-300 */
+        }
+
+        /* برای اطمینان از سازگاری کامل Tailwind با RTL */
+        [dir="rtl"] .space-x-reverse > * + * {
+            margin-left: 0;
+            margin-right: 1.5rem; /* Equivalent to space-x-6 */
+        }
+        [dir="rtl"] .md\:space-x-reverse > * + * {
+             /* Define responsive space-x-reverse for md breakpoint if needed */
+        }
+
+
+        .header-scrolled {
+            background-color: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+
+        .gradient-text {
+            /* طیف رنگی جذاب سایبرپانک */
+            background: linear-gradient(to left, #22d3ee, #ff00ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gaming-section {
+            background: linear-gradient(135deg, #1a1a3d, #2a2a5e);
+            border: 2px solid #22d3ee;
+            box-shadow: 0 0 30px rgba(34, 211, 238, 0.7), inset 0 0 10px rgba(0, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gaming-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 10% 10%, rgba(34, 211, 238, 0.2), transparent 50%);
+            pointer-events: none;
+        }
+
+        /* Swiper custom styling */
+        .swiper-button-next:after, .swiper-button-prev:after {
+            color: #22d3ee;
+            font-size: 1.5rem;
+            text-shadow: 0 0 10px rgba(34, 211, 238, 0.8);
+        }
+        .swiper-pagination-bullet-active {
+            background: #22d3ee !important;
+            box-shadow: 0 0 10px #22d3ee;
+        }
+
+        .crosshair-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #22d3ee;
+            font-size: 2rem;
+            opacity: 0.3;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.2); opacity: 0.5; }
+            100% { transform: scale(1); opacity: 0.3; }
+        }
+
+        .newsletter-input {
+            background-color: #1e293b;
+            border: 1px solid #22d3ee;
+            color: #cbd5e1;
+            direction: ltr; /* برای ورود ایمیل به زبان انگلیسی */
+            text-align: left;
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
+        }
+
+        .newsletter-button {
+            background: linear-gradient(to right, #22d3ee, #00ff88);
+        }
+
+        .newsletter-button:hover {
+            background: linear-gradient(to right, #00ff88, #22d3ee);
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <!-- Navbar/Header -->
+    <header id="header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <a href="https://remotevm.site/" class="flex items-center gap-3 text-2xl font-bold text-white">
+                    <i class="fas fa-server text-cyan-400 text-3xl"></i>
+                    <span>Remote VM</span>
+                </a>
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-reverse space-x-6 text-lg">
+                    <a href="https://remotevm.site/" class="text-slate-300 hover:text-cyan-400 transition-colors">خانه</a>
+                    <a href="#product" class="text-slate-300 hover:text-cyan-400 transition-colors">محصولات</a> <!-- لینک داخلی به بخش محصول -->
+                    <a href="https://remotevm.site/contact/" class="text-slate-300 hover:text-cyan-400 transition-colors">تماس</a>
+                </div>
+                <!-- Action Button & Mobile Menu Button -->
+                <div class="flex items-center gap-4">
+                    <a href="https://remotevm.ir/" target="_blank" class="hidden sm:inline-block px-6 py-2 text-white bg-blue-600 hover:bg-blue-700 rounded-full transition-transform duration-300 hover:scale-105">
+                        R.V.M Server
+                    </a>
+                    <button id="menu-btn" class="md:hidden text-white text-2xl">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full right-0 w-full bg-slate-800/95 backdrop-blur-sm">
+            <div class="flex flex-col items-center space-y-4 py-6">
+                <a href="https://remotevm.site/" class="mobile-menu-link text-slate-300 hover:text-cyan-400 transition-colors">خانه</a>
+                <a href="#product" class="mobile-menu-link text-slate-300 hover:text-cyan-400 transition-colors">محصولات</a>
+                <a href="https://remotevm.site/contact/" class="mobile-menu-link text-slate-300 hover:text-cyan-400 transition-colors">تماس</a>
+                <a href="#" class="px-6 py-2 text-white bg-blue-600 hover:bg-blue-700 rounded-full transition-transform duration-300 hover:scale-105 mt-4">ورود / ثبت‌نام</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-20">
+        <!-- Hero Section -->
+        <section id="hero" class="py-12 md:py-20 bg-gradient-to-b from-slate-900 to-slate-800 relative">
+            <i class="fas fa-crosshairs crosshair-icon"></i>
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6" data-aos="fade-up">
+                    <span class="gradient-text">چیت سخت‌افزاری</span>: <span class="text-cyan-400">کابوس Anti-cheat ها</span>
+                </h1>
+                <p class="text-slate-400 max-w-4xl mx-auto mb-8 text-xl leading-relaxed" data-aos="fade-up" data-aos-delay="100">
+                    با فناوری‌های پیشرفته <b>Remote VM<b>، برتری در میدان نبرد گیمینگ دیگر یک رویا نیست. با کارتی که هیچ نرم‌افزار ضدتقلبی قادر به شناسایی آن نیست، قدرت واقعی را در دست بگیرید.
+                </p>
+                <a href="#product" class="inline-flex items-center gap-3 px-8 py-4 bg-cyan-500 hover:bg-cyan-600 text-white font-bold rounded-xl transition-all duration-300 hover:scale-105 shadow-xl shadow-cyan-500/40" data-aos="zoom-in" data-aos-delay="200">
+                    <i class="fas fa-rocket"></i>
+                    <span>مشاهده جزئیات کارت کپچر Remote VM</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Hardware Cheating Definition Section -->
+        <section id="hardware-cheating" class="py-16 md:py-24 gaming-section relative">
+            <i class="fas fa-crosshairs crosshair-icon"></i>
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12" data-aos="fade-up">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 gradient-text">چیت سخت‌افزاری:<br>انقلابی در گیمینگ</h2>
+                    <p class="text-slate-400 max-w-3xl mx-auto">چیت‌های سخت‌افزاری، نسل جدیدی از ابزارهای گیمینگ هستند که عملکرد شما را بدون خطر شناسایی ارتقا می‌دهند.</p>
+                </div>
+                <div class="max-w-5xl mx-auto bg-slate-800/50 rounded-xl p-6 md:p-8 border border-cyan-700 shadow-lg" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-2xl font-bold text-white mb-4 border-b border-cyan-700 pb-2">چیت سخت‌افزاری چیست؟</h3>
+                    <p class="text-slate-400 leading-relaxed mb-6">
+                        چیت‌های سخت‌افزاری ابزارهایی هستند که با استفاده از دستگاه‌های فیزیکی، عملکرد گیمرها را در بازی‌های رقابتی بهبود می‌دهند. برخلاف چیت‌های نرم‌افزاری که به راحتی توسط سیستم‌های ضدتقلب مانند BattlEye، EAC یا Vanguard شناسایی می‌شوند، چیت‌های سخت‌افزاری از پردازش مستقیم تصاویر یا ورودی‌های سخت‌افزاری استفاده می‌کنند تا غیرقابل ردیابی باشند. برای مثال، <strong>Aim-bot سخت‌افزاری</strong> با تحلیل خروجی HDMI، هدف‌گیری دقیق و خودکار را فراهم می‌کنند، بدون اینکه اثری در نرم‌افزار بازی باقی بگذارند. ابزارهای کنترل لگد (Recoil Control) نیز با شبیه‌سازی ورودی‌های فیزیکی، دقت تیراندازی را افزایش می‌دهند.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 text-center">
+                        <div class="p-4 bg-slate-700/50 rounded-lg"><i class="fas fa-desktop text-cyan-400 ml-2"></i>تجزیه و تحلیل تصویر: پردازش مستقل از کامپیوتر بازی.</div>
+                        <div class="p-4 bg-slate-700/50 rounded-lg"><i class="fas fa-keyboard text-cyan-400 ml-2"></i> تزریق ورودی: شبیه‌سازی دقیق ماوس و کیبورد.</div>
+                        <div class="p-4 bg-slate-700/50 rounded-lg"><i class="fas fa-lock text-cyan-400 ml-2"></i> محافظت از Anti-Cheat: عدم وجود کد در حافظه بازی.</div>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+                    <!-- Feature Card 1 -->
+                    <div class="bg-slate-800 p-6 rounded-xl border border-cyan-700 shadow-lg hover:border-cyan-500 transition-all duration-300" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="text-4xl text-cyan-400 mb-4"><i class="fas fa-crosshairs"></i></div>
+                        <h3 class="text-xl font-bold text-white mb-3">AimBot سخت‌افزاری</h3>
+                        <p class="text-slate-400 text-sm">با پردازش مستقیم تصاویر HDMI، هدف‌گیری دقیق و سریع را تجربه کنید، بدون خطر شناسایی توسط نرم افزارهای AntiCheater و ضدتقلب‌ها.</p>
+                    </div>
+                    <!-- Feature Card 2 -->
+                    <div class="bg-slate-800 p-6 rounded-xl border border-cyan-700 shadow-lg hover:border-cyan-500 transition-all duration-300" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="text-4xl text-cyan-400 mb-4"><i class="fas fa-shield-alt"></i></div>
+                        <h3 class="text-xl font-bold text-white mb-3">پنهان‌سازی کامل (EDID)</h3>
+                        <p class="text-slate-400 text-sm">شبیه‌سازی دستگاه‌های معتبر مانند مانیتور Dell، تضمین‌کننده عدم شناسایی توسط سیستم‌های Anti-Cheat است.</p>
+                    </div>
+                    <!-- Feature Card 3 -->
+                    <div class="bg-slate-800 p-6 rounded-xl border border-cyan-700 shadow-lg hover:border-cyan-500 transition-all duration-300" data-aos="zoom-in" data-aos-delay="300">
+                        <div class="text-4xl text-cyan-400 mb-4"><i class="fas fa-bolt"></i></div>
+                        <h3 class="text-xl font-bold text-white mb-3">عملکرد بی‌وقفه</h3>
+                        <p class="text-slate-400 text-sm">بدون افت فریم یا تاخیر و بدون بار پردازشی اضافه که در روش چیت نرم افزاری به سیستم وارد میشود، تجربه گیمینگ روان و بی‌نقص را تضمین می‌کند.</p> 
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Section: Remote VM Capture Card -->
+        <section id="product" class="py-16 md:py-24 gaming-section relative">
+            <i class="fas fa-crosshairs crosshair-icon"></i>
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12" data-aos="fade-up">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 gradient-text">کارت کپچر Remote VM:<br>کلید چیتر شما</h2>
+                    <p class="text-white-400 max-w-3xl mx-auto">با فناوری EDID Emulator، این کارت کپچر شما را در گیمینگ یک قدم جلوتر نگه می‌دارد.</p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <!-- Product Images Swiper -->
+                    <div data-aos="fade-left">
+                        <div class="bg-slate-800 rounded-2xl p-4 md:p-8 shadow-2xl shadow-slate-900/50 relative border-2 border-cyan-500">
+                            <div class="swiper mySwiper">
+                                <div class="swiper-wrapper">
+                                    <!-- Placeholder images with specific sizes and colors for demonstration -->
+                                    <div class="swiper-slide aspect-square flex items-center justify-center">
+                                        <img src="./capture-card-EDID-02.jpg" onerror="this.onerror=null;this.src='./product/RemoteVm-capture-card-V1-02.jpg';" alt="کارت کپچر Remote VM - نمای ۱" class="w-full h-full object-contain rounded-xl">
+                                    </div>
+                                    <div class="swiper-slide aspect-square flex items-center justify-center">
+                                        <img src="./capture-card-EDID-0001.jpg" onerror="this.onerror=null;this.src='./product/کارت-کپچر-HDMI-با EDID Emulator و شبیه‌ساز وبکم2.jpg';" alt="کارت کپچر Remote VM - نمای ۲" class="w-full h-full object-contain rounded-xl">
+                                    </div>
+                                    <div class="swiper-slide aspect-square flex items-center justify-center">
+                                        <img src="./RemoteVm-HDMI-capture-card-with-EDID-3.jpg" onerror="this.onerror=null;this.src='./product/capture-card-EDID-002.jpg';" alt="کارت کپچر Remote VM - نمای ۳" class="w-full h-full object-contain rounded-xl">
+                                    </div>
+                                    <div class="swiper-slide aspect-square flex items-center justify-center">
+                                        <img src="./کارت-کپچر-HDMI-با EDID Emulator و شبیه‌ساز وبکم2.jpg" onerror="this.onerror=null;this.src='./product/capture-card-EDID-0001.jpg';" alt="کارت کپچر Remote VM - نمای 4" class="w-full h-full object-contain rounded-xl">
+                                    </div> 
+                                </div>
+                                <div class="swiper-pagination"></div>
+                                <div class="swiper-button-prev"></div>
+                                <div class="swiper-button-next"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product Description -->
+                    <div data-aos="fade-right">
+                        <h3 class="text-3xl font-bold text-white mb-4 gradient-text">چرا Remote VM؟ برتری پنهان.</h3>
+                        <p class="text-white-400 leading-relaxed mb-6 text-lg">
+                            کارت کپچر Remote VM با فناوری شبیه‌سازی EDID، دستگاه شما را به عنوان یک مانیتور معتبر Dell معرفی می‌کند، که از شناسایی توسط نرم‌افزارهای ضدتقلب مانند BattlEye و EAC جلوگیری می‌کند. با پشتیبانی از ورودی و خروجی 4K@60Hz و ضبط 1080p@60Hz، این کارت برای استریمینگ حرفه‌ای، ضبط گیم‌پلی و استفاده از ابزارهای سخت‌افزاری مانند ایم‌بات ایده‌آل است. طراحی Plug & Play و HDMI Loop-out بدون تاخیر، تجربه‌ای روان و بی‌نقص را تضمین می‌کند.
+                        </p>
+                        <ul class="text-slate-400 mb-8 space-y-3 bg-slate-800/50 p-4 rounded-lg border border-cyan-700">
+                            <li class="flex items-center gap-2"><i class="fas fa-check-circle text-cyan-400 text-lg"></i> <b>EDID Spoofing:<b> شبیه‌سازی دستگاهی مطمئن برای پنهان‌سازی کامل.</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-check-circle text-cyan-400 text-lg"></i> <b>رزولوشن بالا:<b> پشتیبانی از <b>$4K@60Hz$<b> و ضبط با کیفیت <b>$1080p@60Hz$<b>.</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-check-circle text-cyan-400 text-lg"></i> <b>سازگاری گسترده:<b> سازگار با Windows، macOS و Linux، بدون نیاز به درایور.</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-check-circle text-cyan-400 text-lg"></i> <b>Loop-out صفر تاخیر:<b> تماشای گیم‌پلی بدون هیچ‌گونه لگ یا تأخیر.</li>
+                        </ul>
+                        <a href="https://wa.me/+989195600767?text=سلام، برای خرید کارت کپچر Remote VM با EDID." target="_blank" class="inline-flex items-center gap-3 px-8 py-4 bg-pink-500 hover:bg-pink-600 text-white font-bold rounded-xl transition-all duration-300 hover:scale-105 shadow-xl shadow-pink-500/40">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>همین حالا سفارش دهید و برنده شوید</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How it Works Section -->
+        <section id="how-it-works" class="py-16 md:py-24 bg-slate-800 relative">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4"><span class="gradient-text">نحوه عملکرد:</span> پنهان‌سازی در ۳ مرحله</h2>
+                    <p class="text-slate-400 max-w-3xl mx-auto">کارت کپچر Remote VM با دور زدن لایه نرم‌افزاری، یک محیط کاملاً سخت‌افزاری و ایمن برای ابزارهای چیت فراهم می‌کند.</p>
+                </div>
+
+                <div class="relative max-w-6xl mx-auto">
+                    <!-- Timeline Line (Desktop) -->
+                    <div class="hidden md:block absolute top-1/4 right-0 w-full h-1 bg-cyan-700"></div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+                        
+                        <!-- Step 1 -->
+                        <div class="relative" data-aos="zoom-in" data-aos-delay="100">
+                            <div class="w-16 h-16 bg-cyan-500 rounded-full mx-auto flex items-center justify-center text-3xl text-slate-900 font-extrabold mb-4 border-4 border-slate-800 shadow-xl">
+                                <i class="fas fa-arrow-left"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-3">۱. خروج تصویر اصلی</h3>
+                            <p class="text-slate-400 text-sm">خروجی HDMI کارت گرافیک (PC بازی) به کارت کپچر Remote VM متصل می‌شود.</p>
+                            <p class="text-xs font-mono text-cyan-400 mt-2">GPU $\rightarrow$ Remote VM IN</p>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="relative mt-8 md:mt-0" data-aos="zoom-in" data-aos-delay="300">
+                            <div class="w-16 h-16 bg-pink-500 rounded-full mx-auto flex items-center justify-center text-3xl text-slate-900 font-extrabold mb-4 border-4 border-slate-800 shadow-xl">
+                                <i class="fas fa-eye-slash"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-3">۲. شبیه‌سازی و تحلیل</h3>
+                            <p class="text-slate-400 text-sm">کارت کپچر تصویر را به کامپیوتر دوم (VM) ارسال می‌کند. با EDID Emulator، کامپیوتر بازی فکر می‌کند به یک مانیتور عادی متصل است.</p>
+                            <p class="text-xs font-mono text-pink-400 mt-2">Remote VM $\rightarrow$ VM (Analysis)</p>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="relative mt-8 md:mt-0" data-aos="zoom-in" data-aos-delay="500">
+                            <div class="w-16 h-16 bg-green-500 rounded-full mx-auto flex items-center justify-center text-3xl text-slate-900 font-extrabold mb-4 border-4 border-slate-800 shadow-xl">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-3">۳. تزریق ورودی ایمن</h3>
+                            <p class="text-slate-400 text-sm">چیت‌های سخت‌افزاری بر اساس تحلیل تصویر، دستورات ورودی (ماوس/کیبورد) را به کامپیوتر بازی تزریق می‌کنند.</p>
+                            <p class="text-xs font-mono text-green-400 mt-2">VM $\rightarrow$ Remote VM OUT $\rightarrow$ PC (Game)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Call to Action Section -->
+        <section id="final-cta" class="py-16 md:py-20 bg-slate-900 relative border-t border-cyan-500/50">
+            <div class="container mx-auto px-6 text-center" data-aos="fade-up">
+                <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-4 gradient-text">آیا آماده  چیتینگ هستید؟</h2>
+                <p class="text-slate-400 max-w-3xl mx-auto mb-10 text-xl">
+                    بازی‌های مورد علاقه شما دیگر نباید بر اساس محدودیت‌های نرم‌افزار ضدتقلب باشد. با Remote VM، قوانین را بازنویسی کنید و به بهترین شکل ممکن بازی کنید.
+                </p>
+                <a href="https://wa.me/+989195600767?text=سلام، برای خرید و مشاوره کارت کپچر Remote VM با EDID." target="_blank" class="inline-flex items-center gap-3 px-10 py-5 bg-green-500 hover:bg-green-600 text-white font-extrabold text-lg rounded-xl transition-all duration-300 hover:scale-105 shadow-2xl shadow-green-500/40">
+                    <i class="fab fa-whatsapp text-2xl"></i>
+                    <span>تماس با پشتیبانی و خرید مستقیم</span>
+                </a>
+            </div>
+        </section>
+        
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="text-center md:text-right">
+                    <a href="https://remotevm.site/" class="flex items-center justify-center md:justify-start gap-3 text-2xl font-bold text-white mb-4">
+                        <i class="fas fa-server text-cyan-400 text-3xl"></i>
+                        <span>Remote VM</span>
+                    </a>
+                    <p class="text-slate-400 text-sm">ما در Remote VM ابزارهای پیشرفته‌ای برای گیمرها و حرفه‌ای‌ها ارائه می‌دهیم تا تجربه‌ای بی‌نظیر داشته باشید.</p>
+                </div>
+                <div class="text-center md:text-right">
+                    <h3 class="text-lg font-semibold text-white mb-4">لینک‌های سریع</h3>
+                    <ul class="space-y-2 text-slate-400">
+                        <li><a href="https://remotevm.site/" class="hover:text-cyan-400 transition-colors">خانه</a></li>
+                        <li><a href="#product" class="hover:text-cyan-400 transition-colors">محصولات (کارت کپچر)</a></li>
+                        <li><a href="https://remotevm.site/contact/" class="hover:text-cyan-400 transition-colors">تماس با ما</a></li>
+                        <li><a href="https://remotevm.site/about/" class="hover:text-cyan-400 transition-colors">درباره ما</a></li>
+                    </ul>
+                </div>
+                <div class="text-center md:text-right">
+                    <h3 class="text-lg font-semibold text-white mb-4">تماس با ما</h3>
+                    <ul class="space-y-2 text-slate-400">
+                        <li><i class="fas fa-envelope ml-2"></i> support@remotevm.site</li>
+                        <li><i class="fas fa-phone-alt ml-2"></i> 098-9195600767</li>
+                        <li><i class="fas fa-map-marker-alt ml-2"></i> تهران، ایران</li>
+                    </ul>
+                </div>
+                <div class="text-center md:text-right">
+                    <h3 class="text-lg font-semibold text-white mb-4">خبرنامه</h3>
+                    <p class="text-slate-400 text-sm mb-4">برای دریافت آخرین اخبار و تخفیف‌ها، در خبرنامه ما ثبت‌نام کنید.</p>
+                    <div class="flex justify-center md:justify-start">
+                        <input type="email" placeholder="ایمیل خود را وارد کنید" class="newsletter-input px-4 py-2 rounded-r-lg w-2/3 focus:ring-0">
+                        <button class="newsletter-button px-4 py-2 rounded-l-lg text-white font-semibold transition-all duration-300">اشتراک</button>
+                    </div>
+                    <div class="flex justify-center md:justify-start space-x-reverse space-x-4 mt-4">
+                        <a href="#" class="text-slate-400 hover:text-cyan-400 transition-colors"><i class="fab fa-instagram text-xl"></i></a>
+                        <a href="#" class="text-slate-400 hover:text-cyan-400 transition-colors"><i class="fab fa-telegram-plane text-xl"></i></a>
+                        <a href="#" class="text-slate-400 hover:text-cyan-400 transition-colors"><i class="fab fa-twitter text-xl"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 text-center text-slate-400 text-sm border-t border-slate-800 pt-4">
+                <p>&copy; 2025 Remote VM - تمامی حقوق محفوظ است.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#hero" id="back-to-top" class="fixed bottom-6 right-6 w-12 h-12 bg-cyan-500/80 hover:bg-cyan-500 text-white rounded-full flex items-center justify-center shadow-lg transition-all duration-300 opacity-0 invisible z-40">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Libraries -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        // Initialize AOS library for scroll animations
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 50,
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.getElementById('header');
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const backToTopBtn = document.getElementById('back-to-top');
+            const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+
+            // Header scroll effect
+            window.addEventListener('scroll', () => {
+                header.classList.toggle('header-scrolled', window.scrollY > 50);
+            });
+
+            // Mobile menu toggle
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                menuBtn.querySelector('i').classList.toggle('fa-bars');
+                menuBtn.querySelector('i').classList.toggle('fa-times');
+            });
+
+            // Close mobile menu when a link is clicked
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    menuBtn.querySelector('i').classList.remove('fa-times');
+                    menuBtn.querySelector('i').classList.add('fa-bars');
+                });
+            });
+
+            // Back to top button visibility
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    backToTopBtn.classList.remove('opacity-0', 'invisible');
+                    backToTopBtn.classList.add('opacity-100', 'visible');
+                } else {
+                    backToTopBtn.classList.remove('opacity-100', 'visible');
+                    backToTopBtn.classList.add('opacity-0', 'invisible');
+                }
+            });
+
+            // Swiper Initialization for product images
+            const swiper = new Swiper('.mySwiper', {
+                direction: 'horizontal',
+                loop: true,
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+            });
+        });
+    </script>
+</body>
+</html>
