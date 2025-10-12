@@ -12,6 +12,12 @@
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;800&display=swap');
     :root {
+        --dark-bg: linear-gradient(135deg, #07102e 0%, #13173a 100%);
+        --success: #22c55e;
+        --danger-hover: #dc2626;
+        --warning: #f59e0b;
+        --card-bg: rgba(10, 14, 32, 0.85);
+        --video-bg: #09131d;
         --light-bg: linear-gradient(135deg, #aeeafc 0%, #caf0fc 100%);
         --dark-text: #ffffff;
         --light-text: #1e293b;
@@ -22,7 +28,6 @@
         --success-hover: #16a34a;
         --danger: #ef4444;
         --danger-hover: #dc2626;
-        --warning-hover: #d97706;
         --border-light: linear-gradient(90deg, #3b82f6, #1e293b);
         --border-dark: rgba(75,85,99,0.3);
         --card-bg: rgba(10, 14, 32, 0.85);
@@ -32,15 +37,6 @@
         --secondary-blue: #3b82f6;
         --accent-purple: #7c3aed;
         --dark-bg: #0f172a;
-
-
-        --border-dark: linear-gradient(90deg, #00FFFF, #ff95ff);
-        --success: #10b981;
-        --error: #ef4444;
-        --warning: #f59e0b;
-        --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        --video-bg: #0f172a;
-                   
     }
     html { scroll-behavior: smooth; }
     body {
@@ -105,28 +101,28 @@
         color: var(--light-text);
         border: 1px solid rgba(0,128,255,0.2);
     }
-    .btn-primary { 
-        background: linear-gradient(90deg, var(--primary), var(--neon-blue)); 
-        color: #fff; 
+    .btn-primary {
+        background: linear-gradient(90deg, var(--primary), var(--neon-blue));
+        color: #fff;
     }
-    .btn-primary:hover { 
-        background: linear-gradient(90deg, var(--primary-hover), var(--neon-pink)); 
-        box-shadow: 0 0 15px rgba(0, 191, 255, 0.6); 
+    .btn-primary:hover {
+        background: linear-gradient(90deg, var(--primary-hover), var(--neon-pink));
+        box-shadow: 0 0 15px rgba(0, 191, 255, 0.6);
     }
     .btn-success { background: var(--success); color: #fff; }
-    .btn-success:hover { 
-        background: var(--success-hover); 
-        box-shadow: 0 0 12px rgba(0, 191, 255, 0.5); 
+    .btn-success:hover {
+        background: var(--success-hover);
+        box-shadow: 0 0 12px rgba(0, 191, 255, 0.5);
     }
     .btn-danger { background: var(--danger); color: #fff; }
-    .btn-danger:hover { 
-        background: var(--danger-hover); 
-        box-shadow: 0 0 12px rgba(0, 191, 255, 0.5); 
+    .btn-danger:hover {
+        background: var(--danger-hover);
+        box-shadow: 0 0 12px rgba(0, 191, 255, 0.5);
     }
     .btn-warning { background: var(--warning); color: #fff; }
-    .btn-warning:hover { 
-        background: var(--warning-hover); 
-        box-shadow: 0 0 12px rgba(0, 191, 255, 0.5); 
+    .btn-warning:hover {
+        background: var(--warning-hover);
+        box-shadow: 0 0 12px rgba(0, 191, 255, 0.5);
     }
     .btn-neutral { background: var(--border-light); color: var(--dark-text); }
     body.light-mode .btn-neutral { background: var(--border-dark); color: var(--light-text); }
@@ -184,10 +180,10 @@
     }
     .feature-card {
         background: var(--card-bg);
-        border-radius: 0.7rem;
+        border-radius: 1.3rem;
         padding: clamp(1rem, 3vw, 1.5rem);
-        border: 1px solid var(--border-light);
-        box-shadow: 0 4px 20px rgba(0, 191, 255, 0.25);
+   
+        box-shadow: 0 0 1px rgba(0, 191, 255, 0.5), 0 4px 20px rgba(0, 191, 255, 0.25);
         text-align: center;
         transition: transform 0.3s, box-shadow 0.3s;
     }
@@ -200,6 +196,38 @@
         transform: translateY(-4px);
         box-shadow: 0 8px 24px rgba(0, 191, 255, 0.5);
         animation: pulse-glow 2s infinite;
+    }
+    .feature-card.clickable {
+        cursor: pointer;
+    }
+    .feature-card.clickable:hover {
+        transform: translateY(-4px) scale(1.02);
+        box-shadow: 0 8px 24px rgba(0, 191, 255, 0.6);
+    }
+    .feature-card.featured {
+        background: linear-gradient(135deg, #0143a09f, #02214b9f);
+        border: 2px solid var(--neon-blue);
+        box-shadow: 0 0 1px rgba(0, 191, 255, 0.5), 0 4px 20px rgba(4, 192, 255, 0.25);
+    }
+    body.light-mode .feature-card.featured {
+        background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+        border: 1px solid var(--neon-blue);
+        box-shadow: 0 4px 20px rgba(34, 197, 94, 0.2);
+    }
+    .feature-card.featured:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(1, 204, 255, 0.5);
+        animation: pulse-glow-success 2s infinite;
+    }
+    @keyframes pulse-glow-success {
+        0% { box-shadow: 0 4px 20px rgba(34, 165, 197, 0.25); }
+        50% { box-shadow: 0 8px 40px rgba(34, 186, 197, 0.5); }
+        100% { box-shadow: 0 4px 15px rgba(5, 23, 190, 0.25); }
+    }
+    .feature-card a {
+        color: inherit;
+        text-decoration: none;
+        display: block;
     }
     .status-indicator {
         width: 12px;
@@ -222,9 +250,9 @@
         100% { box-shadow: 0 0 0 0 rgba(0, 191, 255, 0); }
     }
     @keyframes pulse-glow {
-        0% { box-shadow: 0 4px 20px rgba(0, 191, 255, 0.25); }
-        50% { box-shadow: 0 8px 30px rgba(0, 191, 255, 0.5); }
-        100% { box-shadow: 0 4px 20px rgba(0, 191, 255, 0.25); }
+        0% { box-shadow: 0 4px 10px rgba(0, 191, 255, 0.25); }
+        50% { box-shadow: 0 8px 50px rgba(0, 204, 255, 0.555); }
+        100% { box-shadow: 0 4px 10px rgba(0, 191, 255, 0.25); }
     }
     .tooltip {
         position: relative;
@@ -262,7 +290,7 @@
         position: fixed;
         inset: 0;
         z-index: 1000;
-        background: linear-gradient(135deg, #07102e 0%, #021642 80%, #ff30d2 150%);
+        background: linear-gradient(135deg, #07102e 0%, #021642 80%, #00a2ff 200%);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -341,6 +369,17 @@
     @keyframes pulse-dot {
         0%, 80%, 100% { transform: scale(0.8); }
         40% { transform: scale(1.2); }
+    }
+    .loading-text {
+        font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+        font-weight: 600;
+        color: var(--neon-blue);
+        animation: fade-in-out 2s ease-in-out infinite;
+        text-shadow: 0 0 5px rgba(0, 191, 255, 0.5);
+    }
+    @keyframes fade-in-out {
+        0%, 100% { opacity: 0.7; transform: scale(1); }
+        50% { opacity: 1; transform: scale(1.05); }
     }
     .toggle-switch {
         position: relative;
@@ -430,7 +469,7 @@
         font-size: clamp(1.2rem, 3vw, 1.5rem);
         cursor: pointer;
         padding: 0.5rem;
-        z-index: 2000;
+        z-index: 0;
         display: block; /* همیشه نمایش داده می‌شود */
     }
     body.light-mode .menu-toggle {
@@ -440,7 +479,7 @@
         position: fixed;
         inset: 0;
         background: rgba(0, 0, 0, 0.5);
-        z-index: 1500;
+        z-index: 0;
         transition: opacity 0.3s ease;
     }
     .menu-overlay.hidden {
@@ -449,10 +488,11 @@
     }
     .menu-panel {
         position: fixed;
-        top: 0;
+        top: 13%;
         right: -100%;
         width: min(80vw, 300px);
         height: 100vh;
+        border-radius: 15px;
         background: var(--card-bg);
         border-left: 1px solid var(--border-light);
         box-shadow: -4px 0 20px rgba(0, 191, 255, 0.25);
@@ -803,13 +843,13 @@
                 <h2>منو</h2>
                 <ul>
                     <li><a href="https://remotevm.ir" target="_blank" rel="noopener noreferrer"><i class="fas fa-home"></i> خانه</a></li>
-                    <li><a href="https://remotevm.ir/remotevm-tut.html" target="_blank" rel="noopener noreferrer"><i class="fas fa-book"></i> راهنما</a></li>      
+                    <li><a href="https://remotevm.ir/remotevm-tut.html" target="_blank" rel="noopener noreferrer"><i class="fas fa-book"></i> راهنما</a></li>
                     <li><a href="https://call.remotevm.ir" target="_blank" rel="noopener noreferrer"><i class="fas fa-video"></i> تماس تصویری</a></li>
                     <li><a href="https://about.remotevm.ir" target="_blank" rel="noopener noreferrer"><i class="fas fa-info-circle"></i> درباره ما</a></li>
                     <li><a href="https://room.remotevm.ir" target="_blank" rel="noopener noreferrer"><i class="fas fa-users-cog"></i> پنل حرفه‌ای</a></li>
                     <li><a href="https://remotevm.ir/product" target="_blank" rel="noopener noreferrer"><i class="fas fa-box-open"></i> محصولات</a></li>
                     <li><a href="https://seccam.remotevm.ir" target="_blank" rel="noopener noreferrer"><i class="fas fa-eye"></i> Security Cam</a></li>
-                    <li><a href="https://classroom.remotevm.ir" target="_blank" rel="noopener noreferrer"><i class="fas fa-chalkboard-teacher"></i> RVM ClassRoom</a></li>                    
+                    <li><a href="https://class.remotevm.ir" target="_blank" rel="noopener noreferrer"><i class="fas fa-chalkboard-teacher"></i> RVM ClassRoom</a></li>
                 </ul>
             </div>
         </nav>
@@ -846,8 +886,8 @@
             <label for="qualitySelect" class="block font-medium mb-2">کیفیت ویدیو:</label>
             <select id="qualitySelect" class="w-full">
                 <option value="480">480p</option>
-                <option value="720">720p </option>
-                <option value="1080" selected>1080p (پیش‌فرض)</option>
+                <option value="720" selected>720p (پیش‌فرض) </option>
+                <option value="1080" >1080p </option>
             </select>
         </div>
         <div class="flex items-center justify-between mb-6 p-2 rounded-lg">
@@ -923,7 +963,7 @@
                     <div class="dot"></div>
                     <div class="dot"></div>
                 </div>
-                <span class="text-base font-semibold">در حال اتصال ...</span>
+                <span class="loading-text">در حال برقراری ارتباط...</span>
             </div>
             <iframe
                 id="vdoFrame"
@@ -958,7 +998,7 @@
         </section>
     </section>
     <section id="features" class="mb-12">
-        <h2 class="text-xl md:text-2xl text-center mb-8">Remote Video Monitoring </h2>
+        <h2 class="text-xl md:text-2xl text-center mb-8">ویژگی‌ها و قابلیت‌ها</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" id="featuresContainer"></div>
     </section>
     <section id="about" class="text-center">
@@ -971,13 +1011,13 @@
 <footer class="container mx-auto px-4 py-6 text-center">
     <p>&copy; 2025 RemoteVM. All rights reserved.</p>
     <div class="flex justify-center gap-4 mt-4">
-        <a href="privacy-policy.html" class="text-sm" target="_blank" rel="noopener noreferrer">سیاست حریم خصوصی</a>
+        <a href="https://remotevm.ir/privacy-policy.html" class="text-sm" target="_blank" rel="noopener noreferrer">سیاست حریم خصوصی</a>
         <a href="https://remotevm.ir/remotevm-tut.html" class="text-sm" target="_blank" rel="noopener noreferrer">شرایط استفاده</a>
         <a href="https://remotevm.site/contact" class="text-sm" target="_blank" rel="noopener noreferrer">تماس با ما</a>
     </div>
 </footer>
 <script defer>
-document.addEventListener('DOMContentLoaded',function(){const savedTheme=localStorage.getItem('theme')||'dark';if(savedTheme==='light'){document.body.classList.add('light-mode');document.getElementById('themeToggle').innerHTML='<i class="fas fa-sun"></i>'}const themeToggle=document.getElementById('themeToggle');themeToggle.addEventListener('click',()=>{document.body.classList.toggle('light-mode');const isLight=document.body.classList.contains('light-mode');localStorage.setItem('theme',isLight?'light':'dark');themeToggle.innerHTML=isLight?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>'});const menuToggle=document.getElementById('menu-toggle');const menuPanel=document.getElementById('menu-panel');const menuOverlay=document.getElementById('menu-overlay');const menuIcon=document.getElementById('menu-icon');menuToggle.addEventListener('click',()=>{const isActive=menuPanel.classList.contains('active');menuPanel.classList.toggle('active');menuOverlay.classList.toggle('hidden');menuIcon.className=isActive?'fas fa-bars':'fas fa-times';document.body.style.overflow=isActive?'auto':'hidden'});menuOverlay.addEventListener('click',()=>{menuPanel.classList.remove('active');menuOverlay.classList.add('hidden');menuIcon.className='fas fa-bars';document.body.style.overflow='auto'});const menuLinks=menuPanel.querySelectorAll('a');menuLinks.forEach(link=>{link.addEventListener('click',()=>{menuPanel.classList.remove('active');menuOverlay.classList.add('hidden');menuIcon.className='fas fa-bars';document.body.style.overflow='auto'})});setTimeout(()=>{document.getElementById('overlay').classList.add('hidden')},1500);const features=[{icon:'fa-video',title:'ویدیو با کیفیت بالا',desc:'انتقال ویدیو با رزولوشن بالا بدون تاخیر.'},{icon:'fa-microphone',title:'صدای استریو',desc:'صدای شفاف و با کیفیت استریو.'},{icon:'fa-users',title:'کنفرانس گروهی',desc:'جلسات گروهی با چندین شرکت‌کننده.'},{icon:'fa-lock',title:'امنیت بالا',desc:'رمزنگاری end-to-end برای حفظ حریم خصوصی.'},{icon:'fa-mobile-alt',title:'سازگار با دسکتاپ / موبایل',desc:'پشتیبانی از تمام دستگاه‌ها.'},{icon:'fa-cloud',title:'P 2 P ',desc:'بدون نیاز به نصب نرم‌افزار.'}];const featuresContainer=document.getElementById('featuresContainer');featuresContainer.innerHTML='';features.forEach(feature=>{const card=document.createElement('div');card.className='feature-card';card.innerHTML=`<i class="fas ${feature.icon} text-3xl mb-4" style="color:var(--neon-blue);"></i><h3 class="text-lg font-semibold mb-2">${feature.title}</h3><p class="text-sm">${feature.desc}</p>`;featuresContainer.appendChild(card)});const startCallBtn=document.getElementById('startCallBtn');const stopCallBtn=document.getElementById('stopCallBtn');const resetCallBtn=document.getElementById('resetCallBtn');const fullscreenBtn=document.getElementById('fullscreenBtn');const muteBtn=document.getElementById('muteBtn');const qualitySelect=document.getElementById('qualitySelect');const uiCheckbox=document.getElementById('uiCheckbox');const stereoCheckbox=document.getElementById('stereoCheckbox');const codecSelect=document.getElementById('codecSelect');const bitrateRange=document.getElementById('bitrateRange');const bitrateValue=document.getElementById('bitrateValue');const conferenceCheckbox=document.getElementById('conferenceCheckbox');const vdoFrame=document.getElementById('vdoFrame');const callContainer=document.getElementById('callContainer');const obsSection=document.getElementById('obsSection');const obsLink=document.getElementById('obsLink');const copyLinkBtn=document.getElementById('copyLinkBtn');const copyMessage=document.getElementById('copyMessage');const errorMessage=document.getElementById('errorMessage');const inviteSection=document.getElementById('inviteSection');const inviteLink=document.getElementById('inviteLink');const copyInviteBtn=document.getElementById('copyInviteBtn');const copyInviteMessage=document.getElementById('copyInviteMessage');const errorInviteMessage=document.getElementById('errorInviteMessage');const loadingOverlay=document.getElementById('loadingOverlay');const statusIndicator=document.getElementById('statusIndicator');const advancedSettingsToggle=document.getElementById('advancedSettingsToggle');const advancedSettingsPanel=document.getElementById('advancedSettingsPanel');const videoCallCard=document.getElementById('call');const audioDeviceSelect=document.getElementById('audioDeviceSelect');const videoDeviceSelect=document.getElementById('videoDeviceSelect');bitrateValue.textContent=`${bitrateRange.value} kbps`;advancedSettingsToggle.addEventListener('click',()=>{advancedSettingsPanel.classList.toggle('hidden');const icon=advancedSettingsToggle.querySelector('i');icon.classList.toggle('rotate-180')});bitrateRange.addEventListener('input',()=>{bitrateValue.textContent=`${bitrateRange.value} kbps`});if(navigator.mediaDevices&&navigator.mediaDevices.enumerateDevices){navigator.mediaDevices.enumerateDevices().then(devices=>{const audioDevices=devices.filter(device=>device.kind==='audioinput');const videoDevices=devices.filter(device=>device.kind==='videoinput');audioDeviceSelect.innerHTML='<option value="">دستگاه پیش‌فرض</option>';videoDeviceSelect.innerHTML='<option value="">دوربین پیش‌فرض</option>';audioDevices.forEach((device,index)=>{const option=document.createElement('option');option.value=device.deviceId;option.text=device.label||`میکروفون ${index+1}`;audioDeviceSelect.appendChild(option)});videoDevices.forEach((device,index)=>{const option=document.createElement('option');option.value=device.deviceId;option.text=device.label||`دوربین ${index+1}`;videoDeviceSelect.appendChild(option)})}).catch(err=>{console.warn('مشکل در دسترسی به دستگاه‌های ورودی/خروجی:',err)})}function generateRandomString(length=10){return Math.random().toString(36).substring(2,length+2)}function getParams(isViewer=false){let params=[];if(!isViewer){const quality=qualitySelect.value;if(quality)params.push(`height=${quality}`);const audioDevice=audioDeviceSelect.value;if(audioDevice)params.push(`audioinput=${audioDevice}`);const videoDevice=videoDeviceSelect.value;if(videoDevice)params.push(`videoinput=${videoDevice}`)}const codec=codecSelect.value;if(codec)params.push(`codec=${codec}`);const bitrate=bitrateRange.value;if(bitrate)params.push(`vb=${bitrate}`);if(stereoCheckbox.checked)params.push('stereo=1');if(uiCheckbox.checked)params.push('cleanoutput=1');return params.length?`&${params.join('&')}`:''}function updateUrlParams(baseUrl,newParams){if(!baseUrl)return'';try{const url=new URL(baseUrl,'https://live.remotevm.ir/');const searchParams=new URLSearchParams(url.search);for(const key of Array.from(searchParams.keys())){if(key!=='room'&&key!=='push'&&key!=='view'&&key!=='scene'){searchParams.delete(key)}}if(newParams){const paramsString=newParams.replace(/^&/,'');const newSearchParams=new URLSearchParams(paramsString);for(const[key,value]of newSearchParams){searchParams.set(key,value)}}url.search=searchParams.toString();return url.toString()}catch(error){console.error('خطا در بروزرسانی پارامترهای URL:',error);return baseUrl}}let currentID='';let isConference=false;let baseObsUrl='';let baseInviteUrl='';let baseIframeUrl='';let isIframeLoaded=false;let isMuted=false;let loadingTimer=null;function setupIframeLoadHandler(){if(loadingTimer){clearTimeout(loadingTimer);loadingTimer=null}vdoFrame.onload=null;vdoFrame.onload=function(){console.log('iframe loaded');isIframeLoaded=true;loadingOverlay.classList.add('hidden');if(loadingTimer){clearTimeout(loadingTimer);loadingTimer=null}};loadingTimer=setTimeout(()=>{console.log('loading timeout reached');if(!isIframeLoaded){isIframeLoaded=true;loadingOverlay.classList.add('hidden')}loadingTimer=null},8000)}function updateCallLinks(changedElement){if(!currentID)return;const isConferenceChange=changedElement===conferenceCheckbox;const newIsConference=conferenceCheckbox.checked;if((isConferenceChange&&newIsConference!==isConference)||changedElement===startCallBtn){isConference=newIsConference;if(isConference){baseIframeUrl=`https://live.remotevm.ir/?room=${currentID}`;baseObsUrl=`https://live.remotevm.ir/?room=${currentID}&scene=0`;baseInviteUrl=`https://live.remotevm.ir/?room=${currentID}`;inviteSection.classList.remove('hidden')}else{baseIframeUrl=`https://live.remotevm.ir/?push=${currentID}`;baseObsUrl=`https://live.remotevm.ir/?view=${currentID}`;baseInviteUrl='';inviteSection.classList.add('hidden')}loadingOverlay.classList.remove('hidden');isIframeLoaded=false;setupIframeLoadHandler();vdoFrame.src=updateUrlParams(baseIframeUrl,getParams());isMuted=false;muteBtn.innerHTML='<i class="fas fa-microphone mr-2 text-sm"></i>بی‌صدا'}obsLink.value=updateUrlParams(baseObsUrl,getParams(true));if(isConference){inviteLink.value=updateUrlParams(baseInviteUrl,'')}}startCallBtn.addEventListener('click',()=>{try{currentID=generateRandomString();baseObsUrl='';baseInviteUrl='';baseIframeUrl='';updateCallLinks(startCallBtn);callContainer.classList.remove('hidden');obsSection.classList.remove('hidden');startCallBtn.classList.add('hidden');stopCallBtn.classList.remove('hidden');resetCallBtn.classList.remove('hidden');fullscreenBtn.classList.remove('hidden');muteBtn.classList.remove('hidden');statusIndicator.classList.remove('status-inactive');statusIndicator.classList.add('status-active');videoCallCard.classList.add('active')}catch(error){console.error('خطا در شروع تماس:',error);errorMessage.textContent='خطا در شروع تماس. لطفاً دوباره تلاش کنید.';errorMessage.classList.remove('hidden');setTimeout(()=>errorMessage.classList.add('hidden'),3000)}});stopCallBtn.addEventListener('click',()=>{try{if(loadingTimer){clearTimeout(loadingTimer);loadingTimer=null}vdoFrame.src='';obsLink.value='';inviteLink.value='';loadingOverlay.classList.add('hidden');callContainer.classList.add('hidden');obsSection.classList.add('hidden');inviteSection.classList.add('hidden');startCallBtn.classList.remove('hidden');stopCallBtn.classList.add('hidden');resetCallBtn.classList.add('hidden');fullscreenBtn.classList.add('hidden');muteBtn.classList.add('hidden');statusIndicator.classList.add('status-inactive');statusIndicator.classList.remove('status-active');videoCallCard.classList.remove('active');currentID='';baseObsUrl='';baseInviteUrl='';baseIframeUrl='';isIframeLoaded=false;isMuted=false}catch(error){console.error('خطا در توقف تماس:',error)}});resetCallBtn.addEventListener('click',()=>{if(!currentID||!baseIframeUrl)return;try{loadingOverlay.classList.remove('hidden');isIframeLoaded=false;setupIframeLoadHandler();vdoFrame.src=updateUrlParams(baseIframeUrl,getParams());updateCallLinks(resetCallBtn);isMuted=false;muteBtn.innerHTML='<i class="fas fa-microphone mr-2 text-sm"></i>بی‌صدا'}catch(error){console.error('خطا در بازنشانی تماس:',error);errorMessage.textContent='خطا در بازنشانی تماس. لطفاً دوباره تلاش کنید.';errorMessage.classList.remove('hidden');setTimeout(()=>errorMessage.classList.add('hidden'),3000)}});fullscreenBtn.addEventListener('click',()=>{try{if(vdoFrame.requestFullscreen){vdoFrame.requestFullscreen()}else if(vdoFrame.mozRequestFullScreen){vdoFrame.mozRequestFullScreen()}else if(vdoFrame.webkitRequestFullscreen){vdoFrame.webkitRequestFullscreen()}else if(vdoFrame.msRequestFullscreen){vdoFrame.msRequestFullscreen()}}catch(error){console.error('خطا در ورود به حالت تمام‌صفحه:',error);errorMessage.textContent='خطا در نمایش تمام‌صفحه.';errorMessage.classList.remove('hidden');setTimeout(()=>errorMessage.classList.add('hidden'),3000)}});muteBtn.addEventListener('click',()=>{if(!isIframeLoaded){errorMessage.textContent='لطفاً صبر کنید تا ارتباط برقرار شود.';errorMessage.classList.remove('hidden');setTimeout(()=>errorMessage.classList.add('hidden'),3000);return}try{isMuted=!isMuted;muteBtn.innerHTML=isMuted?'<i class="fas fa-microphone-slash mr-2 text-sm"></i>باصدا':'<i class="fas fa-microphone mr-2 text-sm"></i>بی‌صدا';vdoFrame.contentWindow.postMessage({mute:isMuted},'https://live.remotevm.ir')}catch(err){console.error('خطا در تغییر وضعیت بی‌صدا:',err);errorMessage.textContent='خطا در تغییر وضعیت میکروفون.';errorMessage.classList.remove('hidden');setTimeout(()=>errorMessage.classList.add('hidden'),3000)}});copyLinkBtn.addEventListener('click',()=>{if(!obsLink.value)return;try{if(navigator.clipboard){navigator.clipboard.writeText(obsLink.value).then(()=>{copyMessage.textContent='لینک با موفقیت کپی شد!';copyMessage.classList.remove('hidden');setTimeout(()=>copyMessage.classList.add('hidden'),3000)}).catch(err=>{console.error('خطا در کپی لینک:',err);obsLink.select();document.execCommand('copy');copyMessage.textContent='لینک کپی شد!';copyMessage.classList.remove('hidden');setTimeout(()=>copyMessage.classList.add('hidden'),3000)})}else{obsLink.select();document.execCommand('copy');copyMessage.textContent='لینک کپی شد!';copyMessage.classList.remove('hidden');setTimeout(()=>copyMessage.classList.add('hidden'),3000)}}catch(err){console.error('خطا در کپی لینک:',err);errorMessage.textContent='خطا در کپی لینک.';errorMessage.classList.remove('hidden');setTimeout(()=>errorMessage.classList.add('hidden'),3000)}});copyInviteBtn.addEventListener('click',()=>{if(!inviteLink.value)return;try{if(navigator.clipboard){navigator.clipboard.writeText(inviteLink.value).then(()=>{copyInviteMessage.textContent='لینک دعوت با موفقیت کپی شد!';copyInviteMessage.classList.remove('hidden');setTimeout(()=>copyInviteMessage.classList.add('hidden'),3000)}).catch(err=>{console.error('خطا در کپی لینک دعوت:',err);inviteLink.select();document.execCommand('copy');copyInviteMessage.textContent='لینک دعوت کپی شد!';copyInviteMessage.classList.remove('hidden');setTimeout(()=>copyInviteMessage.classList.add('hidden'),3000)})}else{inviteLink.select();document.execCommand('copy');copyInviteMessage.textContent='لینک دعوت کپی شد!';copyInviteMessage.classList.remove('hidden');setTimeout(()=>copyInviteMessage.classList.add('hidden'),3000)}}catch(err){console.error('خطا در کپی لینک دعوت:',err);errorInviteMessage.textContent='خطا در کپی لینک دعوت.';errorInviteMessage.classList.remove('hidden');setTimeout(()=>errorInviteMessage.classList.add('hidden'),3000)}});[qualitySelect,codecSelect,bitrateRange,stereoCheckbox,uiCheckbox,conferenceCheckbox,audioDeviceSelect,videoDeviceSelect].forEach(element=>{element.addEventListener('change',()=>{updateCallLinks(element)})});window.addEventListener('message',(event)=>{if(event.origin!=='https://live.remotevm.ir')return;try{const data=event.data;if(data.connected===true){loadingOverlay.classList.add('hidden');isIframeLoaded=true;if(loadingTimer){clearTimeout(loadingTimer);loadingTimer=null}}else if(data.connected===false){errorMessage.textContent='ارتباط قطع شد. در حال تلاش مجدد...';errorMessage.classList.remove('hidden');setTimeout(()=>errorMessage.classList.add('hidden'),3000)}if(data.isMuted!==undefined){isMuted=data.isMuted;muteBtn.innerHTML=isMuted?'<i class="fas fa-microphone-slash mr-2 text-sm"></i>باصدا':'<i class="fas fa-microphone mr-2 text-sm"></i>بی‌صدا'}}catch(error){console.error('خطا در پردازش پیام از iframe:',error)}});});
+document.addEventListener('DOMContentLoaded',function(){const savedTheme=localStorage.getItem('theme')||'dark';if(savedTheme==='light'){document.body.classList.add('light-mode');document.getElementById('themeToggle').innerHTML='<i class="fas fa-sun"></i>'}const themeToggle=document.getElementById('themeToggle');themeToggle.addEventListener('click',()=>{document.body.classList.toggle('light-mode');const isLight=document.body.classList.contains('light-mode');localStorage.setItem('theme',isLight?'light':'dark');themeToggle.innerHTML=isLight?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>'});const menuToggle=document.getElementById('menu-toggle');const menuPanel=document.getElementById('menu-panel');const menuOverlay=document.getElementById('menu-overlay');const menuIcon=document.getElementById('menu-icon');menuToggle.addEventListener('click',()=>{const isActive=menuPanel.classList.contains('active');menuPanel.classList.toggle('active');menuOverlay.classList.toggle('hidden');menuIcon.className=isActive?'fas fa-bars':'fas fa-times';document.body.style.overflow=isActive?'auto':'hidden'});menuOverlay.addEventListener('click',()=>{menuPanel.classList.remove('active');menuOverlay.classList.add('hidden');menuIcon.className='fas fa-bars';document.body.style.overflow='auto'});const menuLinks=menuPanel.querySelectorAll('a');menuLinks.forEach(link=>{link.addEventListener('click',()=>{menuPanel.classList.remove('active');menuOverlay.classList.add('hidden');menuIcon.className='fas fa-bars';document.body.style.overflow='auto'})});setTimeout(()=>{document.getElementById('overlay').classList.add('hidden')},1500);const features=[{icon: 'fa-chalkboard-teacher', title: 'ساخت کلاس مجازی', desc: ' ساخت کلاس با چند کلیک.',url:'https://class.remotevm.ir'},{icon: 'fa-phone', title: 'تماس تصویری', desc: 'شروع تماس ویدیویی با چند کلیک.',url:'https://call.remotevm.ir'},{icon: 'fa-camera', title: 'انتقال تصویر دوربین موبایل', desc: 'دوربین موبایل را بدون نرم‌افزار به وب‌کم بی‌سیم تبدیل کنید.',url:'https://webcam.remotevm.ir'},{icon:'fa-video',title:'ویدیو با کیفیت بالا',desc:'انتقال ویدیو با رزولوشن بالا بدون تاخیر.' ,},{icon:'fa-microphone',title:'صدا استریو',desc:'صدای شفاف و با کیفیت استریو.'},{icon:'fa-users',title:' ویدیو کنفرانس ',desc:'جلسات گروهی با چندین شرکت‌کننده.'},{icon:'fa-lock',title:'امنیت بالا',desc:'رمزنگاری end-to-end برای حفظ حریم خصوصی.'},{icon:'fa-mobile-alt',title:'سازگار با موبایل',desc:'پشتیبانی کامل از دستگاه‌های موبایل.'},{icon:'fa-cloud',title:'ارتباط P2P',desc:'بدون نیاز به نصب نرم‌افزار.'}];const featuresContainer=document.getElementById('featuresContainer');featuresContainer.innerHTML='';features.forEach(feature=>{const card=document.createElement('div');card.className='feature-card';let content=`<i class="fas ${feature.icon} text-3xl mb-4" style="color:var(--neon-blue);"></i><h3 class="text-lg font-semibold mb-2">${feature.title}</h3><p class="text-sm">${feature.desc}</p>`;if(feature.url){card.classList.add('featured');card.classList.add('clickable');content=`<a href="${feature.url}" target="_blank" rel="noopener noreferrer">${content}</a>`;}card.innerHTML=content;featuresContainer.appendChild(card)});const startCallBtn=document.getElementById('startCallBtn');const stopCallBtn=document.getElementById('stopCallBtn');const resetCallBtn=document.getElementById('resetCallBtn');const fullscreenBtn=document.getElementById('fullscreenBtn');const muteBtn=document.getElementById('muteBtn');const qualitySelect=document.getElementById('qualitySelect');const uiCheckbox=document.getElementById('uiCheckbox');const stereoCheckbox=document.getElementById('stereoCheckbox');const codecSelect=document.getElementById('codecSelect');const bitrateRange=document.getElementById('bitrateRange');const bitrateValue=document.getElementById('bitrateValue');const conferenceCheckbox=document.getElementById('conferenceCheckbox');const vdoFrame=document.getElementById('vdoFrame');const callContainer=document.getElementById('callContainer');const obsSection=document.getElementById('obsSection');const obsLink=document.getElementById('obsLink');const copyLinkBtn=document.getElementById('copyLinkBtn');const copyMessage=document.getElementById('copyMessage');const errorMessage=document.getElementById('errorMessage');const inviteSection=document.getElementById('inviteSection');const inviteLink=document.getElementById('inviteLink');const copyInviteBtn=document.getElementById('copyInviteBtn');const copyInviteMessage=document.getElementById('copyInviteMessage');const errorInviteMessage=document.getElementById('errorInviteMessage');const loadingOverlay=document.getElementById('loadingOverlay');const statusIndicator=document.getElementById('statusIndicator');const advancedSettingsToggle=document.getElementById('advancedSettingsToggle');const advancedSettingsPanel=document.getElementById('advancedSettingsPanel');const videoCallCard=document.getElementById('call');const audioDeviceSelect=document.getElementById('audioDeviceSelect');const videoDeviceSelect=document.getElementById('videoDeviceSelect');bitrateValue.textContent=`${bitrateRange.value} kbps`;advancedSettingsToggle.addEventListener('click',()=>{advancedSettingsPanel.classList.toggle('hidden');const icon=advancedSettingsToggle.querySelector('i');icon.classList.toggle('rotate-180')});bitrateRange.addEventListener('input',()=>{bitrateValue.textContent=`${bitrateRange.value} kbps`});if(navigator.mediaDevices&&navigator.mediaDevices.enumerateDevices){navigator.mediaDevices.enumerateDevices().then(devices=>{const audioDevices=devices.filter(device=>device.kind==='audioinput');const videoDevices=devices.filter(device=>device.kind==='videoinput');audioDeviceSelect.innerHTML='<option value="">دستگاه پیش‌فرض</option>';videoDeviceSelect.innerHTML='<option value="">دوربین پیش‌فرض</option>';audioDevices.forEach((device,index)=>{const option=document.createElement('option');option.value=device.deviceId;option.text=device.label||`میکروفون ${index+1}`;audioDeviceSelect.appendChild(option)});videoDevices.forEach((device,index)=>{const option=document.createElement('option');option.value=device.deviceId;option.text=device.label||`دوربین ${index+1}`;videoDeviceSelect.appendChild(option)})}).catch(err=>{console.warn('مشکل در دسترسی به دستگاه‌های ورودی/خروجی:',err)})}function generateRandomString(length=10){return Math.random().toString(36).substring(2,length+2)}function getParams(isViewer=false){let params=[];if(!isViewer){const quality=qualitySelect.value;if(quality)params.push(`height=${quality}`);const audioDevice=audioDeviceSelect.value;if(audioDevice)params.push(`audioinput=${audioDevice}`);const videoDevice=videoDeviceSelect.value;if(videoDevice)params.push(`videoinput=${videoDevice}`)}const codec=codecSelect.value;if(codec)params.push(`codec=${codec}`);const bitrate=bitrateRange.value;if(bitrate)params.push(`vb=${bitrate}`);if(stereoCheckbox.checked)params.push('stereo=1');if(uiCheckbox.checked)params.push('cleanoutput=1');return params.length?`&${params.join('&')}`:''}function updateUrlParams(baseUrl,newParams){if(!baseUrl)return'';try{const url=new URL(baseUrl,'https://live.remotevm.ir/');const searchParams=new URLSearchParams(url.search);for(const key of Array.from(searchParams.keys())){if(key!=='room'&&key!=='push'&&key!=='view'&&key!=='scene'){searchParams.delete(key)}}if(newParams){const paramsString=newParams.replace(/^&/,'');const newSearchParams=new URLSearchParams(paramsString);for(const[key,value]of newSearchParams){searchParams.set(key,value)}}url.search=searchParams.toString();return url.toString()}catch(error){console.error('خطا در بروزرسانی پارامترهای URL:',error);return baseUrl}}let currentID='';let isConference=false;let baseObsUrl='';let baseInviteUrl='';let baseIframeUrl='';let isIframeLoaded=false;let isMuted=false;let loadingTimer=null;function setupIframeLoadHandler(){if(loadingTimer){clearTimeout(loadingTimer);loadingTimer=null}vdoFrame.onload=null;vdoFrame.onload=function(){console.log('iframe loaded');isIframeLoaded=true;loadingOverlay.classList.add('hidden');if(loadingTimer){clearTimeout(loadingTimer);loadingTimer=null}};loadingTimer=setTimeout(()=>{console.log('loading timeout reached');if(!isIframeLoaded){isIframeLoaded=true;loadingOverlay.classList.add('hidden')}loadingTimer=null},10000)}function updateCallLinks(changedElement, isStart=false){if(!currentID)return;const isConferenceChange=changedElement===conferenceCheckbox;const newIsConference=conferenceCheckbox.checked;if((isConferenceChange&&newIsConference!==isConference)||isStart){isConference=newIsConference;if(isConference){baseIframeUrl=`https://live.remotevm.ir/?room=${currentID}`;baseObsUrl=`https://live.remotevm.ir/?room=${currentID}&scene=0`;baseInviteUrl=`https://live.remotevm.ir/?room=${currentID}`;inviteSection.classList.remove('hidden')}else{baseIframeUrl=`https://live.remotevm.ir/?push=${currentID}`;baseObsUrl=`https://live.remotevm.ir/?view=${currentID}`;baseInviteUrl='';inviteSection.classList.add('hidden')}if(isStart){loadingOverlay.classList.remove('hidden');isIframeLoaded=false;setupIframeLoadHandler();vdoFrame.src=updateUrlParams(baseIframeUrl,getParams());}isMuted=false;muteBtn.innerHTML='<i class="fas fa-microphone mr-2 text-sm"></i>بی‌صدا'}obsLink.value=updateUrlParams(baseObsUrl,getParams(true));if(isConference){inviteLink.value=updateUrlParams(baseInviteUrl,'')}}startCallBtn.addEventListener('click',()=>{try{currentID=generateRandomString();baseObsUrl='';baseInviteUrl='';baseIframeUrl='';callContainer.classList.remove('hidden');loadingOverlay.classList.remove('hidden');obsSection.classList.remove('hidden');updateCallLinks(startCallBtn, true);startCallBtn.classList.add('hidden');stopCallBtn.classList.remove('hidden');resetCallBtn.classList.remove('hidden');fullscreenBtn.classList.remove('hidden');muteBtn.classList.remove('hidden');statusIndicator.classList.remove('status-inactive');statusIndicator.classList.add('status-active');videoCallCard.classList.add('active')}catch(error){console.error('خطا در شروع تماس:',error);errorMessage.textContent='خطا در شروع تماس. لطفاً دوباره تلاش کنید.';errorMessage.classList.remove('hidden');setTimeout(()=>errorMessage.classList.add('hidden'),3000)}});stopCallBtn.addEventListener('click',()=>{try{if(loadingTimer){clearTimeout(loadingTimer);loadingTimer=null}vdoFrame.src='';obsLink.value='';inviteLink.value='';loadingOverlay.classList.add('hidden');callContainer.classList.add('hidden');obsSection.classList.add('hidden');inviteSection.classList.add('hidden');startCallBtn.classList.remove('hidden');stopCallBtn.classList.add('hidden');resetCallBtn.classList.add('hidden');fullscreenBtn.classList.add('hidden');muteBtn.classList.add('hidden');statusIndicator.classList.add('status-inactive');statusIndicator.classList.remove('status-active');videoCallCard.classList.remove('active');currentID='';baseObsUrl='';baseInviteUrl='';baseIframeUrl='';isIframeLoaded=false;isMuted=false}catch(error){console.error('خطا در توقف تماس:',error)}});resetCallBtn.addEventListener('click',()=>{if(!currentID||!baseIframeUrl)return;try{loadingOverlay.classList.remove('hidden');isIframeLoaded=false;setupIframeLoadHandler();vdoFrame.src=updateUrlParams(baseIframeUrl,getParams());updateCallLinks(resetCallBtn);isMuted=false;muteBtn.innerHTML='<i class="fas fa-microphone mr-2 text-sm"></i>بی‌صدا'}catch(error){console.error('خطا در بازنشانی تماس:',error);errorMessage.textContent='خطا در بازنشانی تماس. لطفاً دوباره تلاش کنید.';errorMessage.classList.remove('hidden');setTimeout(()=>errorMessage.classList.add('hidden'),3000)}});fullscreenBtn.addEventListener('click',()=>{try{if(vdoFrame.requestFullscreen){vdoFrame.requestFullscreen()}else if(vdoFrame.mozRequestFullScreen){vdoFrame.mozRequestFullScreen()}else if(vdoFrame.webkitRequestFullscreen){vdoFrame.webkitRequestFullscreen()}else if(vdoFrame.msRequestFullscreen){vdoFrame.msRequestFullscreen()}}catch(error){console.error('خطا در ورود به حالت تمام‌صفحه:',error);errorMessage.textContent='خطا در نمایش تمام‌صفحه.';errorMessage.classList.remove('hidden');setTimeout(()=>errorMessage.classList.add('hidden'),3000)}});muteBtn.addEventListener('click',()=>{if(!isIframeLoaded){errorMessage.textContent='لطفاً صبر کنید تا ارتباط برقرار شود.';errorMessage.classList.remove('hidden');setTimeout(()=>errorMessage.classList.add('hidden'),3000);return}try{isMuted=!isMuted;muteBtn.innerHTML=isMuted?'<i class="fas fa-microphone-slash mr-2 text-sm"></i>باصدا':'<i class="fas fa-microphone mr-2 text-sm"></i>بی‌صدا';vdoFrame.contentWindow.postMessage({mute:isMuted},'https://live.remotevm.ir')}catch(err){console.error('خطا در تغییر وضعیت بی‌صدا:',err);errorMessage.textContent='خطا در تغییر وضعیت میکروفون.';errorMessage.classList.remove('hidden');setTimeout(()=>errorMessage.classList.add('hidden'),3000)}});copyLinkBtn.addEventListener('click',()=>{if(!obsLink.value)return;try{if(navigator.clipboard){navigator.clipboard.writeText(obsLink.value).then(()=>{copyMessage.textContent='لینک با موفقیت کپی شد!';copyMessage.classList.remove('hidden');setTimeout(()=>copyMessage.classList.add('hidden'),3000)}).catch(err=>{console.error('خطا در کپی لینک:',err);obsLink.select();document.execCommand('copy');copyMessage.textContent='لینک کپی شد!';copyMessage.classList.remove('hidden');setTimeout(()=>copyMessage.classList.add('hidden'),3000)})}else{obsLink.select();document.execCommand('copy');copyMessage.textContent='لینک کپی شد!';copyMessage.classList.remove('hidden');setTimeout(()=>copyMessage.classList.add('hidden'),3000)}}catch(err){console.error('خطا در کپی لینک:',err);errorMessage.textContent='خطا در کپی لینک.';errorMessage.classList.remove('hidden');setTimeout(()=>errorMessage.classList.add('hidden'),3000)}});copyInviteBtn.addEventListener('click',()=>{if(!inviteLink.value)return;try{if(navigator.clipboard){navigator.clipboard.writeText(inviteLink.value).then(()=>{copyInviteMessage.textContent='لینک دعوت با موفقیت کپی شد!';copyInviteMessage.classList.remove('hidden');setTimeout(()=>copyInviteMessage.classList.add('hidden'),3000)}).catch(err=>{console.error('خطا در کپی لینک دعوت:',err);inviteLink.select();document.execCommand('copy');copyInviteMessage.textContent='لینک دعوت کپی شد!';copyInviteMessage.classList.remove('hidden');setTimeout(()=>copyInviteMessage.classList.add('hidden'),3000)})}else{inviteLink.select();document.execCommand('copy');copyInviteMessage.textContent='لینک دعوت کپی شد!';copyInviteMessage.classList.remove('hidden');setTimeout(()=>copyInviteMessage.classList.add('hidden'),3000)}}catch(err){console.error('خطا در کپی لینک دعوت:',err);errorInviteMessage.textContent='خطا در کپی لینک دعوت.';errorInviteMessage.classList.remove('hidden');setTimeout(()=>errorInviteMessage.classList.add('hidden'),3000)}});[qualitySelect,codecSelect,bitrateRange,stereoCheckbox,uiCheckbox,conferenceCheckbox,audioDeviceSelect,videoDeviceSelect].forEach(element=>{element.addEventListener('change',()=>{updateCallLinks(element)})});window.addEventListener('message',(event)=>{if(event.origin!=='https://live.remotevm.ir')return;try{const data=event.data;if(data.connected===true){loadingOverlay.classList.add('hidden');isIframeLoaded=true;if(loadingTimer){clearTimeout(loadingTimer);loadingTimer=null}}else if(data.connected===false){errorMessage.textContent='ارتباط قطع شد. در حال تلاش مجدد...';errorMessage.classList.remove('hidden');setTimeout(()=>errorMessage.classList.add('hidden'),3000)}if(data.isMuted!==undefined){isMuted=data.isMuted;muteBtn.innerHTML=isMuted?'<i class="fas fa-microphone-slash mr-2 text-sm"></i>باصدا':'<i class="fas fa-microphone mr-2 text-sm"></i>بی‌صدا'}}catch(error){console.error('خطا در پردازش پیام از iframe:',error)}});});
 </script>
 <script async src="https://cdn.tailwindcss.com"></script>
 </body>
