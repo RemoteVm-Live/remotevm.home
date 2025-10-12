@@ -182,7 +182,7 @@
         background: var(--card-bg);
         border-radius: 1.3rem;
         padding: clamp(1rem, 3vw, 1.5rem);
-   
+        border: 1px solid var(--neon-blue);
         box-shadow: 0 0 1px rgba(0, 191, 255, 0.5), 0 4px 20px rgba(0, 191, 255, 0.25);
         text-align: center;
         transition: transform 0.3s, box-shadow 0.3s;
@@ -203,26 +203,6 @@
     .feature-card.clickable:hover {
         transform: translateY(-4px) scale(1.02);
         box-shadow: 0 8px 24px rgba(0, 191, 255, 0.6);
-    }
-    .feature-card.featured {
-        background: linear-gradient(135deg, #0143a09f, #02214b9f);
-        border: 2px solid var(--neon-blue);
-        box-shadow: 0 0 1px rgba(0, 191, 255, 0.5), 0 4px 20px rgba(4, 192, 255, 0.25);
-    }
-    body.light-mode .feature-card.featured {
-        background: linear-gradient(135deg, #dcfce7, #bbf7d0);
-        border: 1px solid var(--neon-blue);
-        box-shadow: 0 4px 20px rgba(34, 197, 94, 0.2);
-    }
-    .feature-card.featured:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 24px rgba(1, 204, 255, 0.5);
-        animation: pulse-glow-success 2s infinite;
-    }
-    @keyframes pulse-glow-success {
-        0% { box-shadow: 0 4px 20px rgba(34, 165, 197, 0.25); }
-        50% { box-shadow: 0 8px 40px rgba(34, 186, 197, 0.5); }
-        100% { box-shadow: 0 4px 15px rgba(5, 23, 190, 0.25); }
     }
     .feature-card a {
         color: inherit;
@@ -250,9 +230,9 @@
         100% { box-shadow: 0 0 0 0 rgba(0, 191, 255, 0); }
     }
     @keyframes pulse-glow {
-        0% { box-shadow: 0 4px 10px rgba(0, 191, 255, 0.25); }
-        50% { box-shadow: 0 8px 50px rgba(0, 204, 255, 0.555); }
-        100% { box-shadow: 0 4px 10px rgba(0, 191, 255, 0.25); }
+        0% { box-shadow: 0 4px 20px rgba(0, 191, 255, 0.25); }
+        50% { box-shadow: 0 8px 30px rgba(0, 191, 255, 0.5); }
+        100% { box-shadow: 0 4px 20px rgba(0, 191, 255, 0.25); }
     }
     .tooltip {
         position: relative;
@@ -885,9 +865,9 @@
         <div class="mb-5">
             <label for="qualitySelect" class="block font-medium mb-2">کیفیت ویدیو:</label>
             <select id="qualitySelect" class="w-full">
-                <option value="480">480p</option>
-                <option value="720" selected>720p (پیش‌فرض) </option>
-                <option value="1080" >1080p </option>
+                <option value="2">480p</option>
+                <option value="1" selected>720p (پیش‌فرض) </option>
+                <option value="0" >1080p </option>
             </select>
         </div>
         <div class="flex items-center justify-between mb-6 p-2 rounded-lg">
@@ -998,7 +978,7 @@
         </section>
     </section>
     <section id="features" class="mb-12">
-        <h2 class="text-xl md:text-2xl text-center mb-8">ویژگی‌ها و قابلیت‌ها</h2>
+        <h2 class="text-xl md:text-2xl text-center mb-8">ویژگی‌های RemoteVM</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" id="featuresContainer"></div>
     </section>
     <section id="about" class="text-center">
@@ -1017,7 +997,560 @@
     </div>
 </footer>
 <script defer>
-document.addEventListener('DOMContentLoaded',function(){const savedTheme=localStorage.getItem('theme')||'dark';if(savedTheme==='light'){document.body.classList.add('light-mode');document.getElementById('themeToggle').innerHTML='<i class="fas fa-sun"></i>'}const themeToggle=document.getElementById('themeToggle');themeToggle.addEventListener('click',()=>{document.body.classList.toggle('light-mode');const isLight=document.body.classList.contains('light-mode');localStorage.setItem('theme',isLight?'light':'dark');themeToggle.innerHTML=isLight?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>'});const menuToggle=document.getElementById('menu-toggle');const menuPanel=document.getElementById('menu-panel');const menuOverlay=document.getElementById('menu-overlay');const menuIcon=document.getElementById('menu-icon');menuToggle.addEventListener('click',()=>{const isActive=menuPanel.classList.contains('active');menuPanel.classList.toggle('active');menuOverlay.classList.toggle('hidden');menuIcon.className=isActive?'fas fa-bars':'fas fa-times';document.body.style.overflow=isActive?'auto':'hidden'});menuOverlay.addEventListener('click',()=>{menuPanel.classList.remove('active');menuOverlay.classList.add('hidden');menuIcon.className='fas fa-bars';document.body.style.overflow='auto'});const menuLinks=menuPanel.querySelectorAll('a');menuLinks.forEach(link=>{link.addEventListener('click',()=>{menuPanel.classList.remove('active');menuOverlay.classList.add('hidden');menuIcon.className='fas fa-bars';document.body.style.overflow='auto'})});setTimeout(()=>{document.getElementById('overlay').classList.add('hidden')},1500);const features=[{icon: 'fa-chalkboard-teacher', title: 'ساخت کلاس مجازی', desc: ' ساخت کلاس با چند کلیک.',url:'https://class.remotevm.ir'},{icon: 'fa-phone', title: 'تماس تصویری', desc: 'شروع تماس ویدیویی با چند کلیک.',url:'https://call.remotevm.ir'},{icon: 'fa-camera', title: 'انتقال تصویر دوربین موبایل', desc: 'دوربین موبایل را بدون نرم‌افزار به وب‌کم بی‌سیم تبدیل کنید.',url:'https://webcam.remotevm.ir'},{icon:'fa-video',title:'ویدیو با کیفیت بالا',desc:'انتقال ویدیو با رزولوشن بالا بدون تاخیر.' ,},{icon:'fa-microphone',title:'صدا استریو',desc:'صدای شفاف و با کیفیت استریو.'},{icon:'fa-users',title:' ویدیو کنفرانس ',desc:'جلسات گروهی با چندین شرکت‌کننده.'},{icon:'fa-lock',title:'امنیت بالا',desc:'رمزنگاری end-to-end برای حفظ حریم خصوصی.'},{icon:'fa-mobile-alt',title:'سازگار با موبایل',desc:'پشتیبانی کامل از دستگاه‌های موبایل.'},{icon:'fa-cloud',title:'ارتباط P2P',desc:'بدون نیاز به نصب نرم‌افزار.'}];const featuresContainer=document.getElementById('featuresContainer');featuresContainer.innerHTML='';features.forEach(feature=>{const card=document.createElement('div');card.className='feature-card';let content=`<i class="fas ${feature.icon} text-3xl mb-4" style="color:var(--neon-blue);"></i><h3 class="text-lg font-semibold mb-2">${feature.title}</h3><p class="text-sm">${feature.desc}</p>`;if(feature.url){card.classList.add('featured');card.classList.add('clickable');content=`<a href="${feature.url}" target="_blank" rel="noopener noreferrer">${content}</a>`;}card.innerHTML=content;featuresContainer.appendChild(card)});const startCallBtn=document.getElementById('startCallBtn');const stopCallBtn=document.getElementById('stopCallBtn');const resetCallBtn=document.getElementById('resetCallBtn');const fullscreenBtn=document.getElementById('fullscreenBtn');const muteBtn=document.getElementById('muteBtn');const qualitySelect=document.getElementById('qualitySelect');const uiCheckbox=document.getElementById('uiCheckbox');const stereoCheckbox=document.getElementById('stereoCheckbox');const codecSelect=document.getElementById('codecSelect');const bitrateRange=document.getElementById('bitrateRange');const bitrateValue=document.getElementById('bitrateValue');const conferenceCheckbox=document.getElementById('conferenceCheckbox');const vdoFrame=document.getElementById('vdoFrame');const callContainer=document.getElementById('callContainer');const obsSection=document.getElementById('obsSection');const obsLink=document.getElementById('obsLink');const copyLinkBtn=document.getElementById('copyLinkBtn');const copyMessage=document.getElementById('copyMessage');const errorMessage=document.getElementById('errorMessage');const inviteSection=document.getElementById('inviteSection');const inviteLink=document.getElementById('inviteLink');const copyInviteBtn=document.getElementById('copyInviteBtn');const copyInviteMessage=document.getElementById('copyInviteMessage');const errorInviteMessage=document.getElementById('errorInviteMessage');const loadingOverlay=document.getElementById('loadingOverlay');const statusIndicator=document.getElementById('statusIndicator');const advancedSettingsToggle=document.getElementById('advancedSettingsToggle');const advancedSettingsPanel=document.getElementById('advancedSettingsPanel');const videoCallCard=document.getElementById('call');const audioDeviceSelect=document.getElementById('audioDeviceSelect');const videoDeviceSelect=document.getElementById('videoDeviceSelect');bitrateValue.textContent=`${bitrateRange.value} kbps`;advancedSettingsToggle.addEventListener('click',()=>{advancedSettingsPanel.classList.toggle('hidden');const icon=advancedSettingsToggle.querySelector('i');icon.classList.toggle('rotate-180')});bitrateRange.addEventListener('input',()=>{bitrateValue.textContent=`${bitrateRange.value} kbps`});if(navigator.mediaDevices&&navigator.mediaDevices.enumerateDevices){navigator.mediaDevices.enumerateDevices().then(devices=>{const audioDevices=devices.filter(device=>device.kind==='audioinput');const videoDevices=devices.filter(device=>device.kind==='videoinput');audioDeviceSelect.innerHTML='<option value="">دستگاه پیش‌فرض</option>';videoDeviceSelect.innerHTML='<option value="">دوربین پیش‌فرض</option>';audioDevices.forEach((device,index)=>{const option=document.createElement('option');option.value=device.deviceId;option.text=device.label||`میکروفون ${index+1}`;audioDeviceSelect.appendChild(option)});videoDevices.forEach((device,index)=>{const option=document.createElement('option');option.value=device.deviceId;option.text=device.label||`دوربین ${index+1}`;videoDeviceSelect.appendChild(option)})}).catch(err=>{console.warn('مشکل در دسترسی به دستگاه‌های ورودی/خروجی:',err)})}function generateRandomString(length=10){return Math.random().toString(36).substring(2,length+2)}function getParams(isViewer=false){let params=[];if(!isViewer){const quality=qualitySelect.value;if(quality)params.push(`height=${quality}`);const audioDevice=audioDeviceSelect.value;if(audioDevice)params.push(`audioinput=${audioDevice}`);const videoDevice=videoDeviceSelect.value;if(videoDevice)params.push(`videoinput=${videoDevice}`)}const codec=codecSelect.value;if(codec)params.push(`codec=${codec}`);const bitrate=bitrateRange.value;if(bitrate)params.push(`vb=${bitrate}`);if(stereoCheckbox.checked)params.push('stereo=1');if(uiCheckbox.checked)params.push('cleanoutput=1');return params.length?`&${params.join('&')}`:''}function updateUrlParams(baseUrl,newParams){if(!baseUrl)return'';try{const url=new URL(baseUrl,'https://live.remotevm.ir/');const searchParams=new URLSearchParams(url.search);for(const key of Array.from(searchParams.keys())){if(key!=='room'&&key!=='push'&&key!=='view'&&key!=='scene'){searchParams.delete(key)}}if(newParams){const paramsString=newParams.replace(/^&/,'');const newSearchParams=new URLSearchParams(paramsString);for(const[key,value]of newSearchParams){searchParams.set(key,value)}}url.search=searchParams.toString();return url.toString()}catch(error){console.error('خطا در بروزرسانی پارامترهای URL:',error);return baseUrl}}let currentID='';let isConference=false;let baseObsUrl='';let baseInviteUrl='';let baseIframeUrl='';let isIframeLoaded=false;let isMuted=false;let loadingTimer=null;function setupIframeLoadHandler(){if(loadingTimer){clearTimeout(loadingTimer);loadingTimer=null}vdoFrame.onload=null;vdoFrame.onload=function(){console.log('iframe loaded');isIframeLoaded=true;loadingOverlay.classList.add('hidden');if(loadingTimer){clearTimeout(loadingTimer);loadingTimer=null}};loadingTimer=setTimeout(()=>{console.log('loading timeout reached');if(!isIframeLoaded){isIframeLoaded=true;loadingOverlay.classList.add('hidden')}loadingTimer=null},10000)}function updateCallLinks(changedElement, isStart=false){if(!currentID)return;const isConferenceChange=changedElement===conferenceCheckbox;const newIsConference=conferenceCheckbox.checked;if((isConferenceChange&&newIsConference!==isConference)||isStart){isConference=newIsConference;if(isConference){baseIframeUrl=`https://live.remotevm.ir/?room=${currentID}`;baseObsUrl=`https://live.remotevm.ir/?room=${currentID}&scene=0`;baseInviteUrl=`https://live.remotevm.ir/?room=${currentID}`;inviteSection.classList.remove('hidden')}else{baseIframeUrl=`https://live.remotevm.ir/?push=${currentID}`;baseObsUrl=`https://live.remotevm.ir/?view=${currentID}`;baseInviteUrl='';inviteSection.classList.add('hidden')}if(isStart){loadingOverlay.classList.remove('hidden');isIframeLoaded=false;setupIframeLoadHandler();vdoFrame.src=updateUrlParams(baseIframeUrl,getParams());}isMuted=false;muteBtn.innerHTML='<i class="fas fa-microphone mr-2 text-sm"></i>بی‌صدا'}obsLink.value=updateUrlParams(baseObsUrl,getParams(true));if(isConference){inviteLink.value=updateUrlParams(baseInviteUrl,'')}}startCallBtn.addEventListener('click',()=>{try{currentID=generateRandomString();baseObsUrl='';baseInviteUrl='';baseIframeUrl='';callContainer.classList.remove('hidden');loadingOverlay.classList.remove('hidden');obsSection.classList.remove('hidden');updateCallLinks(startCallBtn, true);startCallBtn.classList.add('hidden');stopCallBtn.classList.remove('hidden');resetCallBtn.classList.remove('hidden');fullscreenBtn.classList.remove('hidden');muteBtn.classList.remove('hidden');statusIndicator.classList.remove('status-inactive');statusIndicator.classList.add('status-active');videoCallCard.classList.add('active')}catch(error){console.error('خطا در شروع تماس:',error);errorMessage.textContent='خطا در شروع تماس. لطفاً دوباره تلاش کنید.';errorMessage.classList.remove('hidden');setTimeout(()=>errorMessage.classList.add('hidden'),3000)}});stopCallBtn.addEventListener('click',()=>{try{if(loadingTimer){clearTimeout(loadingTimer);loadingTimer=null}vdoFrame.src='';obsLink.value='';inviteLink.value='';loadingOverlay.classList.add('hidden');callContainer.classList.add('hidden');obsSection.classList.add('hidden');inviteSection.classList.add('hidden');startCallBtn.classList.remove('hidden');stopCallBtn.classList.add('hidden');resetCallBtn.classList.add('hidden');fullscreenBtn.classList.add('hidden');muteBtn.classList.add('hidden');statusIndicator.classList.add('status-inactive');statusIndicator.classList.remove('status-active');videoCallCard.classList.remove('active');currentID='';baseObsUrl='';baseInviteUrl='';baseIframeUrl='';isIframeLoaded=false;isMuted=false}catch(error){console.error('خطا در توقف تماس:',error)}});resetCallBtn.addEventListener('click',()=>{if(!currentID||!baseIframeUrl)return;try{loadingOverlay.classList.remove('hidden');isIframeLoaded=false;setupIframeLoadHandler();vdoFrame.src=updateUrlParams(baseIframeUrl,getParams());updateCallLinks(resetCallBtn);isMuted=false;muteBtn.innerHTML='<i class="fas fa-microphone mr-2 text-sm"></i>بی‌صدا'}catch(error){console.error('خطا در بازنشانی تماس:',error);errorMessage.textContent='خطا در بازنشانی تماس. لطفاً دوباره تلاش کنید.';errorMessage.classList.remove('hidden');setTimeout(()=>errorMessage.classList.add('hidden'),3000)}});fullscreenBtn.addEventListener('click',()=>{try{if(vdoFrame.requestFullscreen){vdoFrame.requestFullscreen()}else if(vdoFrame.mozRequestFullScreen){vdoFrame.mozRequestFullScreen()}else if(vdoFrame.webkitRequestFullscreen){vdoFrame.webkitRequestFullscreen()}else if(vdoFrame.msRequestFullscreen){vdoFrame.msRequestFullscreen()}}catch(error){console.error('خطا در ورود به حالت تمام‌صفحه:',error);errorMessage.textContent='خطا در نمایش تمام‌صفحه.';errorMessage.classList.remove('hidden');setTimeout(()=>errorMessage.classList.add('hidden'),3000)}});muteBtn.addEventListener('click',()=>{if(!isIframeLoaded){errorMessage.textContent='لطفاً صبر کنید تا ارتباط برقرار شود.';errorMessage.classList.remove('hidden');setTimeout(()=>errorMessage.classList.add('hidden'),3000);return}try{isMuted=!isMuted;muteBtn.innerHTML=isMuted?'<i class="fas fa-microphone-slash mr-2 text-sm"></i>باصدا':'<i class="fas fa-microphone mr-2 text-sm"></i>بی‌صدا';vdoFrame.contentWindow.postMessage({mute:isMuted},'https://live.remotevm.ir')}catch(err){console.error('خطا در تغییر وضعیت بی‌صدا:',err);errorMessage.textContent='خطا در تغییر وضعیت میکروفون.';errorMessage.classList.remove('hidden');setTimeout(()=>errorMessage.classList.add('hidden'),3000)}});copyLinkBtn.addEventListener('click',()=>{if(!obsLink.value)return;try{if(navigator.clipboard){navigator.clipboard.writeText(obsLink.value).then(()=>{copyMessage.textContent='لینک با موفقیت کپی شد!';copyMessage.classList.remove('hidden');setTimeout(()=>copyMessage.classList.add('hidden'),3000)}).catch(err=>{console.error('خطا در کپی لینک:',err);obsLink.select();document.execCommand('copy');copyMessage.textContent='لینک کپی شد!';copyMessage.classList.remove('hidden');setTimeout(()=>copyMessage.classList.add('hidden'),3000)})}else{obsLink.select();document.execCommand('copy');copyMessage.textContent='لینک کپی شد!';copyMessage.classList.remove('hidden');setTimeout(()=>copyMessage.classList.add('hidden'),3000)}}catch(err){console.error('خطا در کپی لینک:',err);errorMessage.textContent='خطا در کپی لینک.';errorMessage.classList.remove('hidden');setTimeout(()=>errorMessage.classList.add('hidden'),3000)}});copyInviteBtn.addEventListener('click',()=>{if(!inviteLink.value)return;try{if(navigator.clipboard){navigator.clipboard.writeText(inviteLink.value).then(()=>{copyInviteMessage.textContent='لینک دعوت با موفقیت کپی شد!';copyInviteMessage.classList.remove('hidden');setTimeout(()=>copyInviteMessage.classList.add('hidden'),3000)}).catch(err=>{console.error('خطا در کپی لینک دعوت:',err);inviteLink.select();document.execCommand('copy');copyInviteMessage.textContent='لینک دعوت کپی شد!';copyInviteMessage.classList.remove('hidden');setTimeout(()=>copyInviteMessage.classList.add('hidden'),3000)})}else{inviteLink.select();document.execCommand('copy');copyInviteMessage.textContent='لینک دعوت کپی شد!';copyInviteMessage.classList.remove('hidden');setTimeout(()=>copyInviteMessage.classList.add('hidden'),3000)}}catch(err){console.error('خطا در کپی لینک دعوت:',err);errorInviteMessage.textContent='خطا در کپی لینک دعوت.';errorInviteMessage.classList.remove('hidden');setTimeout(()=>errorInviteMessage.classList.add('hidden'),3000)}});[qualitySelect,codecSelect,bitrateRange,stereoCheckbox,uiCheckbox,conferenceCheckbox,audioDeviceSelect,videoDeviceSelect].forEach(element=>{element.addEventListener('change',()=>{updateCallLinks(element)})});window.addEventListener('message',(event)=>{if(event.origin!=='https://live.remotevm.ir')return;try{const data=event.data;if(data.connected===true){loadingOverlay.classList.add('hidden');isIframeLoaded=true;if(loadingTimer){clearTimeout(loadingTimer);loadingTimer=null}}else if(data.connected===false){errorMessage.textContent='ارتباط قطع شد. در حال تلاش مجدد...';errorMessage.classList.remove('hidden');setTimeout(()=>errorMessage.classList.add('hidden'),3000)}if(data.isMuted!==undefined){isMuted=data.isMuted;muteBtn.innerHTML=isMuted?'<i class="fas fa-microphone-slash mr-2 text-sm"></i>باصدا':'<i class="fas fa-microphone mr-2 text-sm"></i>بی‌صدا'}}catch(error){console.error('خطا در پردازش پیام از iframe:',error)}});});
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize theme from localStorage or default to dark
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    if (savedTheme === 'light') {
+        document.body.classList.add('light-mode');
+        document.getElementById('themeToggle').innerHTML = '<i class="fas fa-sun"></i>';
+    }
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('light-mode');
+        const isLight = document.body.classList.contains('light-mode');
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        themeToggle.innerHTML = isLight ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    });
+    // Menu toggle functionality
+    const menuToggle = document.getElementById('menu-toggle');
+    const menuPanel = document.getElementById('menu-panel');
+    const menuOverlay = document.getElementById('menu-overlay');
+    const menuIcon = document.getElementById('menu-icon');
+    menuToggle.addEventListener('click', () => {
+        const isActive = menuPanel.classList.contains('active');
+        menuPanel.classList.toggle('active');
+        menuOverlay.classList.toggle('hidden');
+        menuIcon.className = isActive ? 'fas fa-bars' : 'fas fa-times';
+        document.body.style.overflow = isActive ? 'auto' : 'hidden';
+    });
+    menuOverlay.addEventListener('click', () => {
+        menuPanel.classList.remove('active');
+        menuOverlay.classList.add('hidden');
+        menuIcon.className = 'fas fa-bars';
+        document.body.style.overflow = 'auto';
+    });
+    const menuLinks = menuPanel.querySelectorAll('a');
+    menuLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            menuPanel.classList.remove('active');
+            menuOverlay.classList.add('hidden');
+            menuIcon.className = 'fas fa-bars';
+            document.body.style.overflow = 'auto';
+        });
+    });
+    // Loading screen
+    setTimeout(() => {
+        document.getElementById('overlay').classList.add('hidden');
+    }, 2000);
+    // Feature cards
+    const features = [
+        {icon:'fa-video',title:'ویدیو با کیفیت بالا',desc:'انتقال ویدیو با رزولوشن بالا بدون تاخیر.' ,},
+        {icon:'fa-microphone',title:'صدا استریو',desc:'صدای شفاف و با کیفیت استریو.'},
+        {icon:'fa-users',title:' ویدیو کنفرانس ',desc:'جلسات گروهی با چندین شرکت‌کننده.'},
+        {icon:'fa-lock',title:'امنیت بالا',desc:'رمزنگاری end-to-end برای حفظ حریم خصوصی.'},
+        {icon:'fa-mobile-alt',title:'سازگار با موبایل',desc:'پشتیبانی کامل از دستگاه‌های موبایل.'},
+        {icon:'fa-cloud',title:'ارتباط P2P',desc:'بدون نیاز به نصب نرم‌افزار.'},
+        {icon:'fa-chalkboard-teacher',title:'ساخت کلاس مجازی',desc:' ساخت کلاس با چند کلیک.',url:'https://class.remotevm.ir'},
+        {icon: 'fa-phone', title: 'تماس تصویری', desc: 'شروع تماس ویدیویی با چند کلیک.',url:'https://call.remotevm.ir'},
+        {icon: 'fa-camera', title: 'انتقال تصویر دوربین موبایل', desc: 'دوربین موبایل را بدون نرم‌افزار به وب‌کم بی‌سیم تبدیل کنید.',url:'https://webcam.remotevm.ir'}
+    ];
+    const featuresContainer = document.getElementById('featuresContainer');
+    featuresContainer.innerHTML = '';
+    features.forEach(feature => {
+        const card = document.createElement('div');
+        card.className = 'feature-card';
+        let content = `<i class="fas ${feature.icon} text-3xl mb-4" style="color:var(--neon-blue);"></i><h3 class="text-lg font-semibold mb-2">${feature.title}</h3><p class="text-sm">${feature.desc}</p>`;
+        if (feature.url) {
+            card.classList.add('clickable');
+            content = `<a href="${feature.url}" target="_blank" rel="noopener noreferrer">${content}</a>`;
+        }
+        card.innerHTML = content;
+        featuresContainer.appendChild(card);
+    });
+    // Get UI elements
+    const startCallBtn = document.getElementById('startCallBtn');
+    const stopCallBtn = document.getElementById('stopCallBtn');
+    const resetCallBtn = document.getElementById('resetCallBtn');
+    const fullscreenBtn = document.getElementById('fullscreenBtn');
+    const muteBtn = document.getElementById('muteBtn');
+    const qualitySelect = document.getElementById('qualitySelect');
+    const uiCheckbox = document.getElementById('uiCheckbox');
+    const stereoCheckbox = document.getElementById('stereoCheckbox');
+    const codecSelect = document.getElementById('codecSelect');
+    const bitrateRange = document.getElementById('bitrateRange');
+    const bitrateValue = document.getElementById('bitrateValue');
+    const conferenceCheckbox = document.getElementById('conferenceCheckbox');
+    const vdoFrame = document.getElementById('vdoFrame');
+    const callContainer = document.getElementById('callContainer');
+    const obsSection = document.getElementById('obsSection');
+    const obsLink = document.getElementById('obsLink');
+    const copyLinkBtn = document.getElementById('copyLinkBtn');
+    const copyMessage = document.getElementById('copyMessage');
+    const errorMessage = document.getElementById('errorMessage');
+    const inviteSection = document.getElementById('inviteSection');
+    const inviteLink = document.getElementById('inviteLink');
+    const copyInviteBtn = document.getElementById('copyInviteBtn');
+    const copyInviteMessage = document.getElementById('copyInviteMessage');
+    const errorInviteMessage = document.getElementById('errorInviteMessage');
+    const loadingOverlay = document.getElementById('loadingOverlay');
+    const statusIndicator = document.getElementById('statusIndicator');
+    const advancedSettingsToggle = document.getElementById('advancedSettingsToggle');
+    const advancedSettingsPanel = document.getElementById('advancedSettingsPanel');
+    const videoCallCard = document.getElementById('call');
+    const audioDeviceSelect = document.getElementById('audioDeviceSelect');
+    const videoDeviceSelect = document.getElementById('videoDeviceSelect');
+    // Initialize bitrate display
+    bitrateValue.textContent = `${bitrateRange.value} kbps`;
+   
+    // Advanced settings toggle
+    advancedSettingsToggle.addEventListener('click', () => {
+        advancedSettingsPanel.classList.toggle('hidden');
+        const icon = advancedSettingsToggle.querySelector('i');
+        icon.classList.toggle('rotate-180');
+    });
+    // Bitrate range input
+    bitrateRange.addEventListener('input', () => {
+        bitrateValue.textContent = `${bitrateRange.value} kbps`;
+    });
+    // Populate media devices when available
+    if (navigator.mediaDevices && navigator.mediaDevices.enumerateDevices) {
+        navigator.mediaDevices.enumerateDevices()
+            .then(devices => {
+                const audioDevices = devices.filter(device => device.kind === 'audioinput');
+                const videoDevices = devices.filter(device => device.kind === 'videoinput');
+               
+                // Clear existing options except the default one
+                audioDeviceSelect.innerHTML = '<option value="">دستگاه پیش‌فرض</option>';
+                videoDeviceSelect.innerHTML = '<option value="">دوربین پیش‌فرض</option>';
+               
+                // Add audio devices
+                audioDevices.forEach((device, index) => {
+                    const option = document.createElement('option');
+                    option.value = device.deviceId;
+                    option.text = device.label || `میکروفون ${index + 1}`;
+                    audioDeviceSelect.appendChild(option);
+                });
+               
+                // Add video devices
+                videoDevices.forEach((device, index) => {
+                    const option = document.createElement('option');
+                    option.value = device.deviceId;
+                    option.text = device.label || `دوربین ${index + 1}`;
+                    videoDeviceSelect.appendChild(option);
+                });
+            })
+            .catch(err => {
+                console.warn('مشکل در دسترسی به دستگاه‌های ورودی/خروجی:', err);
+            });
+    }
+    // Helper functions
+    function generateRandomString(length = 10) {
+        return Math.random().toString(36).substring(2, length + 2);
+    }
+    function getParams(isViewer = false) {
+        let params = [];
+        if (!isViewer) {
+            // کیفیت ویدیو
+            const quality = qualitySelect.value;
+            if (quality) params.push(`quality=${quality}`);
+           
+            // دستگاه‌های ورودی
+            const audioDevice = audioDeviceSelect.value;
+            if (audioDevice) params.push(`audioinput=${audioDevice}`);
+           
+            const videoDevice = videoDeviceSelect.value;
+            if (videoDevice) params.push(`videoinput=${videoDevice}`);
+        }
+       
+        // تنظیمات دیگر
+        const codec = codecSelect.value;
+        if (codec) params.push(`codec=${codec}`);
+       
+        const bitrate = bitrateRange.value;
+        if (bitrate) params.push(`vb=${bitrate}`);
+       
+        if (stereoCheckbox.checked) params.push('stereo=1');
+        if (uiCheckbox.checked) params.push('cleanoutput=1');
+       
+        return params.length ? `&${params.join('&')}` : '';
+    }
+    function updateUrlParams(baseUrl, newParams) {
+        if (!baseUrl) return '';
+        try {
+            const url = new URL(baseUrl, 'https://live.remotevm.ir/');
+            const searchParams = new URLSearchParams(url.search);
+           
+            // فقط پارامترهای مهم را نگه دار
+            for (const key of Array.from(searchParams.keys())) {
+                if (key !== 'room' && key !== 'push' && key !== 'view' && key !== 'scene') {
+                    searchParams.delete(key);
+                }
+            }
+           
+            // پارامترهای جدید را اضافه کن
+            if (newParams) {
+                const paramsString = newParams.replace(/^&/, '');
+                const newSearchParams = new URLSearchParams(paramsString);
+                for (const [key, value] of newSearchParams) {
+                    searchParams.set(key, value);
+                }
+            }
+           
+            url.search = searchParams.toString();
+            return url.toString();
+        } catch (error) {
+            console.error('خطا در بروزرسانی پارامترهای URL:', error);
+            return baseUrl;
+        }
+    }
+    // متغیرهای وضعیت تماس
+    let currentID = '';
+    let isConference = false;
+    let baseObsUrl = '';
+    let baseInviteUrl = '';
+    let baseIframeUrl = '';
+    let isIframeLoaded = false;
+    let isMuted = false;
+    let loadingTimer = null;
+    // تابع برای ایجاد event listener برای رویداد load
+    function setupIframeLoadHandler() {
+        // پاک کردن تایمر قبلی اگر وجود داشته باشد
+        if (loadingTimer) {
+            clearTimeout(loadingTimer);
+            loadingTimer = null;
+        }
+       
+        // حذف همه event listener های قبلی
+        vdoFrame.onload = null;
+       
+        // ایجاد event listener جدید
+        vdoFrame.onload = function() {
+            console.log('iframe loaded');
+            isIframeLoaded = true;
+            loadingOverlay.classList.add('hidden');
+           
+            // پاک کردن تایمر
+            if (loadingTimer) {
+                clearTimeout(loadingTimer);
+                loadingTimer = null;
+            }
+        };
+       
+        // تایمر پشتیبان برای مخفی کردن انیمیشن بارگذاری پس از مدت مشخص
+        loadingTimer = setTimeout(() => {
+            console.log('loading timeout reached');
+            if (!isIframeLoaded) {
+                isIframeLoaded = true;
+                loadingOverlay.classList.add('hidden');
+            }
+            loadingTimer = null;
+        }, 8000);
+    }
+    // بروزرسانی لینک‌های تماس وقتی تنظیمات تغییر می‌کند
+    function updateCallLinks(changedElement) {
+        if (!currentID) return;
+       
+        const isConferenceChange = changedElement === conferenceCheckbox;
+        const newIsConference = conferenceCheckbox.checked;
+       
+        if ((isConferenceChange && newIsConference !== isConference) || changedElement === startCallBtn) {
+            isConference = newIsConference;
+            if (isConference) {
+                baseIframeUrl = `https://live.remotevm.ir/?room=${currentID}`;
+                baseObsUrl = `https://live.remotevm.ir/?room=${currentID}&scene=0`;
+                baseInviteUrl = `https://live.remotevm.ir/?room=${currentID}`;
+                inviteSection.classList.remove('hidden');
+            } else {
+                baseIframeUrl = `https://live.remotevm.ir/?push=${currentID}`;
+                baseObsUrl = `https://live.remotevm.ir/?view=${currentID}`;
+                baseInviteUrl = '';
+                inviteSection.classList.add('hidden');
+            }
+           
+            // نمایش انیمیشن بارگذاری
+            loadingOverlay.classList.remove('hidden');
+            isIframeLoaded = false;
+           
+            // تنظیم event listener برای رویداد load
+            setupIframeLoadHandler();
+           
+            // بروزرسانی منبع iframe با پارامترهای جدید
+            vdoFrame.src = updateUrlParams(baseIframeUrl, getParams());
+           
+            // بازنشانی وضعیت رابط کاربری
+            isMuted = false;
+            muteBtn.innerHTML = '<i class="fas fa-microphone mr-2 text-sm"></i>بی‌صدا';
+        }
+       
+        // بروزرسانی لینک‌ها
+        obsLink.value = updateUrlParams(baseObsUrl, getParams(true));
+        if (isConference) {
+            inviteLink.value = updateUrlParams(baseInviteUrl, '');
+        }
+    }
+    // شروع تماس
+    startCallBtn.addEventListener('click', () => {
+        try {
+            currentID = generateRandomString();
+            baseObsUrl = '';
+            baseInviteUrl = '';
+            baseIframeUrl = '';
+           
+            updateCallLinks(startCallBtn);
+           
+            // نمایش رابط کاربری تماس
+            callContainer.classList.remove('hidden');
+            obsSection.classList.remove('hidden');
+            startCallBtn.classList.add('hidden');
+            stopCallBtn.classList.remove('hidden');
+            resetCallBtn.classList.remove('hidden');
+            fullscreenBtn.classList.remove('hidden');
+            muteBtn.classList.remove('hidden');
+           
+            // بروزرسانی نشانگر وضعیت
+            statusIndicator.classList.remove('status-inactive');
+            statusIndicator.classList.add('status-active');
+           
+            // گسترش کارت
+            videoCallCard.classList.add('active');
+        } catch (error) {
+            console.error('خطا در شروع تماس:', error);
+            errorMessage.textContent = 'خطا در شروع تماس. لطفاً دوباره تلاش کنید.';
+            errorMessage.classList.remove('hidden');
+            setTimeout(() => errorMessage.classList.add('hidden'), 3000);
+        }
+    });
+    // توقف تماس
+    stopCallBtn.addEventListener('click', () => {
+        try {
+            // پاک کردن تایمر اگر هنوز فعال است
+            if (loadingTimer) {
+                clearTimeout(loadingTimer);
+                loadingTimer = null;
+            }
+           
+            // پاک کردن منبع iframe
+            vdoFrame.src = '';
+           
+            // پاک کردن لینک‌ها
+            obsLink.value = '';
+            inviteLink.value = '';
+           
+            // مخفی کردن انیمیشن بارگذاری
+            loadingOverlay.classList.add('hidden');
+           
+            // مخفی کردن رابط کاربری تماس
+            callContainer.classList.add('hidden');
+            obsSection.classList.add('hidden');
+            inviteSection.classList.add('hidden');
+            startCallBtn.classList.remove('hidden');
+            stopCallBtn.classList.add('hidden');
+            resetCallBtn.classList.add('hidden');
+            fullscreenBtn.classList.add('hidden');
+            muteBtn.classList.add('hidden');
+           
+            // بروزرسانی نشانگر وضعیت
+            statusIndicator.classList.add('status-inactive');
+            statusIndicator.classList.remove('status-active');
+           
+            // جمع کردن کارت
+            videoCallCard.classList.remove('active');
+           
+            // بازنشانی وضعیت
+            currentID = '';
+            baseObsUrl = '';
+            baseInviteUrl = '';
+            baseIframeUrl = '';
+            isIframeLoaded = false;
+            isMuted = false;
+        } catch (error) {
+            console.error('خطا در توقف تماس:', error);
+        }
+    });
+    // بازنشانی تماس
+    resetCallBtn.addEventListener('click', () => {
+        if (!currentID || !baseIframeUrl) return;
+       
+        try {
+            // نمایش انیمیشن بارگذاری
+            loadingOverlay.classList.remove('hidden');
+            isIframeLoaded = false;
+           
+            // تنظیم event listener برای رویداد load
+            setupIframeLoadHandler();
+           
+            // بروزرسانی منبع iframe با پارامترهای فعلی
+            vdoFrame.src = updateUrlParams(baseIframeUrl, getParams());
+           
+            // بروزرسانی لینک‌ها
+            updateCallLinks(resetCallBtn);
+           
+            // بازنشانی وضعیت رابط کاربری
+            isMuted = false;
+            muteBtn.innerHTML = '<i class="fas fa-microphone mr-2 text-sm"></i>بی‌صدا';
+        } catch (error) {
+            console.error('خطا در بازنشانی تماس:', error);
+            errorMessage.textContent = 'خطا در بازنشانی تماس. لطفاً دوباره تلاش کنید.';
+            errorMessage.classList.remove('hidden');
+            setTimeout(() => errorMessage.classList.add('hidden'), 3000);
+        }
+    });
+    // دکمه تمام‌صفحه
+    fullscreenBtn.addEventListener('click', () => {
+        try {
+            if (vdoFrame.requestFullscreen) {
+                vdoFrame.requestFullscreen();
+            } else if (vdoFrame.mozRequestFullScreen) {
+                vdoFrame.mozRequestFullScreen();
+            } else if (vdoFrame.webkitRequestFullscreen) {
+                vdoFrame.webkitRequestFullscreen();
+            } else if (vdoFrame.msRequestFullscreen) {
+                vdoFrame.msRequestFullscreen();
+            }
+        } catch (error) {
+            console.error('خطا در ورود به حالت تمام‌صفحه:', error);
+            errorMessage.textContent = 'خطا در نمایش تمام‌صفحه.';
+            errorMessage.classList.remove('hidden');
+            setTimeout(() => errorMessage.classList.add('hidden'), 3000);
+        }
+    });
+    // دکمه بی‌صدا
+    muteBtn.addEventListener('click', () => {
+        if (!isIframeLoaded) {
+            errorMessage.textContent = 'لطفاً صبر کنید تا ارتباط برقرار شود.';
+            errorMessage.classList.remove('hidden');
+            setTimeout(() => errorMessage.classList.add('hidden'), 3000);
+            return;
+        }
+       
+        try {
+            isMuted = !isMuted;
+            muteBtn.innerHTML = isMuted
+                ? '<i class="fas fa-microphone-slash mr-2 text-sm"></i>باصدا'
+                : '<i class="fas fa-microphone mr-2 text-sm"></i>بی‌صدا';
+               
+            // ارسال پیام به iframe
+            vdoFrame.contentWindow.postMessage({ mute: isMuted }, 'https://live.remotevm.ir');
+        } catch (err) {
+            console.error('خطا در تغییر وضعیت بی‌صدا:', err);
+            errorMessage.textContent = 'خطا در تغییر وضعیت میکروفون.';
+            errorMessage.classList.remove('hidden');
+            setTimeout(() => errorMessage.classList.add('hidden'), 3000);
+        }
+    });
+    // دکمه کپی لینک OBS
+    copyLinkBtn.addEventListener('click', () => {
+        if (!obsLink.value) return;
+       
+        try {
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(obsLink.value)
+                    .then(() => {
+                        copyMessage.textContent = 'لینک با موفقیت کپی شد!';
+                        copyMessage.classList.remove('hidden');
+                        setTimeout(() => copyMessage.classList.add('hidden'), 3000);
+                    })
+                    .catch(err => {
+                        console.error('خطا در کپی لینک:', err);
+                        // استفاده از روش قدیمی
+                        obsLink.select();
+                        document.execCommand('copy');
+                        copyMessage.textContent = 'لینک کپی شد!';
+                        copyMessage.classList.remove('hidden');
+                        setTimeout(() => copyMessage.classList.add('hidden'), 3000);
+                    });
+            } else {
+                // برای مرورگرهای قدیمی‌تر
+                obsLink.select();
+                document.execCommand('copy');
+                copyMessage.textContent = 'لینک کپی شد!';
+                copyMessage.classList.remove('hidden');
+                setTimeout(() => copyMessage.classList.add('hidden'), 3000);
+            }
+        } catch (err) {
+            console.error('خطا در کپی لینک:', err);
+            errorMessage.textContent = 'خطا در کپی لینک.';
+            errorMessage.classList.remove('hidden');
+            setTimeout(() => errorMessage.classList.add('hidden'), 3000);
+        }
+    });
+    // دکمه کپی لینک دعوت
+    copyInviteBtn.addEventListener('click', () => {
+        if (!inviteLink.value) return;
+       
+        try {
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(inviteLink.value)
+                    .then(() => {
+                        copyInviteMessage.textContent = 'لینک دعوت با موفقیت کپی شد!';
+                        copyInviteMessage.classList.remove('hidden');
+                        setTimeout(() => copyInviteMessage.classList.add('hidden'), 3000);
+                    })
+                    .catch(err => {
+                        console.error('خطا در کپی لینک دعوت:', err);
+                        // استفاده از روش قدیمی
+                        inviteLink.select();
+                        document.execCommand('copy');
+                        copyInviteMessage.textContent = 'لینک دعوت کپی شد!';
+                        copyInviteMessage.classList.remove('hidden');
+                        setTimeout(() => copyInviteMessage.classList.add('hidden'), 3000);
+                    });
+            } else {
+                // برای مرورگرهای قدیمی‌تر
+                inviteLink.select();
+                document.execCommand('copy');
+                copyInviteMessage.textContent = 'لینک دعوت کپی شد!';
+                copyInviteMessage.classList.remove('hidden');
+                setTimeout(() => copyInviteMessage.classList.add('hidden'), 3000);
+            }
+        } catch (err) {
+            console.error('خطا در کپی لینک دعوت:', err);
+            errorInviteMessage.textContent = 'خطا در کپی لینک دعوت.';
+            errorInviteMessage.classList.remove('hidden');
+            setTimeout(() => errorInviteMessage.classList.add('hidden'), 3000);
+        }
+    });
+    // بروزرسانی لینک‌ها هنگام تغییر تنظیمات
+    [qualitySelect, codecSelect, bitrateRange, stereoCheckbox, uiCheckbox, conferenceCheckbox,
+     audioDeviceSelect, videoDeviceSelect].forEach(element => {
+        element.addEventListener('change', () => updateCallLinks(element));
+    });
+    // گوش دادن به پیام‌های iframe
+    window.addEventListener('message', (event) => {
+        if (event.origin !== 'https://live.remotevm.ir') return;
+       
+        try {
+            const data = event.data;
+           
+            // مدیریت وضعیت اتصال
+            if (data.connected === true) {
+                loadingOverlay.classList.add('hidden');
+                isIframeLoaded = true;
+               
+                // پاک کردن تایمر اگر هنوز فعال است
+                if (loadingTimer) {
+                    clearTimeout(loadingTimer);
+                    loadingTimer = null;
+                }
+            } else if (data.connected === false) {
+                errorMessage.textContent = 'ارتباط قطع شد. در حال تلاش مجدد...';
+                errorMessage.classList.remove('hidden');
+                setTimeout(() => errorMessage.classList.add('hidden'), 3000);
+            }
+           
+            // مدیریت تغییر وضعیت بی‌صدا
+            if (data.isMuted !== undefined) {
+                isMuted = data.isMuted;
+                muteBtn.innerHTML = isMuted
+                    ? '<i class="fas fa-microphone-slash mr-2 text-sm"></i>باصدا'
+                    : '<i class="fas fa-microphone mr-2 text-sm"></i>بی‌صدا';
+            }
+        } catch (error) {
+            console.error('خطا در پردازش پیام از iframe:', error);
+        }
+    });
+});
 </script>
 <script async src="https://cdn.tailwindcss.com"></script>
 </body>
