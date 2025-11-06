@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>سرور اختصاصی RemoteVM | مینی سرور انتقال تصویر P2P با تاخیر 50ms | Remote VM</title>
+    <meta name="description" content="سرور اختصاصی RemoteVM با ارتباط P2P و تاخیر 50 میلی‌ثانیه، مناسب آموزش آنلاین، مصاحبه، نظارت، پخش زنده و ریموت آزمون‌های غیرقابل شناسایی.">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "name": "سرور اختصاصی RemoteVM - مینی سرور انتقال تصویر P2P",
+      "image": [
+        "https://remotevm.ir/product/remotevm-01.jpg",
+        "https://remotevm.ir/product/remotevm-02.jpg",
+        "https://remotevm.ir/product/remotevm-03.jpg"
+      ],
+      "description": "سرور RemoteVM یک راهکار حرفه‌ای برای انتقال تصویر و صدا با ارتباط P2P و تاخیر بسیار پایین 50 میلی‌ثانیه. مناسب آموزش از راه دور، مصاحبه آنلاین، نظارت، پخش زنده و ریموت آزمون‌های غیرقابل شناسایی.",
+      "brand": { "@type": "Brand", "name": "Remote VM" },
+      "sku": "RVM-SRV-001",
+      "mpn": "REMOTEVM-V2",
+      "offers": {
+        "@type": "Offer",
+        "url": "https://remotevm.ir/product/remote-machine/",
+        "priceCurrency": "IRR",
+        "price": "16000000",
+        "itemCondition": "https://schema.org/NewCondition",
+        "availability": "https://schema.org/OutOfStock",
+        "seller": { "@type": "Organization", "name": "Remote VM" }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.95",
+        "reviewCount": "112"
+      }
+    }
+    </script>
+
+    <style>
+        body {font-family: 'Vazirmatn', sans-serif;background-color: #0f172a;color: #cbd5e1;}
+        .header-scrolled {background-color: rgba(15,23,42,0.85);backdrop-filter: blur(12px);-webkit-backdrop-filter: blur(12px);box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);}
+        .gradient-text {background: linear-gradient(to left, #22d3ee, #67e8f9);-webkit-background-clip: text;-webkit-text-fill-color: transparent;}
+        .faq-question::after {content: '\f078';font-family: "Font Awesome 6 Free";font-weight: 900;transition: transform 0.3s ease;}
+        .faq-question.active::after {transform: rotate(180deg);}
+        .faq-answer {max-height: 0;overflow: hidden;transition: max-height 0.3s ease-out;}
+        .swiper-button-next:after, .swiper-button-prev:after {color: #22d3ee;font-size: 1.5rem;}
+        .swiper-pagination-bullet-active {background: #22d3ee !important;}
+        .whatsapp-float-btn {position: fixed;bottom: 24px;left: 24px;z-index: 1000;background-color: #25D366;color: #fff;width: 60px;height: 60px;border-radius: 50%;display: flex;align-items: center;justify-content: center;font-size: 28px;box-shadow: 0 4px 12px rgba(0,0,0,0.2);transition: transform 0.3s ease-in-out;}
+        .whatsapp-float-btn:hover {transform: scale(1.1);}
+        .out-of-stock {background-color: #ef4444;}
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <header id="header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="https://remotevm.ir/" class="flex items-center gap-3 text-2xl font-bold text-white">
+                    <i class="fas fa-server text-cyan-400 text-3xl"></i>
+                    <span>Remote VM</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-reverse space-x-6 text-lg">
+                    <a href="https://remotevm.ir/" class="text-slate-300 hover:text-cyan-400 transition-colors">خانه</a>
+                    <a href="https://remotevm.site/store/" class="text-slate-300 hover:text-cyan-400 transition-colors">محصولات</a>
+                    <a href="#faq" class="text-slate-300 hover:text-cyan-400 transition-colors">سوالات متداول</a>
+                    <a href="https://remotevm.site/contact/" class="text-slate-300 hover:text-cyan-400 transition-colors">تماس</a>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="https://remotevm.ir/" target="_blank" class="hidden sm:inline-block px-6 py-2 text-white bg-blue-600 hover:bg-blue-700 rounded-full transition-transform duration-300 hover:scale-105">
+                        R.V.M Server
+                    </a>
+                    <button id="menu-btn" class="md:hidden text-white text-2xl"><i class="fas fa-bars"></i></button>
+                </div>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full right-0 w-full bg-slate-800/95 backdrop-blur-sm">
+            <div class="flex flex-col items-center space-y-4 py-6">
+                <a href="https://remotevm.ir/" class="text-slate-300 hover:text-cyan-400">خانه</a>
+                <a href="https://remotevm.site/store/" class="text-slate-300 hover:text-cyan-400">محصولات</a>
+                <a href="#faq" class="text-slate-300 hover:text-cyan-400">سوالات متداول</a>
+                <a href="https://remotevm.site/contact/" class="text-slate-300 hover:text-cyan-400">تماس</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-20">
+        <section id="product-details" class="py-12 md:py-20 bg-gradient-to-b from-slate-900 to-slate-800">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div data-aos="fade-left">
+                        <div class="bg-slate-800 rounded-2xl p-4 md:p-8 shadow-2xl shadow-slate-900/50 relative">
+                            <div class="swiper mySwiper">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide aspect-square flex items-center justify-center">
+                                        <img src="./RemoteVm-mini-stream-server.jpg" alt="سرور RemoteVM - نمای اصلی" class="w-full h-full object-contain rounded-xl">
+                                    </div>
+                                    <div class="swiper-slide aspect-square flex items-center justify-center">
+                                        <img src="./RemoteVm-mini-stream-server03.jpg" alt="پورت‌های HDMI و USB سرور RemoteVM" class="w-full h-full object-contain rounded-xl">
+                                    </div>
+                                    <div class="swiper-slide aspect-square flex items-center justify-center">
+                                        <img src="./RemoteVm-mini-stream-server02.jpg" alt="سرور RemoteVM در حال کار" class="w-full h-full object-contain rounded-xl">
+                                    </div>
+                                    <div class="swiper-slide aspect-square flex items-center justify-center">
+                                        <img src="./remove-server-preview.webp" alt="محتویات جعبه RemoteVM" class="w-full h-full object-contain rounded-xl">
+                                    </div>
+                                </div>
+                                <div class="swiper-pagination"></div>
+                                <div class="swiper-button-prev"></div>
+                                <div class="swiper-button-next"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div data-aos="fade-right">
+                        <span class="text-cyan-400 font-semibold tracking-wider">REMOTE VM DEDICATED SERVER</span>
+                        <h1 class="text-3xl md:text-4xl font-extrabold text-white my-4">سرور اختصاصی RemoteVM - مینی سرور انتقال تصویر P2P</h1>
+                        <p class="text-slate-400 leading-relaxed mb-6">
+                            سرور RemoteVM یک راهکار حرفه‌ای برای انتقال تصویر و صدا با ارتباط P2P و تاخیر فوق‌العاده پایین 50 میلی‌ثانیه. غیرقابل شناسایی، همراه با آموزش کامل.
+                        </p>
+                        
+                        <div class="flex items-center gap-4 mb-6">
+                            <span class="text-3xl font-bold text-white">۱۶,۰۰۰,۰۰۰ تومان</span>
+                            <span class="out-of-stock text-white text-sm font-semibold px-3 py-1 rounded-full">در انبار موجود نمی‌باشد</span>
+                        </div>
+
+                        <div class="flex items-center gap-2 mb-6 text-yellow-400">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            <span class="text-slate-400 ml-2">(۴.۹۵ از ۵ ستاره بر اساس ۱۱۲ بررسی)</span>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <a href="https://wa.me/+989195600767?text=سلام، برای پیش‌خرید سرور اختصاصی RemoteVM مزاحم میشم." target="_blank" class="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 bg-cyan-500 hover:bg-cyan-600 text-white font-bold rounded-lg transition-all duration-300 hover:scale-105 shadow-lg shadow-cyan-500/30">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span>پیش‌خرید از واتساپ</span>
+                            </a>
+                            <a href="#features" class="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 bg-slate-700/80 hover:bg-slate-700 text-white font-bold rounded-lg transition-all duration-300 hover:scale-105">
+                                <i class="fas fa-info-circle"></i>
+                                <span>مشاهده ویژگی‌ها</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="py-16 md:py-24 bg-slate-800/50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12" data-aos="fade-up">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">طراحی شده برای حرفه‌ای‌ترین نیازها</h2>
+                    <p class="text-slate-400 max-w-3xl mx-auto">سرور RemoteVM فراتر از یک مینی سرور معمولی است؛ غیرقابل شناسایی، تاخیر 50ms، P2P واقعی.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-md hover:shadow-cyan-500/20 hover:border-cyan-600 transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
+                        <div class="text-3xl text-cyan-400 mb-4"><i class="fas fa-bolt"></i></div>
+                        <h3 class="text-xl font-bold text-white mb-3">تاخیر فوق‌العاده پایین 50ms</h3>
+                        <p class="text-slate-400">ارتباط P2P واقعی با کمترین تاخیر ممکن؛ ایده‌آل برای ریموت آزمون و استریم زنده.</p>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-md hover:shadow-cyan-500/20 hover:border-cyan-600 transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
+                        <div class="text-3xl text-cyan-400 mb-4"><i class="fas fa-shield-alt"></i></div>
+                        <h3 class="text-xl font-bold text-white mb-3">کاملا غیرقابل شناسایی</h3>
+                        <p class="text-slate-400">سخت‌افزار اختصاصی با طراحی سفارشی؛ هیچ نرم‌افزار نظارتی نمی‌تواند آن را تشخیص دهد.</p>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-md hover:shadow-cyan-500/20 hover:border-cyan-600 transition-all duration-300" data-aos="fade-up" data-aos-delay="300">
+                        <div class="text-3xl text-cyan-400 mb-4"><i class="fas fa-hd-video"></i></div>
+                        <h3 class="text-xl font-bold text-white mb-3">2 ورودی HDMI 4K + Loop-out</h3>
+                        <p class="text-slate-400">دو ورودی 4K همزمان + خروجی HDMI بدون تاخیر برای مانیتورینگ زنده.</p>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-md hover:shadow-cyan-500/20 hover:border-cyan-600 transition-all duration-300" data-aos="fade-up" data-aos-delay="400">
+                        <div class="text-3xl text-cyan-400 mb-4"><i class="fas fa-video"></i></div>
+                        <h3 class="text-xl font-bold text-white mb-3">Webcam Emulator + EDID Emulator</h3>
+                        <p class="text-slate-400">شبیه‌سازی وبکم و مانیتور واقعی؛ عبور ۱۰۰٪ از سیستم‌های نظارتی آزمون.</p>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-md hover:shadow-cyan-500/20 hover:border-cyan-600 transition-all duration-300" data-aos="fade-up" data-aos-delay="500">
+                        <div class="text-3xl text-cyan-400 mb-4"><i class="fas fa-graduation-cap"></i></div>
+                        <h3 class="text-xl font-bold text-white mb-3">ریموت آزمون اختصاصی</h3>
+                        <p class="text-slate-400">طراحی شده برای آزمون‌های Home Edition بین‌المللی؛ همراه با ویدیو آموزشی کامل.</p>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-md hover:shadow-cyan-500/20 hover:border-cyan-600 transition-all duration-300" data-aos="fade-up" data-aos-delay="600">
+                        <div class="text-3xl text-cyan-400 mb-4"><i class="fas fa-plug"></i></div>
+                        <h3 class="text-xl font-bold text-white mb-3">Plug & Play + آموزش ویدیویی</h3>
+                        <p class="text-slate-400">بدون نیاز به دانش فنی؛ ویدیو آموزشی گام‌به‌گام به همراه دستگاه.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="use-cases" class="py-16 md:py-24 bg-slate-900">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12" data-aos="fade-up">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 gradient-text">موارد استفاده</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-slate-800 p-6 rounded-xl border border-cyan-700 shadow-lg hover:border-cyan-500 transition-all duration-300" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="text-4xl text-cyan-400 mb-4"><i class="fas fa-chalkboard-teacher"></i></div>
+                        <h3 class="text-xl font-bold text-white mb-3">آموزش از راه دور</h3>
+                        <p class="text-slate-400 text-sm">کلاس‌های آنلاین با کیفیت بالا و تعامل واقعی.</p>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded-xl border border-cyan-700 shadow-lg hover:border-cyan-500 transition-all duration-300" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="text-4xl text-cyan-400 mb-4"><i class="fas fa-user-tie"></i></div>
+                        <h3 class="text-xl font-bold text-white mb-3">مصاحبه‌های آنلاین</h3>
+                        <p class="text-slate-400 text-sm">مصاحبه حرفه‌ای با امکان ضبط و پخش با کیفیت.</p>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded-xl border border-cyan-700 shadow-lg hover:border-cyan-500 transition-all duration-300" data-aos="zoom-in" data-aos-delay="300">
+                        <div class="text-4xl text-cyan-400 mb-4"><i class="fas fa-eye"></i></div>
+                        <h3 class="text-xl font-bold text-white mb-3">نظارت آنلاین</h3>
+                        <p class="text-slate-400 text-sm">نظارت بر دوربین‌ها و جلسات بدون قطعی.</p>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded-xl border border-cyan-700 shadow-lg hover:border-cyan-500 transition-all duration-300" data-aos="zoom-in" data-aos-delay="400">
+                        <div class="text-4xl text-cyan-400 mb-4"><i class="fas fa-broadcast-tower"></i></div>
+                        <h3 class="text-xl font-bold text-white mb-3">پخش زنده (Live Streaming)</h3>
+                        <p class="text-slate-400 text-sm">استریمرهای آموزشی و حرفه‌ای با تجهیزات سبک.</p>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded-xl border border-cyan-700 shadow-lg hover:border-cyan-500 transition-all duration-300" data-aos="zoom-in" data-aos-delay="500">
+                        <div class="text-4xl text-cyan-400 mb-4"><i class="fas fa-user-shield"></i></div>
+                        <h3 class="text-xl font-bold text-white mb-3">سیستم‌های امنیتی</h3>
+                        <p class="text-slate-400 text-sm">انتقال تصویر زنده به مراکز کنترل با امنیت بالا.</p>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded-xl border border-cyan-700 shadow-lg hover:border-cyan-500 transition-all duration-300" data-aos="zoom-in" data-aos-delay="600">
+                        <div class="text-4xl text-cyan-400 mb-4"><i class="fas fa-vial"></i></div>
+                        <h3 class="text-xl font-bold text-white mb-3">ریموت آزمون غیرقابل شناسایی</h3>
+                        <p class="text-slate-400 text-sm">طراحی اختصاصی برای آزمون‌های بین‌المللی.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="specs" class="py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12" data-aos="fade-up">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">مشخصات فنی</h2>
+                </div>
+                <div class="max-w-4xl mx-auto bg-slate-800/50 rounded-lg overflow-hidden border border-slate-700" data-aos="fade-up">
+                    <table class="w-full text-right">
+                        <tbody class="divide-y divide-slate-700">
+                            <tr class="divide-x-reverse divide-x divide-slate-700"><td class="p-4 font-semibold text-white w-1/3">Device use:</td><td class="p-4 text-slate-300">HDMI to USB With Loop</td></tr>
+                            <tr class="divide-x-reverse divide-x divide-slate-700 bg-slate-800/40"><td class="p-4 font-semibold text-white w-1/3">Port:</td><td class="p-4 text-slate-300">2 HDMI 4k input<br>Monitor EDID Emulator + HDMI output 2<br>Webcam Emulator + USB output 2</td></tr>
+                            <tr class="divide-x-reverse divide-x divide-slate-700"><td class="p-4 font-semibold text-white w-1/3">ارتباط</td><td class="p-4 text-slate-300">P2P واقعی با تاخیر 50ms</td></tr>
+                            <tr class="divide-x-reverse divide-x divide-slate-700 bg-slate-800/40"><td class="p-4 font-semibold text-white w-1/3">شبیه‌سازی</td><td class="p-4 text-slate-300">EDID + Webcam Emulator (غیرقابل شناسایی)</td></tr>
+                            <tr class="divide-x-reverse divide-x divide-slate-700"><td class="p-4 font-semibold text-white w-1/3">رزولوشن</td><td class="p-4 text-slate-300">ورودی/خروجی 4K@60Hz</td></tr>
+                            <tr class="divide-x-reverse divide-x divide-slate-700 bg-slate-800/40"><td class="p-4 font-semibold text-white w-1/3">محتویات بسته</td><td class="p-4 text-slate-300">سرور RemoteVM + کابل‌ها + ویدیو آموزشی</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="py-16 md:py-24 bg-slate-900">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12" data-aos="fade-up">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">سوالات متداول</h2>
+                </div>
+                <div class="max-w-3xl mx-auto space-y-4">
+                    <div class="bg-slate-800/50 rounded-lg border border-slate-700 shadow-md">
+                        <button class="faq-question w-full flex justify-between items-center text-right p-5 font-semibold text-white text-lg">
+                            <span>تاخیر 50 میلی‌ثانیه چطور ممکن است؟</span>
+                        </button>
+                        <div class="faq-answer px-5 pb-5 text-slate-400">
+                            <p>با استفاده از ارتباط P2P مستقیم و سخت‌افزار بهینه‌شده اختصاصی، بدون عبور از سرورهای واسط.</p>
+                        </div>
+                    </div>
+                    <div class="bg-slate-800/50 rounded-lg border border-slate-700 shadow-md">
+                        <button class="faq-question w-full flex justify-between items-center text-right p-5 font-semibold text-white text-lg">
+                            <span>آیا واقعا غیرقابل شناسایی است؟</span>
+                        </button>
+                        <div class="faq-answer px-5 pb-5 text-slate-400">
+                            <p>بله، سخت‌افزار کاملاً سفارشی و بدون امضای دیجیتال شناخته‌شده؛ همراه با EDID و Webcam Emulator واقعی.</p>
+                        </div>
+                    </div>
+                    <div class="bg-slate-800/50 rounded-lg border border-slate-700 shadow-md">
+                        <button class="faq-question w-full flex justify-between items-center text-right p-5 font-semibold text-white text-lg">
+                            <span>موجودی کی شارژ می‌شود؟</span>
+                        </button>
+                        <div class="faq-answer px-5 pb-5 text-slate-400">
+                            <p>به‌زودی موجود خواهد شد. از طریق واتساپ پیش‌خرید کنید تا در اولویت باشید.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cta" class="py-16 md:py-24 bg-gradient-to-r from-blue-700 to-cyan-600 text-white text-center">
+            <div class="container mx-auto px-6" data-aos="zoom-in">
+                <h2 class="text-3xl md:text-5xl font-extrabold mb-6 leading-tight">قدرتمندترین سرور انتقال تصویر ایران</h2>
+                <p class="text-xl max-w-3xl mx-auto mb-10 opacity-90">
+                    RemoteVM؛ تنها سرور اختصاصی با تاخیر 50ms و غیرقابل شناسایی برای ریموت آزمون و استریم حرفه‌ای.
+                </p>
+                <a href="https://wa.me/+989195600767?text=سلام، برای پیش‌خرید سرور RemoteVM مزاحم میشم." target="_blank" class="inline-flex items-center gap-3 px-10 py-5 bg-white text-cyan-700 font-bold text-xl rounded-full shadow-2xl hover:scale-105 transition-transform duration-300">
+                    <i class="fab fa-whatsapp text-2xl"></i>
+                    <span>پیش‌خرید در واتساپ</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-900 border-t border-slate-800">
+        <div class="container mx-auto px-6 py-8 text-center text-slate-400">
+            <p class="text-sm">&copy; 2025 Remote VM - تمامی حقوق محفوظ است.</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/+989195600767?text=سلام، برای پیش‌خرید سرور RemoteVM مزاحم میشم." class="whatsapp-float-btn" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <a href="https://remotevm.site/" id="back-to-top" class="fixed bottom-6 right-6 w-12 h-12 bg-cyan-500/80 hover:bg-cyan-500 text-white rounded-full flex items-center justify-center shadow-lg transition-all duration-300 opacity-0 invisible z-40">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        AOS.init({duration: 800, once: true, offset: 50});
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.getElementById('header');
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const backToTopBtn = document.getElementById('back-to-top');
+            window.addEventListener('scroll', () => {
+                header.classList.toggle('header-scrolled', window.scrollY > 50);
+                backToTopBtn.classList.toggle('opacity-0', window.scrollY <= 300);
+                backToTopBtn.classList.toggle('invisible', window.scrollY <= 300);
+            });
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                menuBtn.querySelector('i').classList.toggle('fa-bars');
+                menuBtn.querySelector('i').classList.toggle('fa-times');
+            });
+            document.querySelectorAll('.faq-question').forEach(q => {
+                q.addEventListener('click', () => {
+                    const isActive = q.classList.contains('active');
+                    document.querySelectorAll('.faq-question').forEach(i => {
+                        i.classList.remove('active');
+                        i.nextElementSibling.style.maxHeight = null;
+                    });
+                    if (!isActive) {
+                        q.classList.add('active');
+                        q.nextElementSibling.style.maxHeight = q.nextElementSibling.scrollHeight + "px";
+                    }
+                });
+            });
+            new Swiper('.mySwiper', {
+                loop: true,
+                pagination: { el: '.swiper-pagination', clickable: true },
+                navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+                autoplay: { delay: 5000, disableOnInteraction: false },
+            });
+        });
+    </script>
+</body>
+</html>
