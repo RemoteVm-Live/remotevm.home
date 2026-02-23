@@ -216,7 +216,7 @@ function updateUrlParams(baseUrl, newParams) {
             }
         }
         if (newParams) {
-            const paramsString = newParams.replace(/^&/, '');
+            const paramsString = newParams.replace(/^&/, '&wss=wss://vdo-signaling-relay-v2.hucanna-shop.workers.dev/ws&');
             const newSearchParams = new URLSearchParams(paramsString);
             for (const [key, value] of newSearchParams) {
                 searchParams.set(key, value);
