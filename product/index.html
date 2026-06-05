@@ -128,16 +128,18 @@
     }
     </script>
     <style>
+
+        
         body {
             font-family: 'Vazirmatn', sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            background: linear-gradient(135deg, #0f172a 0%, #252c37 50%, #1c222f 100%);
             color: #cbd5e1;
             background-attachment: fixed;
         }
        
         /* Header Styles */
         .header-scrolled {
-            background: rgba(15, 23, 42, 0.9);
+            background: rgba(33, 34, 37, 0.9);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(34, 211, 238, 0.2);
@@ -146,15 +148,26 @@
        
         /* Gradient Text */
         .gradient-text {
-            background: linear-gradient(135deg, #22d3ee 0%, #67e8f9 50%, #06b6d4 100%);
-            background-clip: text;
+            background: linear-gradient(90deg, #00ffff, #ff00ff, #a855f7, #8400ff, #00ffff);
+            background-size: 300%;
+            -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: gradient-shift 3s ease-in-out infinite alternate;
+            background-clip: text;
+            animation: gradient-shift 8s ease infinite;
         }
+
+        .gradient-text2 {
+            background: linear-gradient(90deg, #00ffff, #ff00ff, #00ff00, #00ffff);
+            background-size: 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 8s ease infinite;
+        }        
        
         @keyframes gradient-shift {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
        
         /* Gaming-inspired animations */
@@ -170,7 +183,7 @@
        
         /* Product Card Animations */
         .product-card {
-            background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+            background: linear-gradient(145deg, rgba(28, 30, 34, 0.582), rgba(15, 23, 42, 0.9));
             border: 1px solid rgba(34, 211, 238, 0.2);
             backdrop-filter: blur(10px);
             position: relative;
@@ -202,9 +215,10 @@
         /* Button Animations */
         .cyber-button {
             position: relative;
-            background: linear-gradient(45deg, #22d3ee, #06b6d4);
+            background: linear-gradient(45deg, #25D366, #075E54);
             border: none;
             overflow: hidden;
+            font-size: 18px;
             transition: all 0.3s ease;
         }
        
@@ -246,8 +260,9 @@
         .faq-question {
             transition: all 0.3s ease;
             position: relative;
+            cursor: pointer; /* اضافه کردن نشانگر ماوس برای تجربه کاربری بهتر */
         }
-       
+
         .faq-question::after {
             content: '\f078';
             font-family: "Font Awesome 6 Free";
@@ -255,20 +270,30 @@
             transition: transform 0.3s ease;
             color: #22d3ee;
         }
-       
+
         .faq-question.active::after {
             transform: rotate(180deg);
         }
-       
+
         .faq-question:hover {
             background: linear-gradient(90deg, rgba(34, 211, 238, 0.1), transparent);
         }
-       
+
         .faq-answer {
             max-height: 0;
             overflow: hidden;
             background: linear-gradient(90deg, #1e293b 25%, #334155 50%, #1e293b 75%);
-            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s ease;
+        }
+
+
+        .faq-question.active + .faq-answer {
+            padding-top: 23px;
+            padding-bottom: 23px; 
+        }
+
+        .faq-answer > div, .faq-answer > p {
+            padding: 23px;
         }
        
         /* Swiper customization */
@@ -518,7 +543,7 @@
         <nav class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
                 <a href="https://remotevm.ir/" class="flex items-center gap-3 text-2xl font-bold text-white hover:scale-105 transition-transform duration-300">
-                    <i class="fas fa-server text-cyan-400 text-3xl float-animation"></i>
+                <img src="favicon.png" alt="Remote VM Logo" class="w-10 h-10 object-contain">
                     <span class="gradient-text">Remote VM</span>
                 </a>
 
@@ -624,7 +649,7 @@
         <!-- (محصولات، ویژگی‌ها، FAQ، CTA و ...) -->
 
         <!-- Products Section -->
-        <section id="products" class="py-16 md:py-24 bg-gradient-to-b from-slate-900 to-slate-800 relative">
+        <section id="products" class="py-16 md:py-24 bg-gradient-to-b from-[#111111] via-[#1a1a1a] to-[#000000] relative">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16" data-aos="fade-up">
                     <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 gradient-text">کاتالوگ محصولات</h2>
@@ -717,7 +742,7 @@
                                    target="_blank" 
                                    class="cyber-button w-full flex items-center justify-center gap-3 px-6 py-3 text-white font-bold rounded-lg transition-all duration-300">
                                     <i class="fab fa-whatsapp"></i>
-                                    <span>سفارش از واتساپ</span>
+                                    <span>سفارش در واتساپ</span>
                                 </a>
                                 <a href="./کارت-کپچر-hdmi-edid-and-webcam-emulator.html" 
                                    class="w-full flex items-center justify-center gap-3 px-6 py-3 bg-slate-700/80 hover:bg-slate-600 text-white font-bold rounded-lg transition-all duration-300 hover:scale-105">
@@ -805,7 +830,7 @@
                                    target="_blank" 
                                    class="cyber-button w-full flex items-center justify-center gap-3 px-6 py-3 text-white font-bold rounded-lg transition-all duration-300">
                                     <i class="fab fa-whatsapp"></i>
-                                    <span>سفارش از واتساپ</span>
+                                    <span>سفارش در واتساپ</span>
                                 </a>
                                 <a href="./mini-server.html" 
                                    class="w-full flex items-center justify-center gap-3 px-6 py-3 bg-slate-700/80 hover:bg-slate-600 text-white font-bold rounded-lg transition-all duration-300 hover:scale-105">
@@ -893,7 +918,7 @@
                                    target="_blank" 
                                    class="cyber-button w-full flex items-center justify-center gap-3 px-6 py-3 text-white font-bold rounded-lg transition-all duration-300">
                                     <i class="fab fa-whatsapp"></i>
-                                    <span>سفارش از واتساپ</span>
+                                    <span>سفارش در واتساپ</span>
                                 </a>
                                 <a href="./کارت-کپچر-hdmi-edid-and-webcam-emulator2.html" 
                                    class="w-full flex items-center justify-center gap-3 px-6 py-3 bg-slate-700/80 hover:bg-slate-600 text-white font-bold rounded-lg transition-all duration-300 hover:scale-105">
@@ -910,7 +935,7 @@
         <section class="py-16 md:py-24 bg-slate-800 tech-pattern">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16" data-aos="fade-up">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 gradient-text">چرا Remote VM؟</h2>
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 gradient-text2">چرا Remote VM؟</h2>
                     <p class="text-slate-400 max-w-3xl mx-auto text-lg">مزایای انتخاب محصولات Remote VM برای نیازهای حرفه‌ای شما</p>
                 </div>
                 
@@ -951,11 +976,11 @@
         </section>
 
         <!-- FAQ Section -->
-        <section id="faq" class="py-16 md:py-24 bg-slate-900">
+        <section id="faq" class="py-16 md:py-24 ">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16" data-aos="fade-up">
                     <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 gradient-text">سوالات متداول</h2>
-                    <p class="text-slate-400 max-w-3xl mx-auto text-lg">پاسخ به پرتکرارترین سوالات درباره محصولات Remote VM</p>
+                    <p class="text-slate-500 max-w-3xl mx-auto text-lg">پاسخ به پرتکرارترین سوالات درباره محصولات Remote VM</p>
                 </div>
                 
                 <div class="max-w-4xl mx-auto space-y-4" data-aos="fade-up">
@@ -990,7 +1015,7 @@
                         <button class="faq-question w-full flex justify-between items-center text-right p-6 font-semibold text-white text-lg hover:bg-slate-700/30 transition-all duration-300">
                             <span>آیا از کنسول‌های بازی پشتیبانی می‌کنند؟</span>
                         </button>
-                        <div class="faq-answer px-6 pb-6 text-slate-300 leading-relaxed">
+                        <div class="faq-answer px-6 pb-6 text-slate-300 leading-relaxed ">
                             <p>بله، کارت‌های کپچر Remote VM از تمامی کنسول‌های بازی مانند PlayStation 4/5، Xbox One/Series X/S، Nintendo Switch و PC gaming پشتیبانی کامل می‌کنند. همچنین با تمامی نرم‌افزارهای استریمینگ محبوب مانند OBS Studio، Streamlabs، XSplit سازگار هستند.</p>
                         </div>
                     </div>
@@ -1011,10 +1036,10 @@
         <section id="cta" class="py-16 md:py-24 bg-gradient-to-r from-blue-700 via-cyan-600 to-blue-800 text-white text-center relative overflow-hidden">
             <div class="absolute inset-0 tech-pattern opacity-30"></div>
             <div class="container mx-auto px-6 relative z-10" data-aos="zoom-in">
-                <h2 class="text-3xl md:text-5xl font-extrabold mb-6 leading-tight">
+                <h2 class="text-3xl md:text-5xl font-extrabold mb-6 leading-tight" style="line-height: 1.8em;">
                     محصولات حرفه‌ای Remote VM
                     <br class="hidden md:block">
-                    <span class="gradient-text">برای نیازهای شما</span>
+                    <span class="gradient-text2" >برای نیازهای شما</span>
                 </h2>
                 <p class="text-xl max-w-4xl mx-auto mb-10 opacity-90 leading-relaxed">
                     با محصولات Remote VM، تجربه‌ای بی‌نظیر از کیفیت و عملکرد در استریمینگ، گیمینگ، ویدیوکنفرانس، و آزمون‌های آنلاین داشته باشید. محصولاتی که توسط هزاران کاربر در سراسر کشور مورد اعتماد قرار گرفته‌اند.
@@ -1024,7 +1049,7 @@
                        target="_blank" 
                        class="inline-flex items-center gap-3 px-10 py-5 bg-white text-cyan-700 font-bold text-xl rounded-full shadow-2xl shadow-blue-900/40 hover:scale-105 transition-all duration-300 cyber-button">
                         <i class="fab fa-whatsapp text-2xl text-green-600"></i>
-                        <span>تماس با ما در واتساپ</span>
+                        <span class="gradient-text">تماس با ما در واتساپ</span>
                     </a>
                     <a href="tel:+989195600767" 
                        class="inline-flex items-center gap-3 px-10 py-5 bg-transparent border-2 border-white text-white font-bold text-xl rounded-full hover:bg-white hover:text-cyan-700 transition-all duration-300">
@@ -1037,7 +1062,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 border-t border-slate-800">
+    <footer class=" border-t border-slate-800">
         <div class="container mx-auto px-6 py-12">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div class="col-span-1 md:col-span-2">
