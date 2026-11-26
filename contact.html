@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تماس با ما | RemoteVM — مرکز ارتباطات و پشتیبانی استودیو</title>
+    <meta name="description" content="راه‌های ارتباطی مستقیم، شماره تماس، ایمیل و کانال‌های پشتیبانی استودیو انتقال تصویر RemoteVM.">
+
+    <!-- فونت وزیرمتن -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-deep: #04070d;
+            --bg-surface: rgba(11, 18, 32, 0.72);
+            --bg-surface-hover: rgba(16, 26, 46, 0.92);
+            --cyan: #00f0ff;
+            --blue: #0ea5e9;
+            --indigo: #6366f1;
+            --emerald: #10b981;
+            --border-tech: rgba(0, 240, 255, 0.18);
+            --border-bright: rgba(0, 240, 255, 0.55);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --grid-line: rgba(14, 165, 233, 0.06);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Vazirmatn', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            background-image:
+                linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+                linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px),
+                radial-gradient(circle at 50% 0%, rgba(14, 165, 233, 0.16) 0%, transparent 55%),
+                radial-gradient(circle at 85% 80%, rgba(99, 102, 241, 0.12) 0%, transparent 45%);
+            background-size: 42px 42px, 42px 42px, 100% 100%, 100% 100%;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1160px;
+            margin: 0 auto;
+            padding: 0 22px;
+        }
+
+        /* ================= NAVBAR ================= */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(4, 7, 13, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-tech);
+        }
+
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 76px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.35rem;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-mark {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.15), rgba(99, 102, 241, 0.25));
+            border: 1px solid var(--border-bright);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 18px rgba(0, 240, 255, 0.22);
+            color: var(--cyan);
+        }
+
+        .brand span.grad {
+            background: linear-gradient(90deg, var(--cyan), #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: var(--text-secondary);
+            font-size: 0.94rem;
+            font-weight: 500;
+            padding: 6px 0;
+            position: relative;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--cyan);
+        }
+
+        .nav-menu a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            right: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--cyan);
+            box-shadow: 0 0 10px var(--cyan);
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.22), rgba(99, 102, 241, 0.25));
+            border: 1px solid var(--border-bright);
+            color: #fff;
+            font-size: 0.9rem;
+            font-weight: 700;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
+        }
+
+        .cta-btn:hover {
+            background: linear-gradient(135deg, var(--blue), var(--indigo));
+            box-shadow: 0 0 28px rgba(0, 240, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* ================= HERO HUD ================= */
+        .hero {
+            padding: 72px 0 48px;
+            text-align: center;
+            position: relative;
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 18px;
+            border-radius: 999px;
+            background: rgba(16, 185, 129, 0.08);
+            border: 1px solid rgba(16, 185, 129, 0.35);
+            color: #6ee7b7;
+            font-size: 0.84rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--emerald);
+            box-shadow: 0 0 10px var(--emerald);
+            animation: blink 1.8s infinite ease-in-out;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.35; transform: scale(1.35); }
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 4.5vw, 3.1rem);
+            font-weight: 900;
+            line-height: 1.25;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(90deg, #ffffff 10%, var(--cyan) 60%, #818cf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            color: var(--text-secondary);
+            max-width: 650px;
+            margin: 0 auto;
+            font-size: 1.05rem;
+        }
+
+        /* ================= TECH CONTACT CARDS GRID ================= */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin: 20px 0 40px;
+        }
+
+        .tech-card {
+            position: relative;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-tech);
+            backdrop-filter: blur(14px);
+            border-radius: 16px;
+            padding: 30px 26px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .tech-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 45px;
+            height: 2px;
+            background: var(--cyan);
+            box-shadow: 0 0 12px var(--cyan);
+            transition: width 0.35s ease;
+        }
+
+        .tech-card:hover {
+            background: var(--bg-surface-hover);
+            border-color: var(--border-bright);
+            transform: translateY(-5px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55), 0 0 25px rgba(0, 240, 255, 0.12);
+        }
+
+        .tech-card:hover::before {
+            width: 100%;
+        }
+
+        .card-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 22px;
+        }
+
+        .tech-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
+            background: rgba(0, 240, 255, 0.08);
+            border: 1px solid rgba(0, 240, 255, 0.25);
+            color: var(--cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 0 14px rgba(0, 240, 255, 0.1);
+        }
+
+        .card-code {
+            font-family: monospace;
+            font-size: 0.78rem;
+            color: rgba(0, 240, 255, 0.6);
+            letter-spacing: 1px;
+            background: rgba(0, 240, 255, 0.05);
+            padding: 4px 10px;
+            border-radius: 6px;
+            border: 1px solid rgba(0, 240, 255, 0.12);
+        }
+
+        .tech-card h2 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+
+        .tech-card p.desc {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            margin-bottom: 20px;
+        }
+
+        .data-box {
+            background: rgba(4, 7, 13, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 10px;
+            padding: 14px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .data-link {
+            color: var(--cyan);
+            font-weight: 700;
+            font-size: 1.05rem;
+            direction: ltr;
+            text-align: right;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+
+        .data-link:hover {
+            color: #fff;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.6);
+        }
+
+        .data-address {
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            line-height: 1.65;
+        }
+
+        /* ================= CHANNELS BANNER ================= */
+        .channels-panel {
+            background: linear-gradient(135deg, rgba(11, 18, 32, 0.85), rgba(15, 23, 42, 0.92));
+            border: 1px solid var(--border-tech);
+            border-radius: 18px;
+            padding: 32px;
+            margin-bottom: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .channels-panel::after {
+            content: '';
+            position: absolute;
+            left: -60px;
+            bottom: -60px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(0, 240, 255, 0.14), transparent 70%);
+            pointer-events: none;
+        }
+
+        .channels-info h3 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+
+        .channels-info p {
+            color: var(--text-secondary);
+            font-size: 0.94rem;
+        }
+
+        .channels-actions {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .channel-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(0, 240, 255, 0.22);
+            color: var(--text-primary);
+            font-size: 0.92rem;
+            font-weight: 600;
+        }
+
+        .channel-btn svg {
+            color: var(--cyan);
+        }
+
+        .channel-btn:hover {
+            background: rgba(0, 240, 255, 0.12);
+            border-color: var(--cyan);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 240, 255, 0.18);
+        }
+
+        /* ================= FAQ ACCORDION ================= */
+        .faq-wrap {
+            max-width: 860px;
+            margin: 0 auto 85px;
+        }
+
+        .section-head {
+            text-align: center;
+            margin-bottom: 34px;
+        }
+
+        .section-head span {
+            color: var(--cyan);
+            font-family: monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .section-head h2 {
+            font-size: 1.75rem;
+            font-weight: 800;
+        }
+
+        .faq-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-tech);
+            border-radius: 12px;
+            margin-bottom: 14px;
+            transition: border-color 0.25s ease;
+        }
+
+        .faq-card.open {
+            border-color: var(--border-bright);
+        }
+
+        .faq-trigger {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 20px 24px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-weight: 700;
+            text-align: right;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .faq-trigger svg {
+            color: var(--cyan);
+            transition: transform 0.3s ease;
+            min-width: 20px;
+        }
+
+        .faq-card.open .faq-trigger svg {
+            transform: rotate(180deg);
+        }
+
+        .faq-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease, padding 0.35s ease;
+            padding: 0 24px;
+            color: var(--text-secondary);
+            font-size: 0.94rem;
+        }
+
+        .faq-card.open .faq-body {
+            max-height: 220px;
+            padding: 0 24px 20px;
+        }
+
+        /* ================= FOOTER ================= */
+        footer {
+            margin-top: auto;
+            border-top: 1px solid var(--border-tech);
+            background: rgba(3, 5, 10, 0.95);
+            padding: 28px 0;
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+        }
+
+        .footer-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-nav {
+            display: flex;
+            gap: 22px;
+        }
+
+        .footer-nav a:hover {
+            color: var(--cyan);
+        }
+
+        /* ================= FLOATING WHATSAPP TECH WIDGET ================= */
+        .wa-widget-wrap {
+            position: fixed;
+            bottom: 24px;
+            left: 24px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .wa-popup {
+            display: none;
+            width: 315px;
+            background: rgba(7, 13, 24, 0.96);
+            border: 1px solid var(--border-bright);
+            backdrop-filter: blur(18px);
+            border-radius: 16px;
+            padding: 18px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75), 0 0 25px rgba(0, 240, 255, 0.14);
+            transform-origin: bottom left;
+        }
+
+        .wa-widget-wrap.active .wa-popup {
+            display: block;
+            animation: popIn 0.22s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px) scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .wa-popup-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding-bottom: 12px;
+            margin-bottom: 12px;
+            border-bottom: 1px solid rgba(0, 240, 255, 0.14);
+        }
+
+        .wa-agent {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .wa-agent-avatar {
+            width: 38px;
+            height: 38px;
+            min-width: 38px;
+            border-radius: 10px;
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid rgba(0, 240, 255, 0.35);
+            color: var(--cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        .wa-agent-meta {
+            display: flex;
+            flex-direction: column;
+            text-align: right;
+        }
+
+        .wa-agent-name {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: #f8fafc;
+            line-height: 1.3;
+        }
+
+        .wa-agent-status {
+            font-size: 0.75rem;
+            color: #34d399;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 2px;
+        }
+
+        .wa-agent-status::before {
+            content: '';
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 8px #10b981;
+        }
+
+        .wa-close-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #94a3b8;
+            cursor: pointer;
+            font-size: 1.15rem;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .wa-close-btn:hover {
+            color: #fff;
+            border-color: rgba(0, 240, 255, 0.35);
+            background: rgba(0, 240, 255, 0.08);
+        }
+
+        .wa-bubble {
+            background: rgba(11, 18, 32, 0.9);
+            border: 1px solid rgba(0, 240, 255, 0.14);
+            border-radius: 12px;
+            padding: 12px 14px;
+            font-size: 0.87rem;
+            color: #cbd5e1;
+            line-height: 1.65;
+            margin-bottom: 14px;
+            text-align: right;
+        }
+
+        .wa-send-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 11px 16px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border: 1px solid rgba(110, 231, 183, 0.4);
+            color: #fff;
+            font-size: 0.9rem;
+            font-weight: 700;
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.28);
+        }
+
+        .wa-send-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 26px rgba(16, 185, 129, 0.45);
+        }
+
+        .wa-fab {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, rgba(11, 18, 32, 0.96), rgba(16, 185, 129, 0.18));
+            border: 1px solid rgba(16, 185, 129, 0.65);
+            color: #34d399;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.6), 0 0 20px rgba(16, 185, 129, 0.22);
+            transition: all 0.25s ease;
+        }
+
+        .wa-fab:hover {
+            transform: translateY(-3px);
+            border-color: var(--cyan);
+            color: var(--cyan);
+            box-shadow: 0 14px 32px rgba(0, 0, 0, 0.7), 0 0 26px rgba(0, 240, 255, 0.3);
+        }
+
+        /* ================= RESPONSIVE ================= */
+        @media (max-width: 960px) {
+            .cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 680px) {
+            .nav-menu {
+                display: none;
+            }
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            .channels-panel {
+                padding: 24px 20px;
+            }
+            .channel-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            .footer-row {
+                flex-direction: column;
+                text-align: center;
+            }
+            .wa-widget-wrap {
+                bottom: 16px;
+                left: 16px;
+            }
+            .wa-popup {
+                width: calc(100vw - 32px);
+                max-width: 315px;
+            }
+            .wa-fab {
+                width: 50px;
+                height: 50px;
+                border-radius: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- هدر -->
+    <header>
+        <div class="container nav-bar">
+            <a href="https://remotevm.ir/" class="brand">
+                <div class="brand-mark">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                        <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                    </svg>
+                </div>
+                <span>Remote<span class="grad">VM</span></span>
+            </a>
+
+            <ul class="nav-menu">
+                <li><a href="https://remotevm.ir/">صفحه اصلی</a></li>
+                <li><a href="https://remotevm.ir/#features">امکانات استودیو</a></li>
+                <li><a href="https://remotevm.ir/#docs">مستندات فنی</a></li>
+                <li><a href="https://remotevm.site/contact/" class="active">تماس با ما</a></li>
+            </ul>
+
+            <a href="https://remotevm.ir/" class="cta-btn">
+                <span>ورود به استودیو</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- بخش Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="status-pill">
+                <span class="pulse-dot"></span>
+                <span>SYSTEM ONLINE • تیم فنی و پشتیبانی در دسترس است</span>
+            </div>
+            <h1>مرکز ارتباطات و پشتیبانی <span>RemoteVM</span></h1>
+            <p>برای دریافت مشاوره فنی، اتصال وب‌کم بی‌سیم، تنظیمات استریم و OBS یا همکاری‌های سازمانی از طریق راه‌های زیر مستقیماً با ما در ارتباط باشید.</p>
+        </div>
+    </section>
+
+    <!-- گرید کارت‌های اطلاعات تماس -->
+    <main class="container">
+        <div class="cards-grid">
+
+            <!-- کارت ۱: تماس تلفنی -->
+            <div class="tech-card">
+                <div>
+                    <div class="card-top">
+                        <div class="tech-icon">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                            </svg>
+                        </div>
+                        <span class="card-code">VOICE // 01</span>
+                    </div>
+                    <h2>تماس مستقیم و پشتیبانی</h2>
+                    <p class="desc">پاسخگویی تلفنی همه‌روزه به جز ایام تعطیل از ساعت ۹:۰۰ تا ۱۸:۰۰</p>
+                </div>
+
+                <div class="data-box">
+                    <!-- TODO: شماره تماس ثابت خود را اینجا جایگزین کنید -->
+                    <!-- <a href="tel:+982100000000" class="data-link">021 - 0000 0000</a> -->
+                    <!-- TODO: شماره موبایل پشتیبانی را اینجا جایگزین کنید -->
+                    <a href="tel:+989195600767" class="data-link" style="font-size: 0.95rem; opacity: 0.85;">0919 - 5600 767</a>
+                </div>
+            </div>
+
+            <!-- کارت ۲: پست الکترونیک -->
+            <div class="tech-card">
+                <div>
+                    <div class="card-top">
+                        <div class="tech-icon">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                            </svg>
+                        </div>
+                        <span class="card-code">MAIL // 02</span>
+                    </div>
+                    <h2>پست الکترونیک</h2>
+                    <p class="desc">مناسب برای ارسال درخواست‌های فنی، پیشنهادات و مکاتبات سازمانی</p>
+                </div>
+
+                <div class="data-box">
+                    <!-- TODO: ایمیل‌های خود را اینجا جایگزین کنید -->
+                    <!-- <a href="mailto:support@remotevm.ir" class="data-link">support@remotevm.ir</a> -->
+                    <a href="mailto:info@remotevm.site" class="data-link" style="font-size: 0.92rem; opacity: 0.85;">Frozanteam@gmail.com</a>
+                </div>
+            </div>
+
+            <!-- کارت ۳: نشانی -->
+            <div class="tech-card">
+                <div>
+                    <div class="card-top">
+                        <div class="tech-icon">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                        </div>
+                        <span class="card-code">LOC // 03</span>
+                    </div>
+                    <h2>نشانی دفتر و استودیو</h2>
+                    <p class="desc">مراجعه حضوری و جلسات هماهنگی با تعیین وقت قبلی</p>
+                </div>
+
+                <div class="data-box">
+                    <!-- TODO: آدرس دقیق خود را اینجا جایگزین کنید -->
+                    <div class="data-address">تهران، خیابان ولیعصر، پارک فناوری، برج نوآوری، طبقه ۴، واحد ۱۲ (آدرس پیش‌فرض)</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- پنل شبکه‌های اجتماعی و کانال‌های سریع -->
+        <div class="channels-panel">
+            <div class="channels-info">
+                <h3>کانال‌های ارتباطی سریع و آموزش‌های استودیو</h3>
+                <p>آخرین به‌روزرسانی‌ها، ویدیوهای آموزشی اتصال موبایل به OBS و پشتیبانی آنلاین در شبکه‌های اجتماعی</p>
+            </div>
+
+            <div class="channels-actions">
+                <!-- TODO: لینک تلگرام را جایگزین کنید -->
+                <a href="https://t.me/RemoteVmIR" target="_blank" rel="noopener" class="channel-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="m22 2-7 20-4-9-9-4Z"></path>
+                        <path d="M22 2 11 13"></path>
+                    </svg>
+                    <span>پشتیبانی تلگرام</span>
+                </a>
+
+                <!-- TODO: لینک آپارات را جایگزین کنید -->
+                <a href="https://www.aparat.com/RemoteVM" target="_blank" rel="noopener" class="channel-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polygon points="10 8 16 12 10 16 10 8"></polygon>
+                    </svg>
+                    <span>کانال آپارات</span>
+                </a>
+
+                <!-- TODO: لینک اینستاگرام را جایگزین کنید -->
+                <a href="https://www.instagram.com/remotevm/" target="_blank" rel="noopener" class="channel-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                    </svg>
+                    <span>صفحه اینستاگرام</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- سوالات متداول -->
+        <section class="faq-wrap">
+            <div class="section-head">
+                <span>// KNOWLEDGE BASE</span>
+                <h2>سوالات پرتکرار فنی</h2>
+            </div>
+
+            <div class="faq-card">
+                <button class="faq-trigger" type="button">
+                    <span>آیا برای استفاده از RemoteVM نیاز به نصب نرم‌افزار روی گوشی یا سیستم است؟</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </button>
+                <div class="faq-body">
+                    خیر؛ تمام فرآیند اتصال دوربین موبایل به عنوان وب‌کم بی‌سیم از طریق مرورگر و اسکن کد QR انجام می‌شود و نیازی به نصب هیچ‌گونه اپلیکیشن جانبی روی موبایل یا کامپیوتر نیست.
+                </div>
+            </div>
+
+            <div class="faq-card">
+                <button class="faq-trigger" type="button">
+                    <span>چگونه تصویر دوربین را وارد نرم‌افزار OBS یا جلسات آنلاین کنیم؟</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </button>
+                <div class="faq-body">
+                    پس از دریافت لینک خروجی استودیو در RemoteVM، می‌توانید آن را مستقیماً به عنوان Browser Source در OBS اضافه کنید یا در پلتفرم‌های برگزاری جلسه آنلاین به اشتراک بگذارید.
+                </div>
+            </div>
+
+            <div class="faq-card">
+                <button class="faq-trigger" type="button">
+                    <span>زمان پاسخگویی تیم پشتیبانی فنی چقدر است؟</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </button>
+                <div class="faq-body">
+                    در ساعات اداری تماس‌های تلفنی به صورت آنی پاسخ داده می‌شوند و پیام‌های ارسالی از طریق ایمیل و تلگرام معمولاً در کمتر از ۲ ساعت بررسی خواهند شد.
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- فوتر -->
+    <footer>
+        <div class="container footer-row">
+            <div>© ۲۰۲۶ RemoteVM — استودیو انتقال تصویر و وب‌کم بی‌سیم تحت وب</div>
+            <div class="footer-nav">
+                <a href="https://remotevm.ir/">صفحه اصلی</a>
+                <a href="https://remotevm.site/contact/">تماس با ما</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ویجت شناور واتساپ RemoteVM -->
+    <div class="wa-widget-wrap" id="waWidget">
+        <div class="wa-popup" role="dialog" aria-label="پشتیبانی واتساپ">
+            <div class="wa-popup-header">
+                <div class="wa-agent">
+                    <div class="wa-agent-avatar">VM</div>
+                    <div class="wa-agent-meta">
+                        <div class="wa-agent-name">پشتیبانی RemoteVM</div>
+                        <div class="wa-agent-status">آنلاین • پاسخگویی سریع</div>
+                    </div>
+                </div>
+                <button type="button" class="wa-close-btn" id="waCloseBtn" aria-label="بستن پنجره">&times;</button>
+            </div>
+
+            <div class="wa-bubble">
+                سلام! سوالی درباره استودیو RemoteVM، اتصال دوربین موبایل یا تنظیمات OBS دارید؟ مستقیم در واتساپ پیام بفرستید.
+            </div>
+
+            <!-- TODO: شماره واتساپ را با کد کشور بدون + یا صفر اول جایگزین کنید -->
+            <a href="https://wa.me/989195600767?text=%D8%B3%D9%84%D8%A7%D9%85%20%D8%AA%DB%8C%D9%85%20RemoteVM%D8%8C%20%D8%AF%D8%B1%D8%A8%D8%A7%D8%B1%D9%87%20%D8%A7%D8%B3%D8%AA%D9%88%D8%AF%DB%8C%D9%88%20%D8%B3%D9%88%D8%A7%D9%84%20%D8%AF%D8%A7%D8%B1%D8%B4%D8%AA%D9%85."
+               target="_blank" rel="noopener" class="wa-send-link">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                </svg>
+                <span>شروع گفتگو در واتساپ</span>
+            </a>
+        </div>
+
+        <button type="button" class="wa-fab" id="waToggleBtn" aria-label="باز کردن پشتیبانی واتساپ">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+            </svg>
+        </button>
+    </div>
+
+    <script>
+        // آکاردئون سوالات متداول
+        document.querySelectorAll('.faq-trigger').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const parent = btn.parentElement;
+                const isOpen = parent.classList.contains('open');
+
+                document.querySelectorAll('.faq-card').forEach(card => card.classList.remove('open'));
+                if (!isOpen) parent.classList.add('open');
+            });
+        });
+
+        // مدیریت باز و بسته شدن ویجت واتساپ
+        const waWidget = document.getElementById('waWidget');
+        const waToggleBtn = document.getElementById('waToggleBtn');
+        const waCloseBtn = document.getElementById('waCloseBtn');
+
+        if (waWidget && waToggleBtn && waCloseBtn) {
+            waToggleBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                waWidget.classList.toggle('active');
+            });
+
+            waCloseBtn.addEventListener('click', () => {
+                waWidget.classList.remove('active');
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!waWidget.contains(e.target)) {
+                    waWidget.classList.remove('active');
+                }
+            });
+        }
+    </script>
+    </script
+    <!--Start of Tawk.to Script-->
+    <script type="ceb6cd0a8a48c91162264e38-text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/686eb59fbb70201915fe135b/default';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script>
+    <!--End of Tawk.to Script-->    
+</body>
+</html>
